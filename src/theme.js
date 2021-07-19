@@ -9,7 +9,8 @@ export const theme = createTheme({
             light: grey[700],
         },
         secondary: {
-            main: yellow[600],
+            main: yellow[500],
+            dark: yellow[700],
         },
         error: {
             main: red[300]

@@ -1,62 +1,37 @@
-import { AppBar, Button, Toolbar, Typography, IconButton, Box, Link} from "@material-ui/core";
+import { AppBar, Box, Button, IconButton, makeStyles, Toolbar, Typography } from "@material-ui/core";
 import MenuIcon from '@material-ui/icons/Menu';
-import { makeStyles } from '@material-ui/core';
-const useStyles = makeStyles(
+import { Link } from "react-router-dom";
+const useStyles = makeStyles((theme) => (
   {
-    bar:{
-      backgroundColor: '#669999',
+    bar: {
+      backgroundColor: theme.palette.primary.main,
       flexGrow: 1
     },
-    title:{
-      flexGrow:1,
+    btn: {
+      color: theme.palette.primary.contrastText
+    },
+    link: {
       textDecoration: 'none',
-    },
-    text:{
-      color : '#ffffff',
-      textDecoration: 'none',
-      variant: "h6",
-      '&:hover':{
-        textDecoration: 'none',
-      }
-    },
-    lgin_btn: {
-      backgroundColor: '#ffbdc7',
-      borderRadius: '10px',
-      padding: "6px 20px",
-      '&:hover':{
-        backgroundColor: '#ffcad2'
+      color: theme.palette.primary.contrastText
     }
-    },
-    sgup_btn:{
-      backgroundColor: ' #ffcf9e',
-      borderRadius: '10px',
-      padding: "6px 20px",
-      '&:hover':{
-        backgroundColor: '#ffdebd'
-    }
-    },
-
-  }
+  })
 )
 export default function NavBar() {
   const classes = useStyles()
-    return (
-        <AppBar>
+  return (
+    <Box display='flex' justifyContent='space-between' alignItems='center'>
+      <AppBar position='sticky'>
         <Toolbar>
-          <IconButton edge="start"  color="inherit" aria-label="menu">
+          <IconButton edge="start" color="inherit" aria-label="menu">
             <MenuIcon />
           </IconButton>
-          <Typography className={classes.title} >
-            <Link className={classes.text} href="/">Food Order Application</Link>
-          </Typography>
-          <Button variant="contained" href="/login" className={classes.lgin_btn}>Login</Button>
-          <Box width='10px'></Box>
-          <Button variant="contained" href="/signup" className={classes.sgup_btn}>Sign Up</Button>
-          
-          
+          <Link className={classes.link} to="/"><Typography variant='h6'>DeliV</Typography></Link>
+          <Box display='flex' justifyContent='center' ml='auto'>
+            <Link to="/login" className={classes.link}><Button className={classes.btn}>Login</Button></Link>
+            <Link to="/signup" className={classes.link}><Button className={classes.btn}>Sign up</Button></Link>
+          </Box>
         </Toolbar>
       </AppBar>
-
-
-    )
+    </Box>
+  )
 }

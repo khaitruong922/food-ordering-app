@@ -37,7 +37,7 @@ export default function LoginPage() {
     if (user) return <Redirect to='/' />
 
     return (
-        <Box display='flex' flexDirection='column' alignItems='center' justifyContent='center' width={300} mx='auto' boxShadow={5} mt={2} p={5}>
+        <Box display='flex' flexDirection='column' alignItems='center' justifyContent='center' width={400} mx='auto' boxShadow={5} mt={2} p={5}>
             <Typography variant='h6'>Sign In</Typography>
             <form onSubmit={onFormSubmit}>
                 <TextField value={username} onChange={onUsernameChange} label="Username" fullWidth required />

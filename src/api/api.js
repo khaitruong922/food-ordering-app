@@ -4,9 +4,8 @@ const isLocal = false
 const url = isLocal ? 'http://localhost:3000' : 'https://deli-v.herokuapp.com'
 
 const api = axios.create({
-    baseURL: url,
     withCredentials: true,
-    headers: { crossDomain: true, 'Content-Type': 'application/json' },
+    baseURL: url,
 })
 
 export default api

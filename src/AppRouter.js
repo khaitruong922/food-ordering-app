@@ -1,17 +1,17 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Login from "./component/Login";
-import NavBar from "./component/NavBar";
-import SignUp from "./component/SignUp";
+import LoginPage from "./component/LoginPage";
+import MainAppBar from "./component/MainAppBar";
+import SignUpPage from "./component/SignUpPage";
 import Home from "./Home";
 
 export default function AppRouter() {
     return (
         <BrowserRouter>
-            <NavBar />
+            <MainAppBar />
             <Switch>
                 <Route exact path='/' component={Home} />
-                <Route exact path='/login' component={Login} />
-                <Route exact path='/signup' component={SignUp} />
+                <Route exact path='/login' component={LoginPage} />
+                <Route exact path='/signup' component={SignUpPage} />
             </Switch>
         </BrowserRouter>
     )

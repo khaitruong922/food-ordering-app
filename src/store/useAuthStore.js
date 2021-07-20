@@ -1,7 +1,8 @@
 import create from 'zustand'
-import api from '../api/api'
 import { persist } from "zustand/middleware"
+import api, { setHeaderToken } from '../api/api'
 
+const TOKEN_COOKIE_NAME = 'token'
 
 const useAuthStore = create(persist(
   (set, get) => ({
@@ -9,8 +10,9 @@ const useAuthStore = create(persist(
     login: async ({ username, password }) => {
       try {
         const loginRes = await api.post('/auth/login', { username, password })
-        if (!loginRes.data.accessToken || loginRes.status !== 200) return
-        await get().fetchCurrentUser()
+        const accessToken = loginRes.data.accessToken
+        if (!accessToken) return
+        console.log(loginRes.data)
       }
       catch (e) {
         console.log(e.response)
@@ -19,8 +21,7 @@ const useAuthStore = create(persist(
     logout: async () => {
       try {
         const res = await api.post('/auth/logout')
-        if (res.status !== 200) return
-        set({ user: null })
+        get().clearUser()
       } catch (e) {
         console.log(e.response)
       }
@@ -29,11 +30,23 @@ const useAuthStore = create(persist(
       try {
         const res = await api.get('users/me')
         const user = res.data
-        if (user) set({ user })
+        console.log(user)
+        if (!user) {
+          get().clearUser()
+          return
+        }
+        set({ user })
+        return get().user
       } catch (e) {
         console.log(e.response)
+        return null
       }
-    }
+    },
+    clearUser: () => {
+      console.log('Clear user!')
+      setHeaderToken('')
+      set({ user: null })
+    },
   }),
   {
     name: "auth", // unique name

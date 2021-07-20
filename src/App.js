@@ -8,7 +8,7 @@ export default function App() {
   const fetchCurrentUser = useAuthStore(state => state.fetchCurrentUser)
   useEffect(() => {
     fetchCurrentUser()
-  }, [])
+  }, [fetchCurrentUser])
   return (
     <ThemeProvider theme={theme}>
       <AppRouter />

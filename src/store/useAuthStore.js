@@ -1,8 +1,6 @@
 import create from 'zustand'
 import { persist } from "zustand/middleware"
-import api, { setHeaderToken } from '../api/api'
-
-const TOKEN_COOKIE_NAME = 'token'
+import api from '../api/api'
 
 const useAuthStore = create(persist(
   (set, get) => ({
@@ -12,7 +10,6 @@ const useAuthStore = create(persist(
         const loginRes = await api.post('/auth/login', { username, password })
         const accessToken = loginRes.data.accessToken
         if (!accessToken) return
-        console.log(loginRes.data)
       }
       catch (e) {
         console.log(e.response)
@@ -20,7 +17,7 @@ const useAuthStore = create(persist(
     },
     logout: async () => {
       try {
-        const res = await api.post('/auth/logout')
+        await api.post('/auth/logout')
         get().clearUser()
       } catch (e) {
         console.log(e.response)
@@ -44,7 +41,6 @@ const useAuthStore = create(persist(
     },
     clearUser: () => {
       console.log('Clear user!')
-      setHeaderToken('')
       set({ user: null })
     },
   }),

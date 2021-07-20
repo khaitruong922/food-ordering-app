@@ -1,8 +1,8 @@
 import { Box, Button, makeStyles, TextField, Typography } from '@material-ui/core';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import React, { useState } from 'react';
-import { Link, Redirect, useHistory } from 'react-router-dom';
+import React from 'react';
+import { Link, Redirect } from 'react-router-dom';
 import useInput from '../hook/useInput';
 import useAuthStore from '../store/useAuthStore';
 import AppDivider from '../styled-component/AppDivider';

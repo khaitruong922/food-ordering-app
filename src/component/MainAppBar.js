@@ -1,4 +1,4 @@
-import { AppBar, Box, Button, IconButton, makeStyles, Toolbar, Typography } from "@material-ui/core";
+import { AppBar, Box, Button, CssBaseline, IconButton, makeStyles, Toolbar, Typography } from "@material-ui/core";
 import MenuIcon from '@material-ui/icons/Menu';
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
@@ -40,7 +40,8 @@ export default function MainAppBar() {
   const classes = useStyles()
   return (
     <Box display='flex' justifyContent='space-between' alignItems='center'>
-      <AppBar position='static' className={classes.appBar}>
+      <CssBaseline />
+      <AppBar position='sticky' className={classes.appBar}>
         <Toolbar>
           <IconButton edge="start" color="inherit" aria-label="menu">
             <MenuIcon />

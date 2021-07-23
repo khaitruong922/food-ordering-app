@@ -9,14 +9,15 @@ const drawerWidth = 300
 const useStyles = makeStyles(theme => ({
     drawer: {
         width: drawerWidth,
-        flexShrink: 0,
+        position: 'relative',
+        height: '100vh',
+        overflow: 'auto'
     },
     drawerPaper: {
         padding: 25,
-        paddingTop: 75,
-        width: drawerWidth,
         backgroundColor: theme.palette.primary.main,
         color: theme.palette.primary.contrastText,
+        position: 'relative',
     },
     menuTitle: {
         fontWeight: 600,

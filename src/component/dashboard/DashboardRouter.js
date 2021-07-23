@@ -14,15 +14,13 @@ export default function DashboardRouter() {
     const { path, url } = useRouteMatch();
     return (
         <BrowserRouter>
-            <Box display='flex' flexDirection='column'>
+            <Box display='flex'>
                 <DashboardSidebar path={path} />
-                <Box flexGrow={1}>
-                    <Switch>
-                        <Route exact path={path} component={MainDashboard} />
-                        <Route path={`${path}/users`} component={UserDashboard} />
-                        <Route path={`${path}/stores`} component={StoreDashboard} />
-                    </Switch>
-                </Box>
+                <Switch>
+                    <Route exact path={path} component={MainDashboard} />
+                    <Route path={`${path}/users`} component={UserDashboard} />
+                    <Route path={`${path}/stores`} component={StoreDashboard} />
+                </Switch>
             </Box>
         </BrowserRouter>
     )

@@ -1,4 +1,4 @@
-import { ThemeProvider } from "@material-ui/core";
+import { CssBaseline, ThemeProvider } from "@material-ui/core";
 import { useEffect } from "react";
 import AppRouter from './AppRouter';
 import useAuthStore from "./store/useAuthStore";
@@ -11,6 +11,7 @@ export default function App() {
   }, [fetchCurrentUser])
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <AppRouter />
     </ThemeProvider>
   );

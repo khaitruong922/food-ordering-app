@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 import useAuthStore from "../store/useAuthStore";
 const useStyles = makeStyles((theme) => (
   {
-    bar: {
-      backgroundColor: theme.palette.primary.main,
-      flexGrow: 1
+    appBar: {
+      zIndex: theme.zIndex.drawer + 1,
+      height: 64,
     },
     btn: {
       color: theme.palette.primary.contrastText,
@@ -26,13 +26,14 @@ function AppBarItems() {
   const logout = useAuthStore(state => state.logout)
   if (user) return (
     <Fragment>
+      <Button component={Link} to='/dashboard' className={classes.btn}>Dashboard</Button>
       <Button onClick={logout} className={classes.btn}>Log out</Button>
     </Fragment>
   )
   return (
     <Fragment>
-      <Link to="/login" className={classes.link}><Button className={classes.btn}>Login</Button></Link>
-      <Link to="/signup" className={classes.link}><Button className={classes.btn}>Sign up</Button></Link>
+      <Button component={Link} to='/login' className={classes.btn}>Login</Button>
+      <Button component={Link} to='/signup' className={classes.btn}>Signup</Button>
     </Fragment>
   )
 }
@@ -41,7 +42,7 @@ export default function MainAppBar() {
   const classes = useStyles()
   return (
     <Box display='flex' justifyContent='space-between' alignItems='center'>
-      <AppBar position='sticky'>
+      <AppBar position='sticky' className={classes.appBar}>
         <Toolbar>
           <IconButton edge="start" color="inherit" aria-label="menu">
             <MenuIcon />

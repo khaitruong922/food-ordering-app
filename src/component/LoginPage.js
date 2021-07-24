@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import useInput from '../hook/useInput';
 import useAuthStore from '../store/useAuthStore';
-import AppDivider from '../styled-component/AppDivider';
+import AppDivider from './styled-component/AppDivider';
 const useStyles = makeStyles((theme) => ({
     btn: {
         borderRadius: '10px',

@@ -1,7 +1,8 @@
 import {Box} from "@material-ui/core";
 import { grey } from "@material-ui/core/colors";
 import * as React from 'react';
-import StoreInfo from "./store/StoreInfo";
+import StoreInfo from "./component/StoreInfo";
+import useAuthStore from "./store/useAuthStore";
 
 const stores = [
     { id: 1, name: 'KFC Store', address: '123 Nam Ky Khoi Nghia, Q.1, TP. Ho Chi Minh', description: 'No Description1', image: 'https://images.foody.vn/res/g3/25271/prof/s576x330/image-1c4f1a69-201123110756.jpeg' },

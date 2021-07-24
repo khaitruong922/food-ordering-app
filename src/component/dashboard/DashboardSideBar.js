@@ -1,8 +1,6 @@
 import { Drawer, List, ListItem, ListItemIcon, ListItemText, makeStyles, Typography } from "@material-ui/core";
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import PeopleIcon from '@material-ui/icons/People';
-import StoreIcon from '@material-ui/icons/Store';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import dashboardItems from "./dashboardItems";
 
 const drawerWidth = 300
 
@@ -10,7 +8,6 @@ const useStyles = makeStyles(theme => ({
     drawer: {
         width: drawerWidth,
         position: 'relative',
-        height: '100vh',
         overflow: 'auto'
     },
     drawerPaper: {
@@ -27,20 +24,25 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
+function StyledListItem({ path, item }) {
+    const classes = useStyles()
+    return (
+        <ListItem
+            button
+            component={Link}
+            to={`${path}/${item.path}`}
+            key={item.name}
+        >
+            <ListItemIcon>{item.icon}</ListItemIcon>
+            <ListItemText primary={<Typography className={classes.listItemText}>{item.name}</Typography>} />
+        </ListItem>
+    )
+
+}
+
 export default function DashboardSideBar({ path }) {
     const classes = useStyles()
-    const items = [
-        {
-            name: 'Users',
-            icon: <PeopleIcon color="secondary" />,
-            path: 'users'
-        },
-        {
-            name: 'Stores',
-            icon: <StoreIcon color="secondary" />,
-            path: 'stores'
-        }
-    ]
+    const items = dashboardItems
     return (
         <Drawer
             className={classes.drawer}
@@ -48,31 +50,12 @@ export default function DashboardSideBar({ path }) {
             variant="permanent"
             classes={{ paper: classes.drawerPaper }}
         >
-            <ListItem
-                button
-                component={Link}
-                to={`${path}`}
-                key='Dashboard'
-            >
-                <ListItemIcon><DashboardIcon color='secondary' /></ListItemIcon>
-                <ListItemText primary={<Typography className={classes.listItemText}>Dashboard</Typography>} />
-            </ListItem>
+            <List>
+                {items.main.map(item => <StyledListItem path={path} item={item} />)}
+            </List>
             <Typography className={classes.menuTitle}>Manage</Typography>
             <List>
-                {
-                    items.map(item => (
-                        <ListItem
-                            button
-                            component={Link}
-                            to={`${path}/${item.path}`}
-                            key={item.name}
-                        >
-                            <ListItemIcon>{item.icon}</ListItemIcon>
-                            <ListItemText primary={<Typography className={classes.listItemText}>{item.name}</Typography>} />
-                        </ListItem>
-                    ))
-                }
-
+                {items.manage.map(item => <StyledListItem path={path} item={item} />)}
             </List>
         </Drawer>
     )

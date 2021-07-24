@@ -4,7 +4,7 @@ import { Link, Redirect } from 'react-router-dom';
 import api from '../api/api';
 import useInput from '../hook/useInput';
 import useAuthStore from '../store/useAuthStore';
-import AppDivider from '../styled-component/AppDivider';
+import AppDivider from './styled-component/AppDivider';
 const useStyles = makeStyles((theme) => (
     {
         btn: {

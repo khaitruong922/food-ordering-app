@@ -4,11 +4,11 @@ const useStyles = makeStyles(theme => ({
 
 }))
 
-export default function UserDashboard() {
+export default function OrderDashboard() {
     const classes = useStyles()
     return (
         <Box display='flex' justifyContent='center'>
-            <Typography>Users</Typography>
+            <Typography>Orders</Typography>
         </Box>
     )
 }

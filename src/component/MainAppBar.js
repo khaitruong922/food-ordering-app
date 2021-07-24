@@ -7,6 +7,7 @@ const useStyles = makeStyles((theme) => (
   {
     appBar: {
       zIndex: theme.zIndex.drawer + 1,
+      height: 64,
     },
     btn: {
       color: theme.palette.primary.contrastText

@@ -12,6 +12,9 @@ export const theme = createTheme({
             main: yellow[500],
             dark: yellow[700],
         },
+        grey:{
+           main: '#f2f2f2' 
+        },
         error: {
             main: red[300]
         }
@@ -30,4 +33,12 @@ export const theme = createTheme({
             '"Segoe UI Symbol"',
         ].join(','),
     },
+    btn: {
+        borderRadius: '20px',
+        
+    },
+    link: {
+        textDecoration: "none",
+    },
+    
 })

@@ -4,15 +4,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import AppDivider from '../styled-component/AppDivider';
-const useStyles = makeStyles((theme) => ({
-    btn: {
-        borderRadius: '10px',
-    },
-    link: {
-        textDecoration: "none",
-    }
-})
-)
+const useStyles = makeStyles((theme) => ({}))
+
 export default function Login() {
     const classes = useStyles()
     return (

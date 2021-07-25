@@ -17,7 +17,9 @@ export default function AppRouter() {
                 <MainAppBar />
                 <Box height='100%'>
                     <Switch>
-                        <Route exact path='/' />
+                        <Route exact path='/'>
+                            <Home />
+                        </Route>
                         <Route path='/login'>
                             {user ? <Redirect to='/' /> : <LoginPage />}
                         </Route>

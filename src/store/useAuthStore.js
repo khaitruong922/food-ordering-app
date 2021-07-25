@@ -23,10 +23,7 @@ const useAuthStore = create(persist(
         console.log(e.response)
       }
     },
-    get isLoggedIn() {
-      return get().user !== null
-    },
-    get isAdmin() {
+    isAdmin: () => {
       return get().user?.role === 'admin'
     },
     fetchCurrentUser: async () => {

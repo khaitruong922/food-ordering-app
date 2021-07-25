@@ -18,9 +18,9 @@ export default function Home() {
     const user = useAuthStore(state => state.user)
     const { data: stores, loading, error } = useApi({ endpoint: '/stores', defaultValue: [] })
     return (
-        <Box container justifyContent='center' mx='auto' mt={3} width={1350} sx={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10, backgroundColor: grey[200], borderRadius: '20px' }}>
+        <Box container="true" justifyContent='center' mx='auto' mt={3} width={1350} sx={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10, backgroundColor: grey[200], borderRadius: '20px' }}>
             {stores.map((store) => (
-                <StoreInfo store={store} />
+                <StoreInfo key={store.id} store={store} />
             ))}
         </Box>
     )

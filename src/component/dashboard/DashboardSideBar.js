@@ -31,7 +31,6 @@ function StyledListItem({ path, item }) {
             button
             component={Link}
             to={`${path}/${item.path}`}
-            key={item.name}
         >
             <ListItemIcon>{item.icon}</ListItemIcon>
             <ListItemText primary={<Typography className={classes.listItemText}>{item.name}</Typography>} />
@@ -51,11 +50,11 @@ export default function DashboardSideBar({ path }) {
             classes={{ paper: classes.drawerPaper }}
         >
             <List>
-                {items.main.map(item => <StyledListItem path={path} item={item} />)}
+                {items.main.map(item => <StyledListItem key={item.name} path={path} item={item} />)}
             </List>
             <Typography className={classes.menuTitle}>Manage</Typography>
             <List>
-                {items.manage.map(item => <StyledListItem path={path} item={item} />)}
+                {items.manage.map(item => <StyledListItem key={item.name} path={path} item={item} />)}
             </List>
         </Drawer>
     )

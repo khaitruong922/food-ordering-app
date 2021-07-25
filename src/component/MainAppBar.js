@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => (
 function AppBarItems() {
   const classes = useStyles()
   const user = useAuthStore(state => state.user)
-  const isAdmin = useAuthStore(state => state.isAdmin)
+  const isAdmin = useAuthStore(state => state.isAdmin)()
   const logout = useAuthStore(state => state.logout)
   if (user) return (
     <Fragment>

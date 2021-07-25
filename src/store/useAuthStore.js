@@ -23,6 +23,12 @@ const useAuthStore = create(persist(
         console.log(e.response)
       }
     },
+    get isLoggedIn() {
+      return get().user !== null
+    },
+    get isAdmin() {
+      return get().user?.role === 'admin'
+    },
     fetchCurrentUser: async () => {
       try {
         const res = await api.get('users/me')

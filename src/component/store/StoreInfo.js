@@ -21,25 +21,25 @@ const useStyles = makeStyles((theme) => ({
         color: theme.palette.primary.contrastText
     }
 }))
-const StoreInfo = ({ storeItem }) => {
+export default function StoreInfo({ store }) {
     const classes = useStyles()
+    const { id, name, address, description, image } = store
+    const imageUrl = image?.url || ''
     return (
-        <Box containter justifyContent='center' mx='10px' my="10px">
+        <Box key={id} containter justifyContent='center' mx='10px' my="10px">
             <Card className={classes.storeCard} >
-                <CardMedia className={classes.media} image={storeItem.image} title={storeItem.name} />
+                <CardMedia className={classes.media} image={imageUrl} title={name} />
                 <Box display='flex' justifyContent='center'>
                     <Typography variant='h6' gutterBottom>
-                        {storeItem.name}
+                        {name}
                     </Typography>
                 </Box>
                 <Box mx='10px' display='flex' justifyContent='center' flexDirection='column'>
-                    <Typography align='center' variant='h7' gutterBottom>
-                        {storeItem.address}
+                    <Typography align='center' variant='subtitle2' gutterBottom>
+                        {address}
                     </Typography>
                 </Box>
             </Card>
         </Box>
     )
 }
-
-export default StoreInfo

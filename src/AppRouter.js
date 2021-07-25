@@ -4,7 +4,7 @@ import DashboardRouter from "./component/dashboard/DashboardRouter";
 import LoginPage from "./component/LoginPage";
 import MainAppBar from "./component/MainAppBar";
 import SignUpPage from "./component/SignUpPage";
-import Home from "./Home";
+import Home from "./component/Home";
 
 export default function AppRouter() {
     return (

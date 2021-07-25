@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => (
     },
     btn: {
       color: theme.palette.primary.contrastText,
-    
+
     },
     link: {
       textDecoration: 'none',
@@ -23,10 +23,13 @@ const useStyles = makeStyles((theme) => (
 function AppBarItems() {
   const classes = useStyles()
   const user = useAuthStore(state => state.user)
+  const isAdmin = useAuthStore(state => state.isAdmin)
   const logout = useAuthStore(state => state.logout)
   if (user) return (
     <Fragment>
-      <Button component={Link} to='/dashboard' className={classes.btn}>Dashboard</Button>
+      {
+        isAdmin && <Button component={Link} to='/dashboard' className={classes.btn}>Dashboard</Button>
+      }
       <Button onClick={logout} className={classes.btn}>Log out</Button>
     </Fragment>
   )

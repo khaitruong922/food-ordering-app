@@ -1,8 +1,9 @@
-import {Box} from "@material-ui/core";
+import { Box } from "@material-ui/core";
 import { grey } from "@material-ui/core/colors";
 import * as React from 'react';
-import StoreInfo from "./component/StoreInfo";
-import useAuthStore from "./store/useAuthStore";
+import StoreInfo from "./store/StoreInfo";
+import useAuthStore from "../store/useAuthStore";
+import useApi from "../hook/useApi";
 
 const stores = [
     { id: 1, name: 'KFC Store', address: '123 Nam Ky Khoi Nghia, Q.1, TP. Ho Chi Minh', description: 'No Description1', image: 'https://images.foody.vn/res/g3/25271/prof/s576x330/image-1c4f1a69-201123110756.jpeg' },
@@ -15,10 +16,11 @@ const stores = [
 
 export default function Home() {
     const user = useAuthStore(state => state.user)
+    const { data: stores, loading, error } = useApi({ endpoint: '/stores', defaultValue: [] })
     return (
         <Box container justifyContent='center' mx='auto' mt={3} width={1350} sx={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10, backgroundColor: grey[200], borderRadius: '20px' }}>
             {stores.map((store) => (
-                <StoreInfo storeItem={store}/>
+                <StoreInfo store={store} />
             ))}
         </Box>
     )

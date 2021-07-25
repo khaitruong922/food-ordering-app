@@ -22,7 +22,6 @@ export default function LoginPage() {
     const [errorMessage, setErrorMessage] = useState('')
     const login = useAuthStore(state => state.login)
     const fetchCurrentUser = useAuthStore(state => state.fetchCurrentUser)
-    const user = useAuthStore(state => state.user)
 
     const onFormSubmit = async (e) => {
         e.preventDefault()
@@ -33,8 +32,6 @@ export default function LoginPage() {
             return
         }
     }
-
-    if (user) return <Redirect to='/' />
 
     return (
         <Box display='flex' flexDirection='column' alignItems='center' justifyContent='center' width={400} mx='auto' boxShadow={5} mt={2} p={5}>

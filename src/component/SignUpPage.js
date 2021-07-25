@@ -31,7 +31,6 @@ function FormMessage({ content, success }) {
 
 export default function SignUpPage() {
     const classes = useStyles()
-    const user = useAuthStore(state => state.user)
 
     const { value: username, onChange: onUsernameChange } = useInput('')
     const { value: name, onChange: onNameChange } = useInput('')
@@ -63,8 +62,6 @@ export default function SignUpPage() {
         }
 
     }
-
-    if (user) return (<Redirect to='/' />)
 
     return (
         <Box display='flex' flexDirection='column' alignItems='center' justifyContent='center' width={400} mx='auto' boxShadow={5} mt={2} p={5}>

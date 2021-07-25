@@ -4,6 +4,7 @@ import * as React from 'react';
 import StoreInfo from "./store/StoreInfo";
 import useAuthStore from "../store/useAuthStore";
 import useApi from "../hook/useApi";
+import Spinner from "./Spinner";
 
 const stores = [
     { id: 1, name: 'KFC Store', address: '123 Nam Ky Khoi Nghia, Q.1, TP. Ho Chi Minh', description: 'No Description1', image: 'https://images.foody.vn/res/g3/25271/prof/s576x330/image-1c4f1a69-201123110756.jpeg' },
@@ -17,6 +18,7 @@ const stores = [
 export default function Home() {
     const user = useAuthStore(state => state.user)
     const { data: stores, loading, error } = useApi({ endpoint: '/stores', defaultValue: [] })
+    if (loading) return <Spinner />
     return (
         <Box container="true" justifyContent='center' mx='auto' mt={3} width={1350} sx={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10, backgroundColor: grey[200], borderRadius: '20px' }}>
             {stores.map((store) => (

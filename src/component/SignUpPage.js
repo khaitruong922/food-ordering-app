@@ -82,7 +82,7 @@ export default function SignUpPage() {
             </Box>
             <AppDivider />
             <Box height={10}></Box>
-            <Typography>Already have an account? Login <Link className={classes.link} to='/register'>here</Link></Typography>
+            <Typography>Already have an account? Login <Link className={classes.link} to='/login'>here</Link></Typography>
         </Box>
     )
 }

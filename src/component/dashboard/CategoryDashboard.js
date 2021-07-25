@@ -17,14 +17,15 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-export default function OrderDashboard() {
+export default function CategoryDashboard() {
     const classes = useStyles()
-    const { data: stores, loading, error } = useApi({ endpoint: '/orders', defaultValue: [] })
+    const { data: stores, loading, error } = useApi({ endpoint: '/categories', defaultValue: [] })
     return (
         <Box display='flex' flexDirection='column' p={4}>
             <Box>
-                <Typography variant='h4'>Orders</Typography>
+                <Typography variant='h4'>Categories</Typography>
                 <Box height={20}></Box>
+                <Button variant='contained' color='secondary'>Add category</Button>
             </Box>
             <Box height={20}></Box>
             {
@@ -36,21 +37,18 @@ export default function OrderDashboard() {
                                 <TableRow>
                                     <TableCell>ID</TableCell>
                                     <TableCell align="left">Name</TableCell>
-                                    <TableCell align="left">User</TableCell>
-                                    <TableCell align="left">Status</TableCell>
-                                    <TableCell align="left">Total</TableCell>
+                                    <TableCell align="left">Number of stores</TableCell>
                                     <TableCell padding='none' align='center'>Manage</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {stores.map(({ id, status, totalPrice }) => (
+                                {stores.map(({ id, name }) => (
                                     <TableRow key={id}>
                                         <TableCell component="th" scope="row">
                                             {id}
                                         </TableCell>
-                                        <TableCell align="left">userId</TableCell>
-                                        <TableCell align="left">{status}</TableCell>
-                                        <TableCell align="left">{totalPrice}</TableCell>
+                                        <TableCell align="left">{name}</TableCell>
+                                        <TableCell align="left">0</TableCell>
                                         <TableCell padding='none' align='center'>
                                             <IconButton disableTouchRipple disableRipple><LaunchIcon color='secondary' /></IconButton>
                                         </TableCell>

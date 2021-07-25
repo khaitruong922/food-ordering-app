@@ -1,4 +1,4 @@
-import { grey, red, yellow } from '@material-ui/core/colors';
+import { amber, grey, red, yellow } from '@material-ui/core/colors';
 import { createTheme } from '@material-ui/core/styles';
 
 export const theme = createTheme({
@@ -9,11 +9,12 @@ export const theme = createTheme({
             light: grey[700],
         },
         secondary: {
-            main: yellow[500],
-            dark: yellow[700],
+            main: amber[600],
+            dark: amber[700],
+            contrastText: "#fff"
         },
-        grey:{
-           main: '#f2f2f2' 
+        grey: {
+            main: '#f2f2f2'
         },
         error: {
             main: red[300]
@@ -35,10 +36,10 @@ export const theme = createTheme({
     },
     btn: {
         borderRadius: '20px',
-        
+
     },
     link: {
         textDecoration: "none",
     },
-    
+
 })

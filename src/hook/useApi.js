@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import api from '../api/api'
 
-export default function useFetch({ endpoint, defaultValue = null }) {
+export default function useApi({ endpoint, defaultValue = null }) {
     const [data, setData] = useState(defaultValue)
     const [error, setError] = useState('')
     const [loading, setloading] = useState(true)

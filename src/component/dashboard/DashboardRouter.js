@@ -1,5 +1,6 @@
 import { Box, makeStyles } from "@material-ui/core";
 import { BrowserRouter, Route, Switch, useRouteMatch } from "react-router-dom";
+import CategoryDashboard from "./CategoryDashboard";
 import DashboardSidebar from "./DashboardSideBar";
 import MainDashboard from './MainDashboard';
 import OrderDashboard from "./OrderDashboard";
@@ -23,6 +24,7 @@ export default function DashboardRouter() {
                         <Route path={`${path}/users`} component={UserDashboard} />
                         <Route path={`${path}/stores`} component={StoreDashboard} />
                         <Route path={`${path}/orders`} component={OrderDashboard} />
+                        <Route path={`${path}/categories`} component={CategoryDashboard} />
                     </Switch>
                 </Box>
 

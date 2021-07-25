@@ -2,6 +2,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import PeopleIcon from '@material-ui/icons/People';
 import StoreIcon from '@material-ui/icons/Store';
 import LocalShippingIcon from '@material-ui/icons/LocalShipping';
+import CategoryIcon from '@material-ui/icons/Category';
 
 const dashboardItems = {
     main: [{
@@ -23,6 +24,11 @@ const dashboardItems = {
         name: 'Orders',
         icon: <LocalShippingIcon color="secondary" />,
         path: 'orders'
+    },
+    {
+        name: 'Categories',
+        icon: <CategoryIcon color="secondary" />,
+        path: 'categories'
     },
 ]
 }

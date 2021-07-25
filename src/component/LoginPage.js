@@ -55,7 +55,7 @@ export default function LoginPage() {
             <Box height={10}></Box>
             <AppDivider />
             <Box height={10}></Box>
-            <Typography align='center'>Don't have an account? Register <Link className={classes.link} to='/register'>here</Link></Typography>
+            <Typography align='center'>Don't have an account? Sign up <Link className={classes.link} to='/signup'>here</Link></Typography>
         </Box>
     )
 }

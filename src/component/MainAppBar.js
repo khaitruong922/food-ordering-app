@@ -1,8 +1,11 @@
 import { AppBar, Box, Button, IconButton, makeStyles, Toolbar, Typography } from "@material-ui/core";
 import MenuIcon from '@material-ui/icons/Menu';
 import { Fragment } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import useAuthStore from "../store/useAuthStore";
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+
 const useStyles = makeStyles((theme) => (
   {
     appBar: {
@@ -24,19 +27,22 @@ function AppBarItems() {
   const classes = useStyles()
   const user = useAuthStore(state => state.user)
   const isAdmin = user?.role === 'admin'
+  const history = useHistory()
   const logout = useAuthStore(state => state.logout)
   if (user) return (
     <Fragment>
       {
-        isAdmin && <Button component={Link} to='/dashboard' className={classes.btn}>Dashboard</Button>
+        isAdmin && <IconButton component={Link} to='/dashboard'><DashboardIcon color='secondary' /></IconButton>
       }
-      <Button onClick={logout} className={classes.btn}>Log out</Button>
+      <IconButton onClick={() => {
+        logout()
+        history.push('/')
+      }} className={classes.btn}><ExitToAppIcon /></IconButton>
     </Fragment>
   )
   return (
     <Fragment>
       <Button component={Link} to='/login' className={classes.btn}>Login</Button>
-      <Button component={Link} to='/signup' className={classes.btn}>Signup</Button>
     </Fragment>
   )
 }
@@ -47,9 +53,6 @@ export default function MainAppBar() {
     <Box display='flex' justifyContent='space-between' alignItems='center'>
       <AppBar position='sticky' className={classes.appBar}>
         <Toolbar>
-          <IconButton edge="start" color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
           <Link className={classes.link} to="/"><Typography variant='h6'>DeliV</Typography></Link>
           <Box display='flex' justifyContent='center' ml='auto'>
             <AppBarItems />

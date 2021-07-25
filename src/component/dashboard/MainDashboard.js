@@ -8,7 +8,6 @@ export default function MainDashboard() {
     const classes = useStyles()
     return (
         <Box display='flex' justifyContent='center'>
-            <Typography>Main</Typography>
         </Box>
     )
 }

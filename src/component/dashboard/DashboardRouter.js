@@ -1,11 +1,12 @@
 import { Box, makeStyles } from "@material-ui/core";
 import { BrowserRouter, Route, Switch, useRouteMatch } from "react-router-dom";
-import CategoryDashboard from "./CategoryDashboard";
+import CategoryDashboard from "./category/CategoryDashboard";
 import DashboardSidebar from "./sidebar/DashboardSideBar";
-import MainDashboard from './MainDashboard';
+import MainDashboard from './main/MainDashboard';
 import OrderDashboard from "./order/OrderDashboard";
 import StoreDashboard from "./store/StoreDashboard";
 import UserDashboard from "./user/UserDashboard";
+import AddStorePage from "./store/AddStorePage";
 
 const useStyles = makeStyles(theme => ({
 
@@ -21,10 +22,12 @@ export default function DashboardRouter() {
                 <Box flexGrow={1}>
                     <Switch>
                         <Route exact path={path} component={MainDashboard} />
-                        <Route path={`${path}/users`} component={UserDashboard} />
-                        <Route path={`${path}/stores`} component={StoreDashboard} />
-                        <Route path={`${path}/orders`} component={OrderDashboard} />
-                        <Route path={`${path}/categories`} component={CategoryDashboard} />
+                        <Route exact path={`${path}/users`} component={UserDashboard} />
+                        <Route exact path={`${path}/stores`} component={StoreDashboard} />
+                        <Route exact path={`${path}/stores/add`} component={AddStorePage} />
+                        <Route exact path={`${path}/stores`} component={StoreDashboard} />
+                        <Route exact path={`${path}/orders`} component={OrderDashboard} />
+                        <Route exact path={`${path}/categories`} component={CategoryDashboard} />
                     </Switch>
                 </Box>
 

@@ -6,8 +6,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import StorefrontIcon from '@material-ui/icons/Storefront';
 import React from 'react';
-import useApi from "../../hook/useApi";
-import Spinner from "../Spinner";
+import useApi from "../../../hook/useApi";
+import Spinner from "../../Spinner";
 import LaunchIcon from '@material-ui/icons/Launch';
 
 const useStyles = makeStyles(theme => ({

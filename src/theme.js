@@ -1,4 +1,4 @@
-import { amber, grey, red, yellow } from '@material-ui/core/colors';
+import { amber, green, grey, red, yellow } from '@material-ui/core/colors';
 import { createTheme } from '@material-ui/core/styles';
 
 export const theme = createTheme({
@@ -9,21 +9,24 @@ export const theme = createTheme({
             light: grey[700],
         },
         secondary: {
-            main: amber[600],
-            dark: amber[700],
+            main: amber[700],
+            dark: amber[900],
             contrastText: "#fff"
         },
         grey: {
             main: '#f2f2f2'
         },
         error: {
-            main: red[300]
+            main: red[600]
+        },
+        success: {
+            main: green[600]
         }
     },
     typography: {
         fontFamily: [
-            '"Helvetica Neue"',
             '-apple-system',
+            '"Helvetica Neue"',
             'BlinkMacSystemFont',
             '"Segoe UI"',
             'Roboto',
@@ -36,7 +39,6 @@ export const theme = createTheme({
     },
     btn: {
         borderRadius: '20px',
-
     },
     link: {
         textDecoration: "none",

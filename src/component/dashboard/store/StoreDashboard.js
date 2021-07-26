@@ -9,7 +9,7 @@ import React from 'react';
 import useApi from "../../../hook/useApi";
 import Spinner from "../../Spinner";
 import LaunchIcon from '@material-ui/icons/Launch';
-
+import { Link } from 'react-router-dom'
 const useStyles = makeStyles(theme => ({
     table: {
         minWidth: 650,
@@ -25,7 +25,7 @@ export default function StoreDashboard() {
             <Box>
                 <Typography variant='h4'>Stores</Typography>
                 <Box height={20}></Box>
-                <Button variant='contained' color='secondary'>Add store</Button>
+                <Button component={Link} to='/dashboard/stores/add' variant='contained' color='secondary'>Add store</Button>
             </Box>
             <Box height={20}></Box>
             {

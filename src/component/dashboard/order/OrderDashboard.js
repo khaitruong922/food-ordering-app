@@ -1,14 +1,13 @@
-import { Box, Button, IconButton, makeStyles, Table, TableContainer, Typography } from "@material-ui/core";
+import { Box, IconButton, makeStyles, Table, TableContainer, Typography } from "@material-ui/core";
 import Paper from '@material-ui/core/Paper';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import StorefrontIcon from '@material-ui/icons/Storefront';
-import React from 'react';
-import useApi from "../../hook/useApi";
-import Spinner from "../Spinner";
 import LaunchIcon from '@material-ui/icons/Launch';
+import React from 'react';
+import useApi from "../../../hook/useApi";
+import Spinner from "../../Spinner";
 
 const useStyles = makeStyles(theme => ({
     table: {
@@ -17,15 +16,14 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-export default function StoreDashboard() {
+export default function OrderDashboard() {
     const classes = useStyles()
-    const { data: stores, loading, error } = useApi({ endpoint: '/stores', defaultValue: [] })
+    const { data: stores, loading, error } = useApi({ endpoint: '/orders', defaultValue: [] })
     return (
         <Box display='flex' flexDirection='column' p={4}>
             <Box>
-                <Typography variant='h4'>Stores</Typography>
+                <Typography variant='h4'>Orders</Typography>
                 <Box height={20}></Box>
-                <Button variant='contained' color='secondary'>Add store</Button>
             </Box>
             <Box height={20}></Box>
             {
@@ -37,20 +35,21 @@ export default function StoreDashboard() {
                                 <TableRow>
                                     <TableCell>ID</TableCell>
                                     <TableCell align="left">Name</TableCell>
-                                    <TableCell align="left">Address</TableCell>
-                                    <TableCell align="left">Description</TableCell>
+                                    <TableCell align="left">User</TableCell>
+                                    <TableCell align="left">Status</TableCell>
+                                    <TableCell align="left">Total</TableCell>
                                     <TableCell padding='none' align='center'>Manage</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {stores.map(({ id, name, address, description }) => (
+                                {stores.map(({ id, status, totalPrice }) => (
                                     <TableRow key={id}>
                                         <TableCell component="th" scope="row">
                                             {id}
                                         </TableCell>
-                                        <TableCell align="left">{name}</TableCell>
-                                        <TableCell align="left">{address}</TableCell>
-                                        <TableCell align="left">{description}</TableCell>
+                                        <TableCell align="left">userId</TableCell>
+                                        <TableCell align="left">{status}</TableCell>
+                                        <TableCell align="left">{totalPrice}</TableCell>
                                         <TableCell padding='none' align='center'>
                                             <IconButton disableTouchRipple disableRipple><LaunchIcon color='secondary' /></IconButton>
                                         </TableCell>

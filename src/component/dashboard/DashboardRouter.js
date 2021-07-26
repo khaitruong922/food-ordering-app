@@ -1,11 +1,11 @@
 import { Box, makeStyles } from "@material-ui/core";
 import { BrowserRouter, Route, Switch, useRouteMatch } from "react-router-dom";
 import CategoryDashboard from "./CategoryDashboard";
-import DashboardSidebar from "./DashboardSideBar";
+import DashboardSidebar from "./sidebar/DashboardSideBar";
 import MainDashboard from './MainDashboard';
-import OrderDashboard from "./OrderDashboard";
-import StoreDashboard from "./StoreDashboard";
-import UserDashboard from "./UserDashboard";
+import OrderDashboard from "./order/OrderDashboard";
+import StoreDashboard from "./store/StoreDashboard";
+import UserDashboard from "./user/UserDashboard";
 
 const useStyles = makeStyles(theme => ({
 

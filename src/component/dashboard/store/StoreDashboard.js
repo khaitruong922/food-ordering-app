@@ -4,9 +4,10 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import StorefrontIcon from '@material-ui/icons/Storefront';
 import React from 'react';
-import useApi from "../../hook/useApi";
-import Spinner from "../Spinner";
+import useApi from "../../../hook/useApi";
+import Spinner from "../../Spinner";
 import LaunchIcon from '@material-ui/icons/Launch';
 
 const useStyles = makeStyles(theme => ({
@@ -16,13 +17,15 @@ const useStyles = makeStyles(theme => ({
 }))
 
 
-export default function UserDashboard() {
+export default function StoreDashboard() {
     const classes = useStyles()
-    const { data: stores, loading, error } = useApi({ endpoint: '/users', defaultValue: [] })
+    const { data: stores, loading, error } = useApi({ endpoint: '/stores', defaultValue: [] })
     return (
         <Box display='flex' flexDirection='column' p={4}>
             <Box>
-                <Typography variant='h4'>Users</Typography>
+                <Typography variant='h4'>Stores</Typography>
+                <Box height={20}></Box>
+                <Button variant='contained' color='secondary'>Add store</Button>
             </Box>
             <Box height={20}></Box>
             {
@@ -33,27 +36,21 @@ export default function UserDashboard() {
                             <TableHead>
                                 <TableRow>
                                     <TableCell>ID</TableCell>
-                                    <TableCell align="left">Username</TableCell>
                                     <TableCell align="left">Name</TableCell>
                                     <TableCell align="left">Address</TableCell>
-                                    <TableCell align="left">Email</TableCell>
-                                    <TableCell align="left">Phone number</TableCell>
-                                    <TableCell align="left">Role</TableCell>
+                                    <TableCell align="left">Description</TableCell>
                                     <TableCell padding='none' align='center'>Manage</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {stores.map(({ id, username, name, address, phoneNumber, email, role }) => (
+                                {stores.map(({ id, name, address, description }) => (
                                     <TableRow key={id}>
                                         <TableCell component="th" scope="row">
                                             {id}
                                         </TableCell>
-                                        <TableCell align="left">{username}</TableCell>
                                         <TableCell align="left">{name}</TableCell>
                                         <TableCell align="left">{address}</TableCell>
-                                        <TableCell align="left">{email}</TableCell>
-                                        <TableCell align="left">{phoneNumber}</TableCell>
-                                        <TableCell align="left">{role}</TableCell>
+                                        <TableCell align="left">{description}</TableCell>
                                         <TableCell padding='none' align='center'>
                                             <IconButton disableTouchRipple disableRipple><LaunchIcon color='secondary' /></IconButton>
                                         </TableCell>

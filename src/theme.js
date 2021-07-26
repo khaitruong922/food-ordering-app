@@ -14,7 +14,7 @@ export const theme = createTheme({
             contrastText: "#fff"
         },
         grey: {
-            main: '#f2f2f2'
+            main: grey[700]
         },
         error: {
             main: red[600]

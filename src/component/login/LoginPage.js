@@ -2,6 +2,7 @@ import { Box, Button, makeStyles, TextField, Typography } from '@material-ui/cor
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import useInput from '../../hook/useInput';
 import useMessage from '../../hook/useMessage';
@@ -37,6 +38,7 @@ export default function LoginPage() {
 
     return (
         <Box display='flex' flexDirection='column' alignItems='center' justifyContent='center' width={400} mx='auto' boxShadow={5} mt={2} p={5}>
+            <Helmet title='Login' />
             <Typography variant='h6'>Sign In</Typography>
             <form onSubmit={onFormSubmit}>
                 <TextField value={username} onInput={onUsernameInput} label="Username" fullWidth required />

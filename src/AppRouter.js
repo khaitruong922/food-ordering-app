@@ -7,6 +7,7 @@ import SignUpPage from "./component/login/SignUpPage";
 import Home from "./component/Home";
 import Error404Page from "./component/shared/Error404Page";
 import useAuthStore from "./store/useAuthStore";
+import StorePage from "./component/store/StorePage";
 
 export default function AppRouter() {
     const user = useAuthStore(state => state.user)
@@ -20,14 +21,17 @@ export default function AppRouter() {
                         <Route exact path='/'>
                             <Home />
                         </Route>
-                        <Route path='/login'>
+                        <Route exact path='/login'>
                             {user ? <Redirect to='/' /> : <LoginPage />}
                         </Route>
-                        <Route path='/signup'>
+                        <Route exact path='/signup'>
                             {user ? <Redirect to='/' /> : <SignUpPage />}
                         </Route>
-                        <Route path='/dashboard'>
+                        <Route exact path='/dashboard'>
                             {isAdmin ? <DashboardRouter /> : <Error404Page />}
+                        </Route>
+                        <Route exact path='/stores/:id'>
+                            <StorePage />
                         </Route>
                         <Route component={Error404Page} />
                     </Switch>

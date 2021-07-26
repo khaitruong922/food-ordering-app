@@ -1,5 +1,6 @@
 import { CssBaseline, ThemeProvider } from "@material-ui/core";
 import { useEffect } from "react";
+import { HelmetProvider } from "react-helmet-async";
 import AppRouter from './AppRouter';
 import useAuthStore from "./store/useAuthStore";
 import { theme } from "./theme";
@@ -10,9 +11,11 @@ export default function App() {
     fetchCurrentUser()
   }, [fetchCurrentUser])
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <AppRouter />
-    </ThemeProvider>
+    <HelmetProvider>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <AppRouter />
+      </ThemeProvider>
+    </HelmetProvider>
   );
 }

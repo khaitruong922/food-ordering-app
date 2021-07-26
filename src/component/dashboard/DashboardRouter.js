@@ -1,4 +1,5 @@
 import { Box, makeStyles } from "@material-ui/core";
+import { Helmet } from "react-helmet-async";
 import { BrowserRouter, Route, Switch, useRouteMatch } from "react-router-dom";
 import AddCategoryPage from '../dashboard/category/AddCategoryPage';
 import CategoryDashboard from "../dashboard/category/CategoryDashboard";
@@ -17,6 +18,7 @@ export default function DashboardRouter() {
     const { path, url } = useRouteMatch();
     return (
         <BrowserRouter>
+            <Helmet title='Dashboard' />
             <Box display='flex' height='100%'>
                 <DashboardSidebar path={path} />
                 <Box flexGrow={1}>

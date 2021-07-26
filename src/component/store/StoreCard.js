@@ -22,7 +22,7 @@ export default function StoreCard({ store }) {
             <Link style={{ textDecoration: 'none', color: 'inherit' }} to={`/stores/${id}`}>
                 <img alt={name} className={classes.img} src={imageUrl}></img>
                 <Typography noWrap variant='h6'>{name}</Typography>
-                <Typography noWrap className={classes.address} variant='subtitle2'>{address}sdfhdsfkjds</Typography>
+                <Typography noWrap className={classes.address} variant='subtitle2'>{address}</Typography>
             </Link>
         </Box>
     )

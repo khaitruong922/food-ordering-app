@@ -1,5 +1,6 @@
 import { Box, Button, makeStyles, TextField, Typography } from '@material-ui/core';
 import React, { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Link, Redirect } from 'react-router-dom';
 import api from '../../api/api';
 import useInput from '../../hook/useInput';
@@ -62,6 +63,7 @@ export default function SignUpPage() {
 
     return (
         <Box display='flex' flexDirection='column' alignItems='center' justifyContent='center' width={400} mx='auto' boxShadow={5} mt={2} p={5}>
+            <Helmet title='Sign Up' />
             <Typography variant='h6'>Sign Up</Typography>
             <form onSubmit={onFormSubmit}>
                 <TextField value={username} onInput={onUsernameInput} label="Username" fullWidth required />

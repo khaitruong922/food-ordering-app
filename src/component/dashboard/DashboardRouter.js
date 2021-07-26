@@ -1,13 +1,13 @@
 import { Box, makeStyles } from "@material-ui/core";
 import { BrowserRouter, Route, Switch, useRouteMatch } from "react-router-dom";
-import CategoryDashboard from "./category/CategoryDashboard";
-import DashboardSidebar from "./sidebar/DashboardSideBar";
-import MainDashboard from './main/MainDashboard';
-import OrderDashboard from "./order/OrderDashboard";
-import StoreDashboard from "./store/StoreDashboard";
-import UserDashboard from "./user/UserDashboard";
-import AddStorePage from "./store/AddStorePage";
-
+import CategoryDashboard from "../dashboard/category/CategoryDashboard";
+import DashboardSidebar from "../dashboard/sidebar/DashboardSideBar";
+import MainDashboard from '../dashboard/main/MainDashboard';
+import OrderDashboard from "../dashboard/order/OrderDashboard";
+import StoreDashboard from "../dashboard/store/StoreDashboard";
+import UserDashboard from "../dashboard/user/UserDashboard";
+import AddStorePage from "../dashboard/store/AddStorePage";
+import AddCategoryPage from '../dashboard/category/AddCategoryPage'
 const useStyles = makeStyles(theme => ({
 
 }))
@@ -28,6 +28,8 @@ export default function DashboardRouter() {
                         <Route exact path={`${path}/stores`} component={StoreDashboard} />
                         <Route exact path={`${path}/orders`} component={OrderDashboard} />
                         <Route exact path={`${path}/categories`} component={CategoryDashboard} />
+                        <Route exact path={`${path}/categories/add`} component={AddCategoryPage} />
+
                     </Switch>
                 </Box>
 

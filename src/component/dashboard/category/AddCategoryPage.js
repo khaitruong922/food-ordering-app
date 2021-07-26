@@ -3,8 +3,7 @@ import React, { useState } from 'react';
 import api from "../../../api/api";
 import useInput from "../../../hook/useInput";
 import useMessage from "../../../hook/useMessage";
-import isValidImageFile from "../../../util/isValidImageFile";
-import Spinner from "../../Spinner";
+import Spinner from "../../shared/Spinner";
 import FormMessage from "../../styled-component/FormMessage";
 
 const useStyles = makeStyles(theme => ({

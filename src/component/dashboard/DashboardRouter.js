@@ -1,13 +1,13 @@
 import { Box, makeStyles } from "@material-ui/core";
 import { BrowserRouter, Route, Switch, useRouteMatch } from "react-router-dom";
+import AddCategoryPage from '../dashboard/category/AddCategoryPage';
 import CategoryDashboard from "../dashboard/category/CategoryDashboard";
-import DashboardSidebar from "../dashboard/sidebar/DashboardSideBar";
 import MainDashboard from '../dashboard/main/MainDashboard';
 import OrderDashboard from "../dashboard/order/OrderDashboard";
+import DashboardSidebar from "../dashboard/sidebar/DashboardSideBar";
+import AddStorePage from "../dashboard/store/AddStorePage";
 import StoreDashboard from "../dashboard/store/StoreDashboard";
 import UserDashboard from "../dashboard/user/UserDashboard";
-import AddStorePage from "../dashboard/store/AddStorePage";
-import AddCategoryPage from '../dashboard/category/AddCategoryPage'
 const useStyles = makeStyles(theme => ({
 
 }))

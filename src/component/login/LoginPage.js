@@ -1,13 +1,13 @@
 import { Box, Button, makeStyles, TextField, Typography } from '@material-ui/core';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import React, { useState } from 'react';
-import { Link, Redirect } from 'react-router-dom';
-import useInput from '../hook/useInput';
-import useMessage from '../hook/useMessage';
-import useAuthStore from '../store/useAuthStore';
-import AppDivider from './styled-component/AppDivider';
-import FormMessage from './styled-component/FormMessage';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import useInput from '../../hook/useInput';
+import useMessage from '../../hook/useMessage';
+import useAuthStore from '../../store/useAuthStore';
+import AppDivider from '.././styled-component/AppDivider';
+import FormMessage from '.././styled-component/FormMessage';
 const useStyles = makeStyles((theme) => ({
     btn: {
         borderRadius: '10px',

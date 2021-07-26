@@ -7,7 +7,7 @@ import TableRow from '@material-ui/core/TableRow';
 import LaunchIcon from '@material-ui/icons/Launch';
 import React from 'react';
 import useApi from "../../../hook/useApi";
-import Spinner from "../../Spinner";
+import Spinner from "../../shared/Spinner";
 
 const useStyles = makeStyles(theme => ({
     table: {

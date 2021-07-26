@@ -1,12 +1,12 @@
 import { Box, Button, makeStyles, TextField, Typography } from '@material-ui/core';
 import React, { useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import api from '../api/api';
-import useInput from '../hook/useInput';
-import useMessage from '../hook/useMessage';
-import useAuthStore from '../store/useAuthStore';
-import AppDivider from './styled-component/AppDivider';
-import FormMessage from './styled-component/FormMessage';
+import api from '../../api/api';
+import useInput from '../../hook/useInput';
+import useMessage from '../../hook/useMessage';
+import useAuthStore from '../../store/useAuthStore';
+import AppDivider from '../styled-component/AppDivider';
+import FormMessage from '../styled-component/FormMessage';
 const useStyles = makeStyles((theme) => (
     {
         btn: {

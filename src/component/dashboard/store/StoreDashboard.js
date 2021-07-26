@@ -8,7 +8,7 @@ import LaunchIcon from '@material-ui/icons/Launch';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import useApi from "../../../hook/useApi";
-import Spinner from "../../Spinner";
+import Spinner from "../../shared/Spinner";
 const useStyles = makeStyles(theme => ({
     table: {
         minWidth: 650,

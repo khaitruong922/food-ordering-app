@@ -1,5 +1,5 @@
 import { Box, Typography } from "@material-ui/core";
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 export default function Error404Page() {
     return (
         <Box display='flex' flexDirection='column' alignItems='center' justifyContent='center' height='100%'>

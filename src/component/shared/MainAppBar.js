@@ -1,10 +1,9 @@
 import { AppBar, Box, Button, IconButton, makeStyles, Toolbar, Typography } from "@material-ui/core";
-import MenuIcon from '@material-ui/icons/Menu';
-import { Fragment } from "react";
-import { Link, useHistory } from "react-router-dom";
-import useAuthStore from "../store/useAuthStore";
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { Fragment } from "react";
+import { Link, useHistory } from "react-router-dom";
+import useAuthStore from "../../store/useAuthStore";
 
 const useStyles = makeStyles((theme) => (
   {

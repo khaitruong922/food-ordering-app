@@ -77,7 +77,7 @@ export default function AddStorePage() {
                 <Box display='flex' flexDirection='column'>
                     <TextField value={name} onInput={onNameInput} label="Name" required />
                     <TextField value={address} onInput={onAddressInput} label="Address" required />
-                    <TextField value={description} onInput={onDescriptionInput} label="Description" multiline rows={4} maxRows={4} required />
+                    <TextField value={description} onInput={onDescriptionInput} label="Description" multiline rows={4} required />
                     <Typography variant='subtitle2'>Image</Typography>
                     <Box height={10} />
                     <input type="file" onChange={onFileChange} />

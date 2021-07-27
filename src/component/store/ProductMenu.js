@@ -1,4 +1,5 @@
 import { Box, Grid, makeStyles, Typography } from "@material-ui/core"
+import { Fragment } from "react"
 import Product from "./Product"
 
 const useStyles = makeStyles((theme) => ({
@@ -10,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
 export default function ProductMenu({ menu }) {
     const { id, name = 'Menu', products = [] } = menu
     const classes = useStyles()
+    if (products?.length === 0) return <Fragment />
     return (
         <Box p={2}>
             <Typography variant='h6'>{name}</Typography>

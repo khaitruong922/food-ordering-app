@@ -1,5 +1,5 @@
 import { Box, Grid, makeStyles, Typography } from "@material-ui/core"
-import { Fragment } from "react"
+import { Fragment, useEffect } from "react"
 import { Helmet } from "react-helmet-async"
 import { useParams } from "react-router-dom"
 import useApi from "../../hook/useApi"
@@ -30,8 +30,11 @@ const useStyles = makeStyles((theme) => ({
 export default function StorePage() {
     const classes = useStyles()
     const { id } = useParams()
-    const { data, error, loading, } = useApi({ endpoint: `/stores/${id}`, defaultValue: null })
+    const { data, error, loading, setLoading} = useApi({ endpoint: `/stores/${id}`, defaultValue: null })
     const { name, address, description, image: { url: imageUrl } = {}, subMenus = [] } = data || {}
+    useEffect(() => {
+        setLoading(true)
+    }, [id])
     return (
         <Box mt={2} height='100%' width='75%' mx='auto'>
             {loading ? <Spinner /> :

@@ -54,7 +54,7 @@ export default function MenuDashboard() {
     const { id } = useParams()
     const { data, error, loading, setData, refresh, setLoading } = useApi({ endpoint: `/sub-menus/${id}`, defaultValue: null })
     const { name, products = [], store } = data || {}
-    const { storeId } = store || {}
+    const { id: storeId } = store || {}
     const { open, handleOpen, handleClose } = useModal()
     const history = useHistory()
 

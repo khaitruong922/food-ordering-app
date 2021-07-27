@@ -1,4 +1,4 @@
-import { amber, green, grey, red, yellow } from '@material-ui/core/colors';
+import { amber, green, grey, red } from '@material-ui/core/colors';
 import { createTheme } from '@material-ui/core/styles';
 
 export const theme = createTheme({

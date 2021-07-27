@@ -27,7 +27,7 @@ export default function AppRouter() {
                         <Route exact path='/signup'>
                             {user ? <Redirect to='/' /> : <SignUpPage />}
                         </Route>
-                        <Route exact path='/dashboard'>
+                        <Route path='/dashboard'>
                             {isAdmin ? <DashboardRouter /> : <Error404Page />}
                         </Route>
                         <Route exact path='/stores/:id'>

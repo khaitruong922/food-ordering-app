@@ -51,7 +51,7 @@ export default function StoreDashboard() {
                                         <TableCell align="left">{address}</TableCell>
                                         <TableCell align="left">{description}</TableCell>
                                         <TableCell padding='none' align='center'>
-                                            <IconButton disableTouchRipple disableRipple><LaunchIcon color='secondary' /></IconButton>
+                                            <IconButton component={Link} to={`/dashboard/stores/${id}`} disableTouchRipple disableRipple><LaunchIcon color='secondary' /></IconButton>
                                         </TableCell>
                                     </TableRow>
                                 ))}

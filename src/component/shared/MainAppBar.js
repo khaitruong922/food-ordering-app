@@ -4,6 +4,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { Fragment } from "react";
 import { Link, useHistory } from "react-router-dom";
 import useAuthStore from "../../store/useAuthStore";
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 const useStyles = makeStyles((theme) => (
   {
@@ -54,6 +55,7 @@ export default function MainAppBar() {
         <Toolbar>
           <Link className={classes.link} to="/"><Typography variant='h6'>DeliV</Typography></Link>
           <Box display='flex' justifyContent='center' ml='auto'>
+            <IconButton component={Link} to='/cart'><ShoppingCartIcon color='secondary' /></IconButton>
             <AppBarItems />
           </Box>
         </Toolbar>

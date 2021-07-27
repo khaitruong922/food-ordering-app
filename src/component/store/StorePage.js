@@ -32,7 +32,7 @@ export default function StorePage() {
     const classes = useStyles()
     const { id } = useParams()
     const { data, error, loading, } = useApi({ endpoint: `/stores/${id}`, defaultValue: null })
-    const { name, address, description, image: { url: imageUrl } = {}, subMenus = mockStore.subMenus } = data || {}
+    const { name, address, description, image: { url: imageUrl } = {}, subMenus = [] } = data || {}
     return (
         <Box mt={2} height='100%' width='75%' mx='auto'>
             {loading ? <Spinner /> :

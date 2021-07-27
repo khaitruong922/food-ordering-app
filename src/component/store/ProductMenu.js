@@ -2,8 +2,9 @@ import { Box, Grid, makeStyles, Typography } from "@material-ui/core"
 import Product from "./Product"
 
 const useStyles = makeStyles((theme) => ({
-
-
+    grid: {
+        flexGrow: 1
+    }
 }))
 
 export default function ProductMenu({ menu }) {
@@ -13,9 +14,9 @@ export default function ProductMenu({ menu }) {
         <Box p={2}>
             <Typography variant='h6'>{name}</Typography>
             <Box height={10} />
-            <Grid container>
+            <Grid container spacing={3}>
                 {products.map(product => (
-                    <Grid key={product.id} item xs={12} md={6} lg={4}>
+                    <Grid item key={product.id} xs={12} md={6} lg={4} >
                         <Product product={product} />
                     </Grid>
                 ))}

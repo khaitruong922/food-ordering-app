@@ -1,6 +1,7 @@
 import { Box, IconButton, makeStyles, Typography } from "@material-ui/core"
 import formatCurrency from "../../util/currencyFormatter"
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import mockProductImage from "../mock/mockProductImage";
 const useStyles = makeStyles((theme) => ({
     image: {
         width: '100%',
@@ -9,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     },
     name: {
         fontWeight: 700,
-        fontSize: 24
+        fontSize: 20
     },
     price: {
         fontWeight: 600,
@@ -21,10 +22,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Product({ product }) {
     const classes = useStyles()
-    const { id, name, price, description, image: { url: imageUrl } = {} } = product || {}
+    const { id, name, price, description, image } = product || {}
+    const { url: imageUrl } = image || mockProductImage
     return (
-        <Box display='flex' flexDirection='row' m={2}>
-            <Box flex={2}>
+        <Box display='flex' flexDirection='row' boxShadow={1} p={2} height='100%'>
+            <Box flex={2} display='flex' alignItems='center'>
                 <img className={classes.image} src={imageUrl}></img>
             </Box>
             <Box flex={4} ml={2}>

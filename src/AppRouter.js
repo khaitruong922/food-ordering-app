@@ -4,7 +4,7 @@ import DashboardRouter from "./component/dashboard/DashboardRouter";
 import LoginPage from "./component/login/LoginPage";
 import MainAppBar from "./component/shared/MainAppBar";
 import SignUpPage from "./component/login/SignUpPage";
-import Home from "./component/Home";
+import Home from "./component/home/Home";
 import Error404Page from "./component/shared/Error404Page";
 import useAuthStore from "./store/useAuthStore";
 import StorePage from "./component/store/StorePage";

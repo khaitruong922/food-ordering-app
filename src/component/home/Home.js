@@ -1,11 +1,10 @@
 import { Box, Grid } from "@material-ui/core";
-import { grey } from "@material-ui/core/colors";
 import * as React from 'react';
-import StoreCard from "./store/StoreCard";
-import useAuthStore from "../store/useAuthStore";
-import useApi from "../hook/useApi";
-import Spinner from "./shared/Spinner";
 import { Helmet } from "react-helmet-async";
+import useApi from "../../hook/useApi";
+import useAuthStore from "../../store/useAuthStore";
+import Spinner from "../shared/Spinner";
+import StoreCard from "./StoreCard";
 
 export default function Home() {
     const user = useAuthStore(state => state.user)

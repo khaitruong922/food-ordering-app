@@ -1,21 +1,24 @@
-import { Box, Button, Grid, IconButton, makeStyles, Table, TableContainer, TextField, Typography } from "@material-ui/core"
+import { Box, Button, Collapse, Grid, IconButton, makeStyles, Table, TableContainer, TextField, Typography } from "@material-ui/core"
 import Paper from '@material-ui/core/Paper'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
 import LaunchIcon from '@material-ui/icons/Launch'
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { Helmet } from "react-helmet-async"
-import { Link, useHistory, useParams } from "react-router-dom"
+import { useHistory, useParams } from "react-router-dom"
 import api from "../../../api/api"
 import useApi from "../../../hook/useApi"
 import useInput from "../../../hook/useInput"
 import useModal from "../../../hook/useModal"
+import mockProductImage from "../../../mock/mockProductImage"
+import formatCurrency from '../../../util/formatCurrency'
 import Spinner from "../../shared/Spinner"
 import AppDivider from "../../styled-component/AppDivider"
 import WarningModal from "../../styled-component/WarningModal"
-
 const infoHeight = 250
 
 const useStyles = makeStyles((theme) => ({
@@ -46,8 +49,73 @@ const useStyles = makeStyles((theme) => ({
     },
     addBtn: {
         height: 40,
+    },
+    productImg: {
+        width: '80%',
+        height: 100,
+        objectFit: 'cover'
     }
 }))
+
+function ProductRow({ product }) {
+    const classes = useStyles()
+    const { id, name, price, image } = product || {}
+    const { url: imageUrl } = image || mockProductImage
+    return (
+        <TableRow>
+            <TableCell width='10%' component="th" scope="row">{id}</TableCell>
+            <TableCell width='20%' scope="row">
+                <img src={imageUrl} className={classes.productImg} />
+            </TableCell>
+            <TableCell width='50%' align='left'>{name}</TableCell>
+            <TableCell width='20%' align='right'>{formatCurrency(price)}</TableCell>
+        </TableRow>
+    )
+}
+
+function MenuRow({ menu }) {
+    const { id, name, products = [], } = menu
+    const [open, setOpen] = useState(false);
+    return (
+        <Fragment>
+            <TableRow>
+                <TableCell padding='none'>
+                    <Box ml={2}>
+                        <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
+                            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                        </IconButton>
+                    </Box>
+                </TableCell>
+                <TableCell component="th" scope="row" align="left">{name} ({products.length})</TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell style={{ paddingBottom: 0, paddingTop: 0, }} colSpan={3}>
+                    <Collapse in={open} timeout="auto" unmountOnExit>
+                        <Box m={1}>
+                            <Table aria-label="products">
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell width='10%'>ID</TableCell>
+                                        <TableCell width='20%'>Image</TableCell>
+                                        <TableCell width='50%'>Name</TableCell>
+                                        <TableCell width='20%' align='right'>Price</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {products.map((product) => <ProductRow key={product.id} product={product} />)}
+                                </TableBody>
+                            </Table>
+                        </Box>
+                    </Collapse>
+                </TableCell>
+            </TableRow>
+        </Fragment >
+
+    )
+
+}
+
+
 
 export default function StoreDetailDashboard() {
     const classes = useStyles()
@@ -139,18 +207,13 @@ export default function StoreDetailDashboard() {
                             <Table stickyHeader className={classes.table} aria-label="simple table">
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell align="left">Category</TableCell>
-                                        <TableCell padding='none' align='center'>Manage</TableCell>
+                                        <TableCell width='10%' />
+                                        <TableCell width='90%' align="left">Menu</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {subMenus.map(({ id, name, products = [] }) => (
-                                        <TableRow key={id}>
-                                            <TableCell component="th" scope="row" align="left">{name} ({products.length})</TableCell>
-                                            <TableCell padding='none' align='center'>
-                                                <IconButton component={Link} to={`/dashboard/menus/${id}`} disableTouchRipple disableRipple><LaunchIcon color='secondary' /></IconButton>
-                                            </TableCell>
-                                        </TableRow>
+                                    {subMenus.map((menu) => (
+                                        <MenuRow key={menu.id} menu={menu} />
                                     ))}
                                 </TableBody>
                             </Table>

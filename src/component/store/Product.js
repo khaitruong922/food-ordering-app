@@ -1,7 +1,7 @@
 import { Box, IconButton, makeStyles, Typography } from "@material-ui/core"
-import formatCurrency from "../../util/currencyFormatter"
+import formatCurrency from "../../util/formatCurrency"
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-import mockProductImage from "../mock/mockProductImage";
+import mockProductImage from "../../mock/mockProductImage";
 const useStyles = makeStyles((theme) => ({
     image: {
         width: '100%',

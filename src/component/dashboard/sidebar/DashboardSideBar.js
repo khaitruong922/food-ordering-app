@@ -1,20 +1,12 @@
-import { Drawer, List, ListItem, ListItemIcon, ListItemText, makeStyles, Typography } from "@material-ui/core";
+import { Box, Drawer, List, ListItem, ListItemIcon, ListItemText, makeStyles, Typography } from "@material-ui/core";
 import { Link } from 'react-router-dom';
 import dashboardItems from "./dashboardItems";
 
-const drawerWidth = 300
 
 const useStyles = makeStyles(theme => ({
-    drawer: {
-        width: drawerWidth,
-        position: 'relative',
-        overflow: 'auto'
-    },
-    drawerPaper: {
-        padding: 25,
+    root: {
         backgroundColor: theme.palette.primary.main,
-        color: theme.palette.primary.contrastText,
-        position: 'relative',
+        color: theme.palette.primary.contrastText
     },
     menuTitle: {
         fontWeight: 600,
@@ -43,12 +35,7 @@ export default function DashboardSideBar({ path }) {
     const classes = useStyles()
     const items = dashboardItems
     return (
-        <Drawer
-            className={classes.drawer}
-            anchor="left"
-            variant="permanent"
-            classes={{ paper: classes.drawerPaper }}
-        >
+        <Box className={classes.root} height='100%' p={2} display='flex' flexDirection='column'>
             <List>
                 {items.main.map(item => <StyledListItem key={item.name} path={path} item={item} />)}
             </List>
@@ -56,7 +43,7 @@ export default function DashboardSideBar({ path }) {
             <List>
                 {items.manage.map(item => <StyledListItem key={item.name} path={path} item={item} />)}
             </List>
-        </Drawer>
+        </Box>
     )
 
 }

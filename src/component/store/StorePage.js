@@ -36,7 +36,7 @@ export default function StorePage() {
         setLoading(true)
     }, [id, setLoading])
     return (
-        <Box mt={2} height='100%' width='75%' mx='auto'>
+        <Box height='100%' width='75%' mx='auto'>
             {loading ? <Spinner /> :
                 (
                     <Fragment>

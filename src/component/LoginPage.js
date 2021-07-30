@@ -51,7 +51,7 @@ export default function LoginPage() {
             </Box>
             <Typography align="center">
                 <Link className={classes.link} to="#">
-                    Forgot Password?
+                    Forgot Password ?
                 </Link>
             </Typography>
 

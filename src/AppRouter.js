@@ -1,5 +1,6 @@
 import { Box } from "@material-ui/core";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import CheckoutPage from "./component/CheckoutPage";
 import DashboardRouter from "./component/dashboard/DashboardRouter";
 import LoginPage from "./component/LoginPage";
 import MainAppBar from "./component/MainAppBar";
@@ -16,7 +17,8 @@ export default function AppRouter() {
                         <Route exact path='/' component={Home} />
                         <Route path='/login' component={LoginPage} />
                         <Route path='/signup' component={SignUpPage} />
-                        <Route path='/dashboard' component={DashboardRouter} />
+                        <Route path='/dashboard' component={DashboardRouter}/>
+                        <Route path='/checkout' component={CheckoutPage}/>
                     </Switch>
                 </Box>
             </Box>

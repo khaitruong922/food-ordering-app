@@ -13,9 +13,6 @@ const useStyles = makeStyles((theme) => ({
         height: 0,
         paddingTop: '56.25%', // 16:9 56.25,
     },
-    content: {
-        alignItems: 'center'
-    },
     link: {
         textDecoration: theme.link.textDecoration,
         color: theme.palette.primary.contrastText

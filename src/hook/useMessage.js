@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export default function useMessage() {
     const [message, setMessage] = useState('')
-    const [success, setSuccess] = useState('')
+    const [success, setSuccess] = useState(false)
     function setErrorMessage(content) {
         setMessage(content)
         setSuccess(false)

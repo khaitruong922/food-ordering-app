@@ -10,6 +10,7 @@ import AddStorePage from "../dashboard/store/AddStorePage";
 import StoreDashboard from "../dashboard/store/StoreDashboard";
 import UserDashboard from "../dashboard/user/UserDashboard";
 import Error404Page from "../shared/Error404Page";
+import AddProductPage from "./product/AddProductPage";
 import StoreDetailDashboard from "./store/StoreDetailDashboard";
 const useStyles = makeStyles(theme => ({
     gridContainer: {
@@ -40,6 +41,7 @@ export default function DashboardRouter() {
                             <Route exact path={`${path}/orders`} component={OrderDashboard} />
                             <Route exact path={`${path}/categories`} component={CategoryDashboard} />
                             <Route exact path={`${path}/categories/add`} component={AddCategoryPage} />
+                            <Route exact path={`${path}/menus/:id/add-product`} component={AddProductPage} />
                             <Route component={Error404Page} />
                         </Switch>
                     </Grid>

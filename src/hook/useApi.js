@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import api from '../api/api'
 
 export default function useApi({ endpoint, defaultValue = null }) {
@@ -6,29 +6,33 @@ export default function useApi({ endpoint, defaultValue = null }) {
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(true)
     const [trigger, setTrigger] = useState(0)
-    const fetchData = () => {
-        api
-            .get(endpoint)
-            .then((res) => {
-                setData(res.data)
-            })
-            .catch((err) => {
-                setError(err)
-            })
-            .finally(() => {
-                setLoading(false)
-            })
-    }
+
+    const fetchData = useCallback(
+        () => {
+            api
+                .get(endpoint)
+                .then((res) => {
+                    setData(res.data)
+                })
+                .catch((err) => {
+                    setError(err)
+                })
+                .finally(() => {
+                    setLoading(false)
+                })
+        },
+        [endpoint, setLoading],
+    )
 
     useEffect(() => {
         if (!loading) return
         fetchData()
-    }, [loading])
+    }, [loading, fetchData])
 
     useEffect(() => {
         if (trigger === 0) return
         fetchData()
-    }, [trigger])
+    }, [trigger, fetchData])
 
     // Use this to not trigger loading spinner on some pages
     function refresh() {

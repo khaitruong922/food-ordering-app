@@ -6,10 +6,9 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
-import LaunchIcon from '@material-ui/icons/Launch'
 import React, { Fragment, useEffect, useState } from 'react'
 import { Helmet } from "react-helmet-async"
-import { useHistory, useParams } from "react-router-dom"
+import { Link, useHistory, useParams } from "react-router-dom"
 import api from "../../../api/api"
 import useApi from "../../../hook/useApi"
 import useInput from "../../../hook/useInput"
@@ -19,6 +18,10 @@ import formatCurrency from '../../../util/formatCurrency'
 import Spinner from "../../shared/Spinner"
 import AppDivider from "../../styled-component/AppDivider"
 import WarningModal from "../../styled-component/WarningModal"
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import AddIcon from '@material-ui/icons/Add';
+
 const infoHeight = 250
 
 const useStyles = makeStyles((theme) => ({
@@ -54,28 +57,80 @@ const useStyles = makeStyles((theme) => ({
         width: '80%',
         height: 100,
         objectFit: 'cover'
+    },
+    addIcon: {
+        color: '#00ff00'
+    },
+    deleteIcon: {
+        color: theme.palette.error.main
+    },
+    editIcon: {
+        color: '#ffd343'
     }
 }))
 
-function ProductRow({ product }) {
+function ProductRow({ product, refresh }) {
     const classes = useStyles()
     const { id, name, price, image } = product || {}
     const { url: imageUrl } = image || mockProductImage
+    const { open, handleOpen, handleClose } = useModal()
+
+    async function deleteProduct() {
+        try {
+            await api.delete(`/products/${id}`)
+            refresh()
+        }
+        catch (e) {
+
+        }
+    }
+
     return (
         <TableRow>
-            <TableCell width='10%' component="th" scope="row">{id}</TableCell>
-            <TableCell width='20%' scope="row">
+            <TableCell component="th" scope="row">{id}</TableCell>
+            <TableCell >
                 <img src={imageUrl} className={classes.productImg} />
             </TableCell>
-            <TableCell width='50%' align='left'>{name}</TableCell>
-            <TableCell width='20%' align='right'>{formatCurrency(price)}</TableCell>
+            <TableCell>{name}</TableCell>
+            <TableCell align='right'>{formatCurrency(price)}</TableCell>
+            <TableCell align='center'>
+                <IconButton>
+                    <EditIcon className={classes.editIcon} />
+                </IconButton>
+            </TableCell>
+            <TableCell align='center'>
+                <Box onClick={handleOpen}>
+                    <IconButton>
+                        <DeleteIcon className={classes.deleteIcon} />
+                    </IconButton>
+                </Box>
+            </TableCell>
+            <WarningModal
+                open={open}
+                onClose={handleClose}
+                onConfirm={deleteProduct}
+                title={`Delete ${name}?`}
+            />
         </TableRow>
     )
 }
 
-function MenuRow({ menu }) {
+function MenuRow({ menu, refresh }) {
+    const classes = useStyles()
     const { id, name, products = [], } = menu
     const [open, setOpen] = useState(false);
+    const { open: modalOpen, handleOpen: handleModalOpen, handleClose: handleModalClose } = useModal()
+
+    async function deleteMenu() {
+        try {
+            await api.delete(`/sub-menus/${id}`)
+            refresh()
+        }
+        catch (e) {
+
+        }
+    }
+
     return (
         <Fragment>
             <TableRow>
@@ -86,23 +141,43 @@ function MenuRow({ menu }) {
                         </IconButton>
                     </Box>
                 </TableCell>
-                <TableCell component="th" scope="row" align="left">{name} ({products.length})</TableCell>
+                <TableCell component="th" align="left">{name} ({products.length})</TableCell>
+                <TableCell align="center">
+                    <IconButton component={Link} to={`/dashboard/menus/${id}/add-product`}>
+                        <AddIcon className={classes.addIcon} />
+                    </IconButton>
+                </TableCell>
+                <TableCell align="center">
+                    <Box onClick={handleModalOpen}>
+                        <IconButton>
+                            <DeleteIcon className={classes.deleteIcon} />
+                        </IconButton>
+                    </Box>
+                </TableCell>
+                <WarningModal
+                    open={modalOpen}
+                    onClose={handleModalClose}
+                    onConfirm={deleteMenu}
+                    title={`Delete ${name}?`}
+                />
             </TableRow>
             <TableRow>
-                <TableCell style={{ paddingBottom: 0, paddingTop: 0, }} colSpan={3}>
+                <TableCell style={{ paddingBottom: 0, paddingTop: 0, }} colSpan={4}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
-                        <Box m={1}>
+                        <Box>
                             <Table aria-label="products">
                                 <TableHead>
                                     <TableRow>
                                         <TableCell width='10%'>ID</TableCell>
                                         <TableCell width='20%'>Image</TableCell>
-                                        <TableCell width='50%'>Name</TableCell>
-                                        <TableCell width='20%' align='right'>Price</TableCell>
+                                        <TableCell width='35%'>Name</TableCell>
+                                        <TableCell width='25%' align='right'>Price</TableCell>
+                                        <TableCell width='5%' align='center'>Edit</TableCell>
+                                        <TableCell width='5%' align='center'>Delete</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {products.map((product) => <ProductRow key={product.id} product={product} />)}
+                                    {products.map((product) => <ProductRow key={product.id} product={product} refresh={refresh} />)}
                                 </TableBody>
                             </Table>
                         </Box>
@@ -128,7 +203,7 @@ export default function StoreDetailDashboard() {
 
     useEffect(() => {
         setLoading(true)
-    }, [id])
+    }, [id, setLoading])
 
     async function deleteStore() {
         try {
@@ -155,8 +230,9 @@ export default function StoreDetailDashboard() {
         }
     }
 
+
     return (
-        <Box mt={2} height='100%' width='75%' mx='auto'>
+        <Box height='100%' width='75%' mx='auto'>
             {loading ? <Spinner /> :
                 (
                     <Fragment>
@@ -175,9 +251,9 @@ export default function StoreDetailDashboard() {
                                     <Box height={5} />
                                     <Typography className={classes.description} align='center'>{description}</Typography>
                                     <Box mt={2} display='flex'>
-                                        <Button variant='contained' color='secondary'>Edit</Button>
+                                        <Button startIcon={<EditIcon />} variant='contained' color='secondary'>Edit</Button>
                                         <Box width={10} />
-                                        <Button onClick={handleOpen} variant='contained' className={classes.deleteBtn} >Delete</Button>
+                                        <Button startIcon={<DeleteIcon />} onClick={handleOpen} variant='contained' className={classes.deleteBtn} >Delete</Button>
                                         <WarningModal
                                             open={open}
                                             onClose={handleClose}
@@ -200,7 +276,6 @@ export default function StoreDetailDashboard() {
                                 <Button type='submit' className={classes.addBtn} variant='contained' color='secondary'>Add</Button>
                             </Box>
                         </form>
-
                         <Box height={10} />
 
                         <TableContainer component={Paper}>
@@ -208,12 +283,14 @@ export default function StoreDetailDashboard() {
                                 <TableHead>
                                     <TableRow>
                                         <TableCell width='10%' />
-                                        <TableCell width='90%' align="left">Menu</TableCell>
+                                        <TableCell width='70%' align="left">Menu</TableCell>
+                                        <TableCell width='10%' align="center">Add product</TableCell>
+                                        <TableCell width='10%' align="center">Delete</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
                                     {subMenus.map((menu) => (
-                                        <MenuRow key={menu.id} menu={menu} />
+                                        <MenuRow key={menu.id} menu={menu} refresh={refresh} />
                                     ))}
                                 </TableBody>
                             </Table>

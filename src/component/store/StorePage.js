@@ -30,11 +30,11 @@ const useStyles = makeStyles((theme) => ({
 export default function StorePage() {
     const classes = useStyles()
     const { id } = useParams()
-    const { data, error, loading, setLoading} = useApi({ endpoint: `/stores/${id}`, defaultValue: null })
+    const { data, error, loading, setLoading } = useApi({ endpoint: `/stores/${id}`, defaultValue: null })
     const { name, address, description, image: { url: imageUrl } = {}, subMenus = [] } = data || {}
     useEffect(() => {
         setLoading(true)
-    }, [id])
+    }, [id, setLoading])
     return (
         <Box mt={2} height='100%' width='75%' mx='auto'>
             {loading ? <Spinner /> :

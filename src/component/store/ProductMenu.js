@@ -8,8 +8,8 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-export default function ProductMenu({ menu }) {
-    const { id, name = 'Menu', products = [] } = menu
+export default function ProductMenu({ menu, storeId }) {
+    const { id, name = 'Menu', products = [], } = menu
     const classes = useStyles()
     if (products?.length === 0) return <Fragment />
     return (
@@ -19,7 +19,7 @@ export default function ProductMenu({ menu }) {
             <Grid container spacing={3}>
                 {products.map(product => (
                     <Grid item key={product.id} xs={12} md={6} lg={4} >
-                        <Product product={product} />
+                        <Product storeId={storeId} product={product} />
                     </Grid>
                 ))}
             </Grid >

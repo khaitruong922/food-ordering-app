@@ -50,4 +50,6 @@ const useAuthStore = create(persist(
   }
 ))
 
+useAuthStore.subscribe((state, prevState) => console.log(state))
+
 export default useAuthStore

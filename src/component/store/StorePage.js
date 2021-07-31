@@ -3,6 +3,7 @@ import { Fragment, useEffect } from "react"
 import { Helmet } from "react-helmet-async"
 import { useParams } from "react-router-dom"
 import useApi from "../../hook/useApi"
+import useCartsStore from "../../store/useCartsStore"
 import Spinner from "../shared/Spinner"
 import AppDivider from "../styled-component/AppDivider"
 import ProductMenu from "./ProductMenu"
@@ -32,6 +33,8 @@ export default function StorePage() {
     const { id } = useParams()
     const { data, error, loading, setLoading } = useApi({ endpoint: `/stores/${id}`, defaultValue: null })
     const { name, address, description, image: { url: imageUrl } = {}, subMenus = [] } = data || {}
+    const carts = useCartsStore(state => state.carts)
+
     useEffect(() => {
         setLoading(true)
     }, [id, setLoading])
@@ -59,7 +62,7 @@ export default function StorePage() {
                         </Grid>
                         <AppDivider />
                         <Box height={10} />
-                        {subMenus.map(menu => <ProductMenu key={menu.id} menu={menu} />)}
+                        {subMenus.map(menu => <ProductMenu key={menu.id} menu={menu} storeId={id} />)}
                     </Fragment>
                 )
             }

@@ -18,7 +18,7 @@ export default function ProductMenu({ menu, storeId }) {
             <Box height={10} />
             <Grid container spacing={3}>
                 {products.map(product => (
-                    <Grid item key={product.id} xs={12} md={6} lg={4} >
+                    <Grid item key={product.id} xs={12} >
                         <Product storeId={storeId} product={product} />
                     </Grid>
                 ))}

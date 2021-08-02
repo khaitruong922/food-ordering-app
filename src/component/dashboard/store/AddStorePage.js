@@ -70,7 +70,7 @@ export default function AddStorePage() {
     }
 
     return (
-        <Box display='flex' flexDirection='column' alignItems='center' p={4}>
+        <Box display='flex' flexDirection='column' alignItems='center' p={5}>
             <Typography variant='h4'>Add new store</Typography>
             <Box height={20}></Box>
             <form className={classes.root} onSubmit={onFormSubmit}>

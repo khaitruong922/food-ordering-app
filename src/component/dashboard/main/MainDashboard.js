@@ -7,7 +7,7 @@ const useStyles = makeStyles(theme => ({
 export default function MainDashboard() {
     const classes = useStyles()
     return (
-        <Box display='flex' justifyContent='center'>
+        <Box display='flex' justifyContent='center' p={5}>
         </Box>
     )
 }

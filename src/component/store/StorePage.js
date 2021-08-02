@@ -3,7 +3,7 @@ import { Fragment, useEffect } from "react"
 import { Helmet } from "react-helmet-async"
 import { useParams } from "react-router-dom"
 import useApi from "../../hook/useApi"
-import useCartsStore from "../../store/useCartsStore"
+import Cart from "../cart/Cart"
 import Spinner from "../shared/Spinner"
 import AppDivider from "../styled-component/AppDivider"
 import ProductMenu from "./ProductMenu"
@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         height: 250,
         objectFit: 'cover'
+    },
+    storeBanner: {
+        width: '80%'
     }
 }))
 
@@ -33,18 +36,17 @@ export default function StorePage() {
     const { id } = useParams()
     const { data, error, loading, setLoading } = useApi({ endpoint: `/stores/${id}`, defaultValue: null })
     const { name, address, description, image: { url: imageUrl } = {}, subMenus = [] } = data || {}
-    const carts = useCartsStore(state => state.carts)
 
     useEffect(() => {
         setLoading(true)
     }, [id, setLoading])
     return (
-        <Box height='100%' width='75%' mx='auto'>
+        <Box height='100%' width='80%' mx='auto' display='flex' flexDirection='column' alignItems='center'>
             {loading ? <Spinner /> :
                 (
                     <Fragment>
                         <Helmet title={name} />
-                        <Grid container>
+                        <Grid className={classes.storeBanner} container>
                             <Grid item sm={12} md={4}>
                                 <Box p={4}>
                                     <img alt={name} className={classes.image} src={imageUrl} />
@@ -62,7 +64,18 @@ export default function StorePage() {
                         </Grid>
                         <AppDivider />
                         <Box height={10} />
-                        {subMenus.map(menu => <ProductMenu key={menu.id} menu={menu} storeId={id} />)}
+                        <Grid container>
+                            <Grid item sm={12} md={3}>
+
+                            </Grid>
+                            <Grid item sm={12} md={6}>
+                                {subMenus.map(menu => <ProductMenu key={menu.id} menu={menu} storeId={id} />)}
+                            </Grid>
+                            <Grid item sm={12} md={3}>
+                                <Cart storeId={id} />
+                            </Grid>
+                        </Grid>
+
                     </Fragment>
                 )
             }

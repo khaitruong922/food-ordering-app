@@ -71,7 +71,7 @@ export default function UserDashboard() {
     const { data: users, loading, error, refresh } = useApi({ endpoint: '/users', defaultValue: [] })
 
     return (
-        <Box display='flex' flexDirection='column' p={4}>
+        <Box display='flex' flexDirection='column' p={5}>
             <Box>
                 <Typography variant='h4'>Users</Typography>
             </Box>

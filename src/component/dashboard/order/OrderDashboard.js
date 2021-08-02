@@ -7,6 +7,7 @@ import TableRow from '@material-ui/core/TableRow';
 import LaunchIcon from '@material-ui/icons/Launch';
 import React from 'react';
 import useApi from "../../../hook/useApi";
+import formatCurrency from "../../../util/formatCurrency";
 import Spinner from "../../shared/Spinner";
 
 const useStyles = makeStyles(theme => ({
@@ -34,8 +35,6 @@ export default function OrderDashboard() {
                             <TableHead>
                                 <TableRow>
                                     <TableCell>ID</TableCell>
-                                    <TableCell align="left">Name</TableCell>
-                                    <TableCell align="left">User</TableCell>
                                     <TableCell align="left">Status</TableCell>
                                     <TableCell align="left">Total</TableCell>
                                     <TableCell padding='none' align='center'>Manage</TableCell>
@@ -47,9 +46,8 @@ export default function OrderDashboard() {
                                         <TableCell component="th" scope="row">
                                             {id}
                                         </TableCell>
-                                        <TableCell align="left">userId</TableCell>
                                         <TableCell align="left">{status}</TableCell>
-                                        <TableCell align="left">{totalPrice}</TableCell>
+                                        <TableCell align="left">{formatCurrency(totalPrice)}</TableCell>
                                         <TableCell padding='none' align='center'>
                                             <IconButton disableTouchRipple disableRipple><LaunchIcon color='secondary' /></IconButton>
                                         </TableCell>

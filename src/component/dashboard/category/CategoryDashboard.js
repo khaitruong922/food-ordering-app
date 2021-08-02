@@ -21,7 +21,7 @@ export default function CategoryDashboard() {
     const classes = useStyles()
     const { data: stores, loading, error } = useApi({ endpoint: '/categories', defaultValue: [] })
     return (
-        <Box display='flex' flexDirection='column' p={4}>
+        <Box display='flex' flexDirection='column' p={5}>
             <Box>
                 <Typography variant='h4'>Categories</Typography>
                 <Box height={20}></Box>

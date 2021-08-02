@@ -196,7 +196,8 @@ export default function StoreDetailDashboard() {
     const classes = useStyles()
     const { id } = useParams()
     const { data, error, loading, setData, refresh, setLoading } = useApi({ endpoint: `/stores/${id}`, defaultValue: null })
-    const { name, address, description, image: { url: imageUrl } = {}, subMenus = [] } = data || {}
+    const { name, address, description, image, subMenus = [] } = data || {}
+    const { url: imageUrl } = image || {}
     const { open, handleOpen, handleClose } = useModal()
     const { value: addedMenuName, onInput: onAddedMenuNameInput, reset: resetAddedMenuNameInput } = useInput('')
     const history = useHistory()
@@ -232,7 +233,7 @@ export default function StoreDetailDashboard() {
 
 
     return (
-        <Box height='100%' width='75%' mx='auto'>
+        <Box width='75%' mx='auto' p={5}>
             {loading ? <Spinner /> :
                 (
                     <Fragment>

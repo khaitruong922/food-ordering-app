@@ -3,7 +3,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import useInput from '../../hook/useInput';
 import useMessage from '../../hook/useMessage';
 import useAuthStore from '../../store/useAuthStore';
@@ -23,6 +23,7 @@ export default function LoginPage() {
     const { value: username, onInput: onUsernameInput } = useInput('')
     const { value: password, onInput: onPasswordInput } = useInput('')
     const { message, success, setErrorMessage } = useMessage()
+    const history = useHistory()
     const login = useAuthStore(state => state.login)
     const fetchCurrentUser = useAuthStore(state => state.fetchCurrentUser)
 

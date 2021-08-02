@@ -1,6 +1,6 @@
 import { Box } from "@material-ui/core";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import CheckoutPage from "./component/CheckoutPage";
+import CheckoutPage from "./checkout/CheckoutPage";
 import DashboardRouter from "./component/dashboard/DashboardRouter";
 import LoginPage from "./component/login/LoginPage";
 import MainAppBar from "./component/shared/MainAppBar";
@@ -34,7 +34,9 @@ export default function AppRouter() {
                         <Route exact path='/stores/:id'>
                             <StorePage />
                         </Route>
-                        <Route path='/checkout' component={CheckoutPage}/>
+                        <Route exact path='/stores/:id/checkout'>
+                            {user ? <CheckoutPage /> : <Redirect to='/login' />}
+                        </Route>
                         <Route component={Error404Page} />
                     </Switch>
                 </Box>

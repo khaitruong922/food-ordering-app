@@ -30,6 +30,9 @@ const useStyles = makeStyles((theme) => ({
     },
     bold: {
         fontWeight: 700,
+    },
+    link: {
+        textDecoration: "none",
     }
 }))
 const steps = ["Shipping Information", "Review", "Completed"]
@@ -185,6 +188,11 @@ export default function CheckoutPage() {
                                 </Typography>
                                 <Box height={20} />
                                 <CheckCircleOutlineIcon color='success' className={classes.successIcon} />
+                                <Box  className={classes.link} borderRadius={20} component={Link} to="/" my="10px">
+                                    <Typography className={classes.successText}>
+                                        Back to Home
+                                    </Typography>
+                                </Box>
 
                             </Box>
                         }

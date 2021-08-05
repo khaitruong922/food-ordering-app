@@ -91,7 +91,7 @@ export default function CheckoutPage() {
                 <Stepper activeStep={activeStep}>
                     {steps.map((step) => (
                         <Step key={step}>
-                            <StepLabel>{step}</StepLabel>
+                            <StepLabel id="step">{step}</StepLabel>
                         </Step>
 
                     ))}

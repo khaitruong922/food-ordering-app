@@ -74,7 +74,7 @@ export default function CheckoutPage() {
         e.preventDefault()
         if (submitting) return
         setSubmitting(true)
-        const data = await submitOrder({ storeId, address, note, name, phoneNumber })
+        const data = await submitOrder({ storeId, address, note })
         console.log(data)
         if (data) nextStep()
     }

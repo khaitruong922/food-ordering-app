@@ -74,7 +74,7 @@ export default function CheckoutPage() {
         e.preventDefault()
         if (submitting) return
         setSubmitting(true)
-        const data = await submitOrder({ storeId, address, note })
+        const data = await submitOrder({ storeId, address, note, name, phoneNumber })
         console.log(data)
         if (data) nextStep()
     }
@@ -188,7 +188,7 @@ export default function CheckoutPage() {
                                 </Typography>
                                 <Box height={20} />
                                 <CheckCircleOutlineIcon color='success' className={classes.successIcon} />
-                                <Box  className={classes.link} borderRadius={20} component={Link} to="/" my="10px">
+                                <Box className={classes.link} borderRadius={20} component={Link} to="/" my="10px">
                                     <Typography className={classes.successText}>
                                         Back to Home
                                     </Typography>

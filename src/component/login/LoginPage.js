@@ -52,7 +52,7 @@ export default function LoginPage() {
                 <FormMessage success={success} content={message} />
             </Box>
             <Typography align="center">
-                <Link className={classes.link} to="#">
+                <Link id="link1" className={classes.link} to="#">
                     Forgot Password ?
                 </Link>
             </Typography>
@@ -60,7 +60,7 @@ export default function LoginPage() {
             <Box height={10}></Box>
             <AppDivider />
             <Box height={10}></Box>
-            <Typography align='center'>Don't have an account? Sign up <Link id="link" className={classes.link} to='/signup'>here</Link></Typography>
+            <Typography align='center'>Don't have an account? Sign up <Link id="link2" className={classes.link} to='/signup'>here</Link></Typography>
         </Box>
     )
 }

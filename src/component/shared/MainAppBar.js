@@ -1,29 +1,12 @@
-import { AppBar, Box, Button, IconButton, makeStyles, Toolbar, Typography } from "@material-ui/core";
+import { Flex, IconButton, Text } from '@chakra-ui/react';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { Fragment } from "react";
 import { Link, useHistory } from "react-router-dom";
 import useAuthStore from "../../store/useAuthStore";
 
-const useStyles = makeStyles((theme) => (
-  {
-    appBar: {
-      zIndex: theme.zIndex.drawer + 1,
-      height: 64,
-    },
-    btn: {
-      color: theme.palette.primary.contrastText,
-
-    },
-    link: {
-      textDecoration: 'none',
-      color: theme.palette.primary.contrastText
-    }
-  })
-)
 
 function AppBarItems() {
-  const classes = useStyles()
   const user = useAuthStore(state => state.user)
   const isAdmin = user?.role === 'admin'
   const history = useHistory()
@@ -31,33 +14,44 @@ function AppBarItems() {
   if (user) return (
     <Fragment>
       {
-        isAdmin && <IconButton component={Link} to='/dashboard'><DashboardIcon color='secondary' /></IconButton>
+        isAdmin &&
+        <Link to='/dashboard'>
+          <IconButton
+            icon={<DashboardIcon color='secondary' />}
+            variant='ghost'
+            isRound
+            colorScheme='blackAlpha'
+            _focus={{ boxShadow: 'none' }}
+          />
+        </Link>
       }
-      <IconButton onClick={() => {
-        logout()
-        history.push('/')
-      }} className={classes.btn}><ExitToAppIcon /></IconButton>
-    </Fragment>
+      <IconButton
+        onClick={() => {
+          logout()
+          history.push('/')
+        }}
+        isRound
+        variant='ghost'
+        colorScheme='blackAlpha'
+        _focus={{ boxShadow: 'none' }}
+        icon={<ExitToAppIcon style={{ color: 'white' }} />}
+      />
+    </Fragment >
   )
   return (
     <Fragment>
-      <Button component={Link} to='/login' className={classes.btn}>Login</Button>
+      <Link to='/login'><Text color='white' fontSize='lg' fontWeight={600}>Login</Text></Link>
     </Fragment>
   )
 }
 
 export default function MainAppBar() {
-  const classes = useStyles()
   return (
-    <Box display='flex' justifyContent='space-between' alignItems='center'>
-      <AppBar position='sticky' className={classes.appBar}>
-        <Toolbar>
-          <Link className={classes.link} to="/"><Typography variant='h6'>DeliV</Typography></Link>
-          <Box display='flex' justifyContent='center' ml='auto'>
-            <AppBarItems />
-          </Box>
-        </Toolbar>
-      </AppBar>
-    </Box >
+    <Flex py={4} px={6} bgColor='black' position='sticky' justify='space-between' align='center'>
+      <Link to="/"><Text color='white' fontSize='2xl' fontWeight={600}>DeliV</Text></Link>
+      <Flex justify='center' ml='auto'>
+        <AppBarItems />
+      </Flex>
+    </Flex >
   )
 }

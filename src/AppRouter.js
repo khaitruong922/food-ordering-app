@@ -1,6 +1,6 @@
 import { Box } from "@material-ui/core";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import CheckoutPage from "./checkout/CheckoutPage";
+import CheckoutPage from "./component/checkout/CheckoutPage";
 import DashboardRouter from "./component/dashboard/DashboardRouter";
 import LoginPage from "./component/login/LoginPage";
 import MainAppBar from "./component/shared/MainAppBar";

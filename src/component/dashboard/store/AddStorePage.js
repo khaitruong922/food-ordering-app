@@ -4,7 +4,7 @@ import api from "../../../api/api";
 import useInput from "../../../hook/useInput";
 import useMessage from "../../../hook/useMessage";
 import isValidImageFile from "../../../util/isValidImageFile";
-import Spinner from "../../shared/Spinner";
+import LoadingSpinner from "../../shared/LoadingSpinner";
 import FormMessage from "../../styled-component/FormMessage";
 
 const useStyles = makeStyles(theme => ({
@@ -92,7 +92,7 @@ export default function AddStorePage() {
             <Box height={60} display='flex' alignItems='center' justifyContent='center'>
                 {
                     loading ?
-                        <Spinner color='secondary' /> :
+                        <LoadingSpinner /> :
                         <FormMessage success={success} content={message} />
                 }
             </Box>

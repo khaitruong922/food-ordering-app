@@ -7,10 +7,10 @@ import TableRow from '@material-ui/core/TableRow';
 import DeleteIcon from '@material-ui/icons/Delete';
 import React from 'react';
 import api from "../../../api/api";
+import WarningModal from '../../../component/styled-component/WarningModal';
 import useApi from "../../../hook/useApi";
 import useModal from "../../../hook/useModal";
-import Spinner from "../../shared/Spinner";
-import WarningModal from '../../../component/styled-component/WarningModal'
+import LoadingSpinner from "../../shared/LoadingSpinner";
 
 const useStyles = makeStyles(theme => ({
     table: {
@@ -78,7 +78,7 @@ export default function UserDashboard() {
             <Box height={20}></Box>
             {
                 loading ?
-                    <Spinner /> :
+                    <LoadingSpinner /> :
                     <TableContainer component={Paper}>
                         <Table stickyHeader className={classes.table} aria-label="simple table">
                             <TableHead>

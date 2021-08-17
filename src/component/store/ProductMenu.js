@@ -1,28 +1,19 @@
-import { Box, Grid, makeStyles, Typography } from "@material-ui/core"
+import { Box, SimpleGrid, Text } from "@chakra-ui/react"
 import { Fragment } from "react"
 import Product from "./Product"
 
-const useStyles = makeStyles((theme) => ({
-    grid: {
-        flexGrow: 1
-    }
-}))
-
 export default function ProductMenu({ menu, storeId }) {
     const { id, name = 'Menu', products = [], } = menu
-    const classes = useStyles()
     if (products?.length === 0) return <Fragment />
     return (
         <Box p={2}>
-            <Typography variant='h6'>{name}</Typography>
+            <Text fontSize='2xl'>{name}</Text>
             <Box height={10} />
-            <Grid container spacing={3}>
+            <SimpleGrid container column={1}>
                 {products.map(product => (
-                    <Grid item key={product.id} xs={12} >
-                        <Product storeId={storeId} product={product} />
-                    </Grid>
+                    <Product key={product.id} storeId={storeId} product={product} />
                 ))}
-            </Grid >
+            </SimpleGrid >
         </Box>
     )
 }

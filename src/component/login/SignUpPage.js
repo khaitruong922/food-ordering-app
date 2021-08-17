@@ -1,4 +1,4 @@
-import { Box, Button, makeStyles, TextField, Typography } from '@material-ui/core';
+import { Box, Button, Flex, FormControl, FormLabel, Input, Text, useToast } from '@chakra-ui/react';
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
@@ -7,27 +7,9 @@ import useInput from '../../hook/useInput';
 import useMessage from '../../hook/useMessage';
 import AppDivider from '../styled-component/AppDivider';
 import FormMessage from '../styled-component/FormMessage';
-const useStyles = makeStyles((theme) => (
-    {
-        btn: {
-            borderRadius: '10px',
-        },
-        link: {
-            textDecoration: "none",
-        },
-        error: {
-            fontWeight: 500,
-        },
-        success: {
-            color: '#0f0',
-            fontWeight: 500,
-        }
-    })
-)
+
 
 export default function SignUpPage() {
-    const classes = useStyles()
-
     const { value: username, onInput: onUsernameInput } = useInput('')
     const { value: name, onInput: onNameInput } = useInput('')
     const { value: email, onInput: onEmailInput } = useInput('')
@@ -59,26 +41,48 @@ export default function SignUpPage() {
     }
 
     return (
-        <Box display='flex' flexDirection='column' alignItems='center' justifyContent='center' width={400} mx='auto' boxShadow={5} mt={2} p={5}>
+        <Flex direction='column' align='center' justify='center' width={400} mx='auto' boxShadow='xl' mt={5} p={5}>
             <Helmet title='Sign Up' />
-            <Typography variant='h6'>Sign Up</Typography>
-            <form onSubmit={onFormSubmit}>
-                <TextField value={username} onInput={onUsernameInput} label="Username" fullWidth required />
-                <TextField value={name} onInput={onNameInput} label="Name" fullWidth required />
-                <TextField value={email} onInput={onEmailInput} label="Email" fullWidth />
-                <TextField value={phoneNumber} onInput={onPhoneNumberInput} label="Phone number" fullWidth required />
-                <TextField value={address} onInput={onAddressInput} label="Address" fullWidth required />
-                <TextField value={password} onInput={onPasswordInput} label="Password" type="password" fullWidth required />
-                <TextField value={confirmPassword} onInput={onConfirmPasswordInput} label="Confirm Password" type="password" fullWidth required />
-                <Box height={20}></Box>
-                <Button className={classes.btn} type="submit" color='primary' variant="contained" fullWidth>Create Account</Button>
-            </form>
-            <Box height={50} display='flex' alignItems='center' justifyContent='center'>
-                <FormMessage content={message} success={success} />
+            <Text fontSize='3xl' fontWeight={700}>Sign Up</Text>
+            <Box width='100%' p={2}>
+                <form onSubmit={onFormSubmit}>
+                    <FormControl id="username">
+                        <FormLabel>Username</FormLabel>
+                        <Input value={username} onInput={onUsernameInput} required />
+                    </FormControl>
+                    <FormControl id="name">
+                        <FormLabel>Name</FormLabel>
+                        <Input value={name} onInput={onNameInput} required />
+                    </FormControl>
+                    <FormControl id="email">
+                        <FormLabel>Email</FormLabel>
+                        <Input type='email' value={email} onInput={onEmailInput} required />
+                    </FormControl>
+                    <FormControl id="phoneNumber">
+                        <FormLabel>Phone Number</FormLabel>
+                        <Input type='tel' value={phoneNumber} onInput={onPhoneNumberInput} required />
+                    </FormControl>
+                    <FormControl id="address">
+                        <FormLabel>Address</FormLabel>
+                        <Input value={address} onInput={onAddressInput} required />
+                    </FormControl>
+                    <FormControl id="password">
+                        <FormLabel>Password</FormLabel>
+                        <Input type='password' value={password} onInput={onPasswordInput} required />
+                    </FormControl>
+                    <FormControl id="address">
+                        <FormLabel>Confirm Password</FormLabel>
+                        <Input type='password' value={confirmPassword} onInput={onConfirmPasswordInput} required />
+                    </FormControl>
+                    <Box height={5}></Box>
+                    <Button type="submit" width='100%' colorScheme='yellow'>Sign Up</Button>
+                </form>
             </Box>
+            <Box height={5}></Box>
             <AppDivider />
-            <Box height={10}></Box>
-            <Typography>Already have an account? Login <Link className={classes.link} to='/login'>here</Link></Typography>
-        </Box>
+            <Box height={5}></Box>
+            <Text align='center'>Already have an account? Log in <Link to='/login'><Text display='inline' color='yellow.500'>here</Text></Link></Text>
+
+        </Flex>
     )
 }

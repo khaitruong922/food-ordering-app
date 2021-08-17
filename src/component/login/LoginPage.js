@@ -1,30 +1,16 @@
-import { Box, Button, makeStyles, TextField, Typography } from '@material-ui/core';
-import Checkbox from '@material-ui/core/Checkbox';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { Box, Button, Flex, FormControl, FormLabel, Input, Text, useToast } from '@chakra-ui/react';
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import useInput from '../../hook/useInput';
-import useMessage from '../../hook/useMessage';
 import useAuthStore from '../../store/useAuthStore';
 import AppDivider from '.././styled-component/AppDivider';
-import FormMessage from '.././styled-component/FormMessage';
-const useStyles = makeStyles((theme) => ({
-    btn: {
-        borderRadius: '10px',
-    },
-    link: {
-        textDecoration: "none",
-    }
-})
-)
+
 export default function LoginPage() {
-    const classes = useStyles()
     const { value: username, onInput: onUsernameInput } = useInput('')
     const { value: password, onInput: onPasswordInput } = useInput('')
-    const { message, success, setErrorMessage } = useMessage()
-    const history = useHistory()
     const login = useAuthStore(state => state.login)
+    const toast = useToast()
     const fetchCurrentUser = useAuthStore(state => state.fetchCurrentUser)
 
     const onFormSubmit = async (e) => {
@@ -32,35 +18,38 @@ export default function LoginPage() {
         await login({ username, password })
         const user = await fetchCurrentUser()
         if (!user) {
-            setErrorMessage('Username and password do not match!')
+            toast({
+                title: 'Login failed!',
+                description: 'Username and password do not match.',
+                status: 'error',
+                isClosable: true,
+            })
             return
         }
     }
 
     return (
-        <Box display='flex' flexDirection='column' alignItems='center' justifyContent='center' width={400} mx='auto' boxShadow={5} mt={2} p={5}>
+        <Flex direction='column' align='center' justify='center' width={400} mx='auto' boxShadow='xl' mt={5} p={5}>
             <Helmet title='Login' />
-            <Typography variant='h6'>Sign In</Typography>
-            <form onSubmit={onFormSubmit}>
-                <TextField value={username} onInput={onUsernameInput} label="Username" fullWidth required />
-                <TextField value={password} onInput={onPasswordInput} label="Password" type="password" fullWidth required />
-                <FormControlLabel className={classes.text} control={<Checkbox name="checkedB" color="primary" />} label="Remember Me" />
-                <Box height={20}></Box>
-                <Button className={classes.btn} type="submit" variant="contained" color='primary' fullWidth>Sign In</Button>
-            </form>
-            <Box height={50} display='flex' alignItems='center'>
-                <FormMessage success={success} content={message} />
+            <Text fontSize='3xl' fontWeight={700}>Sign In</Text>
+            <Box width='100%' p={2}>
+                <form onSubmit={onFormSubmit}>
+                    <FormControl id="username">
+                        <FormLabel>Username</FormLabel>
+                        <Input value={username} onInput={onUsernameInput} required />
+                    </FormControl>
+                    <FormControl id="password">
+                        <FormLabel>Password</FormLabel>
+                        <Input type='password' value={password} onInput={onPasswordInput} required />
+                    </FormControl>
+                    <Box height={5}></Box>
+                    <Button type="submit" width='100%' colorScheme='yellow'>Sign In</Button>
+                </form>
             </Box>
-            <Typography align="center">
-                <Link id="link1" className={classes.link} to="#">
-                    Forgot Password ?
-                </Link>
-            </Typography>
-
-            <Box height={10}></Box>
+            <Box height={5}></Box>
             <AppDivider />
-            <Box height={10}></Box>
-            <Typography align='center'>Don't have an account? Sign up <Link id="link2" className={classes.link} to='/signup'>here</Link></Typography>
-        </Box>
+            <Box height={5}></Box>
+            <Text align='center'>Don't have an account? Sign up <Link id="link2" to='/signup'><Text display='inline' color='yellow.500'>here</Text></Link></Text>
+        </Flex>
     )
 }

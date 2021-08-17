@@ -1,29 +1,26 @@
-import { Box, Grid } from "@material-ui/core";
+import { SimpleGrid } from "@chakra-ui/react";
+import { Box } from "@material-ui/core";
 import { Helmet } from "react-helmet-async";
 import useApi from "../../hook/useApi";
 import useAuthStore from "../../store/useAuthStore";
-import Spinner from "../shared/Spinner";
+import LoadingSpinner from "../shared/LoadingSpinner";
 import StoreCard from "./StoreCard";
 
 export default function Home() {
     const user = useAuthStore(state => state.user)
     const { data: stores, loading, error } = useApi({ endpoint: '/stores', defaultValue: [] })
-    if (loading) return <Spinner />
+    if (loading) return <LoadingSpinner />
     return (
         <Box width='80%' mx='auto' mt={2}>
             <Helmet title='DeliV' />
-            <Grid
-                container
-                direction="row"
-                justifyContent='flex-start'
+            <SimpleGrid
+                columns={[1, 2, 3, 4]}
                 spacing={3}
             >
                 {stores.map((store) => (
-                    <Grid key={store.id} item xs={12} sm={6} md={4} lg={3} >
-                        <StoreCard store={store} />
-                    </Grid>
+                    <StoreCard key={store.id} store={store} />
                 ))}
-            </Grid>
+            </SimpleGrid>
         </Box>
 
     )

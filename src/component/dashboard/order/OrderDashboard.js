@@ -8,7 +8,7 @@ import LaunchIcon from '@material-ui/icons/Launch';
 import React from 'react';
 import useApi from "../../../hook/useApi";
 import formatCurrency from "../../../util/formatCurrency";
-import Spinner from "../../shared/Spinner";
+import LoadingSpinner from "../../shared/LoadingSpinner";
 
 const useStyles = makeStyles(theme => ({
     table: {
@@ -29,7 +29,7 @@ export default function OrderDashboard() {
             <Box height={20}></Box>
             {
                 loading ?
-                    <Spinner /> :
+                    <LoadingSpinner /> :
                     <TableContainer component={Paper}>
                         <Table stickyHeader className={classes.table} aria-label="simple table">
                             <TableHead>

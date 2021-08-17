@@ -6,9 +6,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import LaunchIcon from '@material-ui/icons/Launch';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import useApi from "../../../hook/useApi";
-import Spinner from "../../shared/Spinner";
-import { Link } from 'react-router-dom'
+import LoadingSpinner from "../../shared/LoadingSpinner";
 
 const useStyles = makeStyles(theme => ({
     table: {
@@ -30,7 +30,7 @@ export default function CategoryDashboard() {
             <Box height={20}></Box>
             {
                 loading ?
-                    <Spinner /> :
+                    <LoadingSpinner /> :
                     <TableContainer component={Paper}>
                         <Table stickyHeader className={classes.table} aria-label="simple table">
                             <TableHead>

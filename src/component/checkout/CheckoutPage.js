@@ -4,15 +4,15 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import Spinner from '../component/shared/Spinner';
-import useInput from '../hook/useInput';
-import useAuthStore from '../store/useAuthStore';
-import useCartsStore from '../store/useCartsStore';
-import formatCurrency from '../util/formatCurrency';
-import getArrayEntries from '../util/getArrayEntries';
-import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import useInput from '../../hook/useInput';
+import useAuthStore from '../../store/useAuthStore';
+import useCartsStore from '../../store/useCartsStore';
+import formatCurrency from '../../util/formatCurrency';
+import getArrayEntries from '../../util/getArrayEntries';
+import LoadingSpinner from '../shared/LoadingSpinner';
 const useStyles = makeStyles((theme) => ({
     total: {
         fontWeight: 700,
@@ -177,7 +177,7 @@ export default function CheckoutPage() {
                                         <Button type='submit' fullWidth>Confirm</Button>
                                     </Box>
                                 </Box>
-                                <Box height={50}>{submitting && <Spinner />}</Box>
+                                <Box height={50}>{submitting && <LoadingSpinner />}</Box>
                             </Box>
                         }
                         {

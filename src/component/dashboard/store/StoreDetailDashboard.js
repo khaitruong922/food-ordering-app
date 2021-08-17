@@ -4,6 +4,9 @@ import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
+import AddIcon from '@material-ui/icons/Add'
+import DeleteIcon from '@material-ui/icons/Delete'
+import EditIcon from '@material-ui/icons/Edit'
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp'
 import React, { Fragment, useEffect, useState } from 'react'
@@ -15,12 +18,9 @@ import useInput from "../../../hook/useInput"
 import useModal from "../../../hook/useModal"
 import mockProductImage from "../../../mock/mockProductImage"
 import formatCurrency from '../../../util/formatCurrency'
-import Spinner from "../../shared/Spinner"
+import LoadingSpinner from "../../shared/LoadingSpinner"
 import AppDivider from "../../styled-component/AppDivider"
 import WarningModal from "../../styled-component/WarningModal"
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
-import AddIcon from '@material-ui/icons/Add';
 
 const infoHeight = 250
 
@@ -234,7 +234,7 @@ export default function StoreDetailDashboard() {
 
     return (
         <Box width='75%' mx='auto' p={5}>
-            {loading ? <Spinner /> :
+            {loading ? <LoadingSpinner /> :
                 (
                     <Fragment>
                         <Helmet title={name} />

@@ -1,4 +1,4 @@
-import { Box, Button, Hidden, makeStyles, Typography } from "@material-ui/core"
+import { Box, Button, Flex, Text } from '@chakra-ui/react'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import { Fragment } from "react"
 import { useEffect } from "react"
@@ -8,14 +8,7 @@ import useCartsStore from "../../store/useCartsStore"
 import formatCurrency from "../../util/formatCurrency"
 import CartItem from "./CartItem"
 
-const useStyles = makeStyles((theme) => ({
-    price: {
-        fontWeight: 700,
-    }
-}))
-
 export default function Cart({ storeId }) {
-    const classes = useStyles()
     const productIds = useCartsStore(state => Object.keys(state.carts[storeId]?.products ?? {}))
     const total = useCartsStore(state => (state.carts[storeId]?.total))
     const checkout = useCartsStore(state => state.checkout)
@@ -25,24 +18,28 @@ export default function Cart({ storeId }) {
     }, [])
     return (
         <Box p={2}>
-            <Typography variant='h6'>Your cart</Typography>
-            <Box height={10} />
             {productIds.map(productId => <CartItem key={productId} storeId={storeId} productId={productId} />)}
-            <Box height={10} />
+            <Box height={5} />
             {
                 productIds.length > 0 ?
                     <Fragment>
-                        <Box display='flex'>
-                            <Typography className={classes.price}>Total</Typography>
+                        <Flex>
+                            <Text fontSize='md' fontWeight={600}>Total</Text>
                             <Box ml='auto'>
-                                <Typography className={classes.price} align='right'>{formatCurrency(total)}</Typography>
+                                <Text fontSize='md' fontWeight={600} align='right'>{formatCurrency(total)}</Text>
                             </Box>
-                        </Box>
+                        </Flex>
                         <Box display='flex' justifyContent='center'>
-                            <Button component={Link} to={`/stores/${storeId}/checkout`} startIcon={<ShoppingCartIcon color='secondary' />} color='secondary'>Checkout</Button>
+                            <Link to={`/stores/${storeId}/checkout`} >
+                                <Button
+                                    leftIcon={<ShoppingCartIcon color='secondary' />}
+                                    variant='ghost'
+                                >Checkout
+                                </Button>
+                            </Link>
                         </Box>
                     </Fragment> :
-                    <Typography align='center' variant='subtitle2'>Your cart is empty</Typography>
+                    <Text align='center' variant='subtitle2'>Your cart is empty</Text>
             }
 
         </Box >

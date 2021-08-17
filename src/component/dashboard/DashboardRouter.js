@@ -1,4 +1,4 @@
-import { Box, Grid, makeStyles } from "@material-ui/core";
+import { Box, GridItem, SimpleGrid } from "@chakra-ui/react";
 import { Helmet } from "react-helmet-async";
 import { BrowserRouter, Route, Switch, useRouteMatch } from "react-router-dom";
 import AddCategoryPage from '../dashboard/category/AddCategoryPage';
@@ -12,25 +12,18 @@ import UserDashboard from "../dashboard/user/UserDashboard";
 import Error404Page from "../shared/Error404Page";
 import AddProductPage from "./product/AddProductPage";
 import StoreDetailDashboard from "./store/StoreDetailDashboard";
-const useStyles = makeStyles(theme => ({
-    gridContainer: {
-        height: '100%',
-        flexGrow: 1,
-    }
-}))
 
 export default function DashboardRouter() {
-    const classes = useStyles()
     const { path, url } = useRouteMatch();
     return (
         <BrowserRouter>
             <Helmet title='Dashboard' />
-            <Box height='100%'>
-                <Grid container className={classes.gridContainer}>
-                    <Grid item sm={12} md={3} lg={2}>
+            <Box h='100%'>
+                <SimpleGrid columns={12} h='100%'>
+                    <GridItem colSpan={[12, null, 3, 2]}>
                         <DashboardSidebar path={path} />
-                    </Grid>
-                    <Grid item sm={12} md={9} lg={10}>
+                    </GridItem>
+                    <GridItem colSpan={[12, null, 9, 10]}>
                         <Switch>
                             <Route exact path={path} component={MainDashboard} />
                             <Route exact path={`${path}/users`} component={UserDashboard} />
@@ -44,8 +37,8 @@ export default function DashboardRouter() {
                             <Route exact path={`${path}/menus/:id/add-product`} component={AddProductPage} />
                             <Route component={Error404Page} />
                         </Switch>
-                    </Grid>
-                </Grid>
+                    </GridItem>
+                </SimpleGrid>
             </Box>
         </BrowserRouter>
     )

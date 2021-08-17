@@ -8,7 +8,7 @@ import LaunchIcon from '@material-ui/icons/Launch';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import useApi from "../../../hook/useApi";
-import Spinner from "../../shared/Spinner";
+import LoadingSpinner from "../../shared/LoadingSpinner";
 const useStyles = makeStyles(theme => ({
     table: {
         minWidth: 650,
@@ -29,7 +29,7 @@ export default function StoreDashboard() {
             <Box height={20}></Box>
             {
                 loading ?
-                    <Spinner /> :
+                    <LoadingSpinner /> :
                     <TableContainer component={Paper}>
                         <Table stickyHeader className={classes.table} aria-label="simple table">
                             <TableHead>

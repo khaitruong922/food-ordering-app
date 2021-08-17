@@ -1,4 +1,4 @@
-import { Box, Divider } from "@material-ui/core";
+import { Box, Divider } from "@chakra-ui/react"
 
 export default function AppDivider() {
     return (

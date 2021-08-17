@@ -1,4 +1,4 @@
-import { Box, IconButton, makeStyles, Typography } from "@material-ui/core"
+import { Box, Flex, IconButton, Text } from '@chakra-ui/react';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import IndeterminateCheckBoxIcon from '@material-ui/icons/IndeterminateCheckBox';
 import { Fragment } from "react";
@@ -6,14 +6,7 @@ import useCartsStore from "../../store/useCartsStore";
 import formatCurrency from "../../util/formatCurrency";
 import AppDivider from "../styled-component/AppDivider";
 
-const useStyles = makeStyles((theme) => ({
-    price: {
-        fontWeight: 700,
-    }
-}))
-
 export default function CartItem({ storeId, productId }) {
-    const classes = useStyles()
     const quantity = useCartsStore(state => state.carts[storeId].products[productId].quantity)
     const product = useCartsStore(state => state.carts[storeId].products[productId].data)
     const addProductToCart = useCartsStore(state => state.addProductToCart)
@@ -21,29 +14,31 @@ export default function CartItem({ storeId, productId }) {
     const { id, name, price } = product || {}
     return (
         <Fragment>
-            <Box display='flex' alignItems='center'>
-                <Box flexGrow={0} onClick={() => addProductToCart({ storeId, product })}>
-                    <IconButton>
-                        <AddBoxIcon />
-                    </IconButton>
-                </Box>
-
+            <Flex align='center'>
+                <IconButton
+                    onClick={() => addProductToCart({ storeId, product })}
+                    variant='ghost'
+                    isRound
+                    _focus={{ boxShadow: 'none' }}
+                    icon={<AddBoxIcon color='secondary' />}
+                />
                 <Box flex={1}>
-                    <Typography align='center'>{quantity}</Typography>
+                    <Text align='center'>{quantity}</Text>
                 </Box>
-
-                <Box flexGrow={0} onClick={() => decreaseProductQuantity({ storeId, productId })}>
-                    <IconButton>
-                        <IndeterminateCheckBoxIcon />
-                    </IconButton>
-                </Box>
+                <IconButton
+                    onClick={() => decreaseProductQuantity({ storeId, productId })}
+                    variant='ghost'
+                    isRound
+                    _focus={{ boxShadow: 'none' }}
+                    icon={<IndeterminateCheckBoxIcon />}
+                />
                 <Box flex={10}>
-                    <Typography flex={3}>{name}</Typography>
+                    <Text flex={3}>{name}</Text>
                 </Box>
                 <Box flex={3}>
-                    <Typography className={classes.price} align='right'>{formatCurrency(quantity * price)}</Typography>
+                    <Text align='right'>{formatCurrency(quantity * price)}</Text>
                 </Box>
-            </Box >
+            </Flex >
             <AppDivider />
         </Fragment>
 

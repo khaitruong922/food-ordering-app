@@ -1,49 +1,34 @@
-import { Box, Drawer, List, ListItem, ListItemIcon, ListItemText, makeStyles, Typography } from "@material-ui/core";
+import { Box, Button, Flex, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import dashboardItems from "./dashboardItems";
 
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        backgroundColor: theme.palette.primary.main,
-        color: theme.palette.primary.contrastText
-    },
-    menuTitle: {
-        fontWeight: 600,
-    },
-    listItemText: {
-        fontWeight: 600,
-    }
-}))
-
 function StyledListItem({ path, item }) {
-    const classes = useStyles()
+    const { path: itemPath, icon, name } = item
     return (
-        <ListItem
-            button
-            component={Link}
-            to={`${path}/${item.path}`}
-        >
-            <ListItemIcon>{item.icon}</ListItemIcon>
-            <ListItemText primary={<Typography className={classes.listItemText}>{item.name}</Typography>} />
-        </ListItem>
+        <Link to={`${path}/${itemPath}`}>
+            <Button
+                py={7}
+                colorScheme='blackAlpha'
+                variant='ghost'
+                w='100%'
+                justifyContent='flex-start'
+                leftIcon={icon}
+                color='white'
+                _focus={{ boxShadow: 'none' }}
+            >{name}</Button>
+        </Link>
     )
-
 }
 
 export default function DashboardSideBar({ path }) {
-    const classes = useStyles()
     const items = dashboardItems
     return (
-        <Box className={classes.root} height='100%' p={2} display='flex' flexDirection='column'>
-            <List>
-                {items.main.map(item => <StyledListItem key={item.name} path={path} item={item} />)}
-            </List>
-            <Typography className={classes.menuTitle}>Manage</Typography>
-            <List>
-                {items.manage.map(item => <StyledListItem key={item.name} path={path} item={item} />)}
-            </List>
-        </Box>
+        <Flex direction='column' h='100%' p={5} bgColor='gray.900' >
+            {items.main.map(item => <StyledListItem key={item.name} path={path} item={item} />)}
+            <Text color='white' fontWeight={600} fontSize='xl'>Manage</Text>
+            {items.manage.map(item => <StyledListItem key={item.name} path={path} item={item} />)}
+        </Flex>
     )
 
 }

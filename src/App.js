@@ -1,3 +1,4 @@
+import { ChakraProvider } from "@chakra-ui/react";
 import { CssBaseline, ThemeProvider } from "@material-ui/core";
 import { useEffect } from "react";
 import { HelmetProvider } from "react-helmet-async";
@@ -12,10 +13,12 @@ export default function App() {
   }, [fetchCurrentUser])
   return (
     <HelmetProvider>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <AppRouter />
-      </ThemeProvider>
+      <ChakraProvider>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <AppRouter />
+        </ThemeProvider>
+      </ChakraProvider>
     </HelmetProvider>
   );
 }

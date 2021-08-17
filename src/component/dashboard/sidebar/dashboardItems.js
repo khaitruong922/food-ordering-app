@@ -30,7 +30,7 @@ const dashboardItems = {
         icon: <CategoryIcon color="secondary" />,
         path: 'categories'
     },
-]
+    ]
 }
 
 export default dashboardItems

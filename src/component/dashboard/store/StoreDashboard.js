@@ -1,65 +1,40 @@
-import { Box, Button, IconButton, makeStyles, Table, TableContainer, Typography } from "@material-ui/core";
-import Paper from '@material-ui/core/Paper';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
+import { Box, Button, Flex, Table, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react';
 import LaunchIcon from '@material-ui/icons/Launch';
-import React from 'react';
 import { Link } from 'react-router-dom';
-import useApi from "../../../hook/useApi";
+import useApiGet from "../../../hook/useApiGet";
 import LoadingSpinner from "../../shared/LoadingSpinner";
-const useStyles = makeStyles(theme => ({
-    table: {
-        minWidth: 650,
-    },
-}))
 
 
 export default function StoreDashboard() {
-    const classes = useStyles()
-    const { data: stores, loading, error } = useApi({ endpoint: '/stores', defaultValue: [] })
+    const { data: stores, loading, error } = useApiGet({ endpoint: '/stores', defaultValue: [] })
     return (
-        <Box display='flex' flexDirection='column' p={5}>
-            <Box>
-                <Typography variant='h4'>Stores</Typography>
-                <Box height={20}></Box>
-                <Button component={Link} to='/dashboard/stores/add' variant='contained' color='secondary'>Add store</Button>
+        <Flex direction='column' p={5}>
+            <Text fontSize='4xl' align='center' mb={2}>Stores</Text>
+            <Box ml='auto' mb={5}>
+                <Link to='/dashboard/stores/add'><Button colorScheme='yellow'>Add store</Button></Link>
             </Box>
-            <Box height={20}></Box>
             {
                 loading ?
                     <LoadingSpinner /> :
-                    <TableContainer component={Paper}>
-                        <Table stickyHeader className={classes.table} aria-label="simple table">
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell>ID</TableCell>
-                                    <TableCell align="left">Name</TableCell>
-                                    <TableCell align="left">Address</TableCell>
-                                    <TableCell align="left">Description</TableCell>
-                                    <TableCell padding='none' align='center'>Manage</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {stores.map(({ id, name, address, description }) => (
-                                    <TableRow key={id}>
-                                        <TableCell component="th" scope="row">
-                                            {id}
-                                        </TableCell>
-                                        <TableCell align="left">{name}</TableCell>
-                                        <TableCell align="left">{address}</TableCell>
-                                        <TableCell align="left">{description}</TableCell>
-                                        <TableCell padding='none' align='center'>
-                                            <IconButton component={Link} to={`/dashboard/stores/${id}`} disableTouchRipple disableRipple><LaunchIcon color='secondary' /></IconButton>
-                                        </TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
+                    <Table variant='striped' colorScheme='orange'>
+                        <Thead>
+                            <Th>ID</Th>
+                            <Th>Name</Th>
+                            <Th>Description</Th>
+                            <Th>Manage</Th>
+                        </Thead>
+                        <Tbody>
+                            {stores.map(({ id, name, description }) => (
+                                <Tr>
+                                    <Td>{id}</Td>
+                                    <Td>{name}</Td>
+                                    <Td>{description}</Td>
+                                    <Td><Link to={`/dashboard/stores/${id}`}><LaunchIcon /></Link></Td>
+                                </Tr>
+                            ))}
+                        </Tbody>
+                    </Table>
             }
-
-        </Box>
+        </Flex>
     )
 }

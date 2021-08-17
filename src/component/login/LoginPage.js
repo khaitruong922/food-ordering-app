@@ -19,6 +19,7 @@ export default function LoginPage() {
         const user = await fetchCurrentUser()
         if (!user) {
             toast({
+                position: 'bottom-right',
                 title: 'Login failed!',
                 description: 'Username and password do not match.',
                 status: 'error',

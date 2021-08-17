@@ -1,12 +1,10 @@
 import { Box, Button, Flex, FormControl, FormLabel, Input, Text, useToast } from '@chakra-ui/react';
-import React from 'react';
+import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import api from '../../api/api';
 import useInput from '../../hook/useInput';
-import useMessage from '../../hook/useMessage';
 import AppDivider from '../styled-component/AppDivider';
-import FormMessage from '../styled-component/FormMessage';
 
 
 export default function SignUpPage() {
@@ -17,26 +15,45 @@ export default function SignUpPage() {
     const { value: address, onInput: onAddressInput } = useInput('')
     const { value: password, onInput: onPasswordInput } = useInput('')
     const { value: confirmPassword, onInput: onConfirmPasswordInput } = useInput('')
-    const { message, success, setErrorMessage, setSuccessMessage } = useMessage()
+    const [submitting, setSubmitting] = useState(false)
+    const toast = useToast()
 
     const onFormSubmit = async (e) => {
         e.preventDefault()
         if (password !== confirmPassword) {
-            setErrorMessage('Password does not match')
+            toast({
+                position: 'bottom-right',
+                title: 'Password do not match!',
+                status: 'error',
+                isClosable: true,
+            })
             return
         }
+        setSubmitting(true)
         try {
-            const res = await api.post('/users', { username, name, email, phoneNumber, address, password })
-            setSuccessMessage('Register account successfully!')
+            await api.post('/users', { username, name, email, phoneNumber, address, password })
+            toast({
+                position: 'bottom-right',
+                title: 'Register account successfully!',
+                status: 'success',
+                isClosable: true,
+            })
         }
         catch (e) {
-            // Band aid for checking username violation - will fix later
-            if (e.response.data.statusCode === 500) {
-                setErrorMessage('Username is already taken!')
-                return
-            }
-            const errorMessage = e.response.data.message[0]
-            setErrorMessage(errorMessage)
+            const message =
+                e.response.data.statusCode === 500 ?
+                    'Username is already taken!' :
+                    e.response.data.message[0]
+            toast({
+                position: 'bottom-right',
+                title: 'Sign up failed!',
+                description: message,
+                status: 'error',
+                isClosable: true,
+            })
+        }
+        finally {
+            setSubmitting(false)
         }
     }
 
@@ -82,7 +99,6 @@ export default function SignUpPage() {
             <AppDivider />
             <Box height={5}></Box>
             <Text align='center'>Already have an account? Log in <Link to='/login'><Text display='inline' color='yellow.500'>here</Text></Link></Text>
-
         </Flex>
     )
 }

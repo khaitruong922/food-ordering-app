@@ -1,64 +1,78 @@
-import { Box, Button, IconButton, makeStyles, Table, TableContainer, Typography } from "@material-ui/core";
-import Paper from '@material-ui/core/Paper';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
+import { Box, Button, Flex, Input, Table, Tbody, Td, Text, Th, Thead, Tr, useToast } from '@chakra-ui/react';
 import LaunchIcon from '@material-ui/icons/Launch';
-import React from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import useApi from "../../../hook/useApi";
+import api from '../../../api/api';
+import useApiGet from "../../../hook/useApiGet";
+import useInput from '../../../hook/useInput';
 import LoadingSpinner from "../../shared/LoadingSpinner";
-
-const useStyles = makeStyles(theme => ({
-    table: {
-        minWidth: 650,
-    },
-}))
 
 
 export default function CategoryDashboard() {
-    const classes = useStyles()
-    const { data: stores, loading, error } = useApi({ endpoint: '/categories', defaultValue: [] })
+    const { data: categories, loading, error, refresh } = useApiGet({ endpoint: '/categories', defaultValue: [] })
+    const { onInput: onCategoryInput, value: category, reset: resetCategoryInput } = useInput('')
+    const [submitting, setSubmitting] = useState(false)
+    const toast = useToast()
+    async function onAddCategorySubmit(e) {
+        e.preventDefault()
+        setSubmitting(true)
+        try {
+            await api.post('/categories', { name: category })
+            toast({
+                position: 'bottom-right',
+                title: 'Add category successfully!',
+                status: 'success',
+                isClosable: true,
+            })
+            refresh()
+        } catch (e) {
+            const message =
+                e.response.data.statusCode === 500 ?
+                    'Please provide a unique name!' :
+                    e.response.data.message[0]
+            toast({
+                position: 'bottom-right',
+                title: 'Add category failed!',
+                description: message,
+                status: 'error',
+                isClosable: true,
+            })
+        } finally {
+            setSubmitting(false)
+            resetCategoryInput()
+        }
+
+    }
     return (
-        <Box display='flex' flexDirection='column' p={5}>
-            <Box>
-                <Typography variant='h4'>Categories</Typography>
-                <Box height={20}></Box>
-                <Button component={Link} to='/dashboard/categories/add' variant='contained' color='secondary'>Add category</Button>
-            </Box>
-            <Box height={20}></Box>
+        <Flex direction='column' p={5}>
+            <Text fontSize='4xl' align='center' mb={2}>Categories</Text>
+            <form onSubmit={onAddCategorySubmit}>
+                <Flex justify='flex-end' my={5}>
+                    <Input value={category} onInput={onCategoryInput} w={300} placeholder='Category name' mr={2} required />
+                    <Button isLoading={submitting} type='submit' colorScheme='yellow'>Add category</Button>
+                </Flex>
+            </form>
+
             {
                 loading ?
                     <LoadingSpinner /> :
-                    <TableContainer component={Paper}>
-                        <Table stickyHeader className={classes.table} aria-label="simple table">
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell>ID</TableCell>
-                                    <TableCell align="left">Name</TableCell>
-                                    <TableCell align="left">Number of stores</TableCell>
-                                    <TableCell padding='none' align='center'>Manage</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {stores.map(({ id, name }) => (
-                                    <TableRow key={id}>
-                                        <TableCell component="th" scope="row">
-                                            {id}
-                                        </TableCell>
-                                        <TableCell align="left">{name}</TableCell>
-                                        <TableCell align="left">0</TableCell>
-                                        <TableCell padding='none' align='center'>
-                                            <IconButton disableTouchRipple disableRipple><LaunchIcon color='secondary' /></IconButton>
-                                        </TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
+                    <Table variant='striped' colorScheme='orange'>
+                        <Thead>
+                            <Th>ID</Th>
+                            <Th>Name</Th>
+                            <Th>Manage</Th>
+                        </Thead>
+                        <Tbody>
+                            {categories.map(({ id, name, }) => (
+                                <Tr>
+                                    <Td>{id}</Td>
+                                    <Td>{name}</Td>
+                                    <Td><Link to={`/dashboard/categories/${id}`}><LaunchIcon /></Link></Td>
+                                </Tr>
+                            ))}
+                        </Tbody>
+                    </Table>
             }
-
-        </Box>
+        </Flex>
     )
 }

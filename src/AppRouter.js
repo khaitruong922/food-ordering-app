@@ -1,23 +1,23 @@
-import { Box } from "@material-ui/core";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { Box, Flex } from "@chakra-ui/react";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import CheckoutPage from "./component/checkout/CheckoutPage";
 import DashboardRouter from "./component/dashboard/DashboardRouter";
-import LoginPage from "./component/login/LoginPage";
-import MainAppBar from "./component/shared/MainAppBar";
-import SignUpPage from "./component/login/SignUpPage";
 import Home from "./component/home/Home";
+import LoginPage from "./component/login/LoginPage";
+import SignUpPage from "./component/login/SignUpPage";
 import Error404Page from "./component/shared/Error404Page";
-import useAuthStore from "./store/useAuthStore";
+import MainAppBar from "./component/shared/MainAppBar";
 import StorePage from "./component/store/StorePage";
+import useAuthStore from "./store/useAuthStore";
 
 export default function AppRouter() {
     const user = useAuthStore(state => state.user)
     const isAdmin = user?.role === 'admin'
     return (
         <BrowserRouter>
-            <Box height='100%' display='flex' flexDirection='column'>
+            <Flex h='100%' direction='column'>
                 <MainAppBar />
-                <Box height='100%'>
+                <Box h='100%'>
                     <Switch>
                         <Route exact path='/'>
                             <Home />
@@ -40,7 +40,7 @@ export default function AppRouter() {
                         <Route component={Error404Page} />
                     </Switch>
                 </Box>
-            </Box>
+            </Flex>
         </BrowserRouter>
     )
 }

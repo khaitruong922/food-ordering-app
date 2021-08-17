@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import api from '../api/api'
 
-export default function useApi({ endpoint, defaultValue = null }) {
+export default function useApiGet({ endpoint, defaultValue = null }) {
     const [data, setData] = useState(defaultValue)
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(true)
@@ -11,10 +11,10 @@ export default function useApi({ endpoint, defaultValue = null }) {
         () => {
             api
                 .get(endpoint)
-                .then((res) => {
+                .then(res => {
                     setData(res.data)
                 })
-                .catch((err) => {
+                .catch(err => {
                     setError(err)
                 })
                 .finally(() => {

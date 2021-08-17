@@ -1,34 +1,15 @@
-import { Box, Button, makeStyles, TextField, Typography } from "@material-ui/core";
-import React, { useState } from 'react';
+import { Box, Button, Flex, FormControl, FormLabel, Image, Input, Text, Textarea, useToast } from '@chakra-ui/react';
+import { useState } from 'react';
 import api from "../../../api/api";
 import useInput from "../../../hook/useInput";
-import useMessage from "../../../hook/useMessage";
 import isValidImageFile from "../../../util/isValidImageFile";
-import LoadingSpinner from "../../shared/LoadingSpinner";
-import FormMessage from "../../styled-component/FormMessage";
-
-const useStyles = makeStyles(theme => ({
-    root: {
-        '& .MuiTextField-root': {
-            margin: theme.spacing(1),
-            width: '75ch',
-        },
-    },
-    previewImage: {
-        height: 200,
-    },
-    btn: {
-        width: "auto"
-    }
-}))
 
 
 export default function AddStorePage() {
-    const classes = useStyles()
     const { value: name, onInput: onNameInput } = useInput('')
     const { value: address, onInput: onAddressInput } = useInput('')
     const { value: description, onInput: onDescriptionInput } = useInput('')
-    const { message, success, setErrorMessage, setSuccessMessage } = useMessage()
+    const toast = useToast()
     const [file, setFile] = useState(null)
     const [loading, setLoading] = useState(false)
 
@@ -47,10 +28,22 @@ export default function AddStorePage() {
                     }
                 })
             }
-            setSuccessMessage('Create store successfully!')
+            toast({
+                position: 'bottom-right',
+                title: 'Create store sucessfully!',
+                description: '',
+                status: 'success',
+                isClosable: true,
+            })
         } catch (e) {
-            const errorMessage = e.response.data.message[0]
-            setErrorMessage(errorMessage)
+            const message = e.response.data.message[0]
+            toast({
+                position: 'bottom-right',
+                title: 'Create store failed!',
+                description: message,
+                status: 'error',
+                isClosable: true,
+            })
         } finally {
             setLoading(false)
         }
@@ -60,42 +53,50 @@ export default function AddStorePage() {
         const file = e.target.files[0]
         const { valid, message } = isValidImageFile(file)
         if (!valid) {
-            setErrorMessage(message)
             setFile(null)
             e.target.value = null
+            toast({
+                position: 'bottom-right',
+                title: 'Image upload failed!',
+                description: message,
+                status: 'error',
+                isClosable: true,
+            })
             return
         }
-        setErrorMessage('')
         setFile(file)
     }
 
     return (
-        <Box display='flex' flexDirection='column' alignItems='center' p={5}>
-            <Typography variant='h4'>Add new store</Typography>
-            <Box height={20}></Box>
-            <form className={classes.root} onSubmit={onFormSubmit}>
-                <Box display='flex' flexDirection='column'>
-                    <TextField value={name} onInput={onNameInput} label="Name" required />
-                    <TextField value={address} onInput={onAddressInput} label="Address" required />
-                    <TextField value={description} onInput={onDescriptionInput} label="Description" multiline rows={4} required />
-                    <Typography variant='subtitle2'>Image</Typography>
-                    <Box height={10} />
-                    <input type="file" onChange={onFileChange} />
-                    <Box height={10} />
-                    <Box display='flex' alignItems='center' flexDirection='column'>
-                        <img className={classes.previewImage} src={file ? URL.createObjectURL(file) : null} alt={file ? file.name : null} />
-                        <Box height={20} />
-                        <Button className={classes.btn} type="submit" variant="contained" color='secondary'>Submit</Button>
-                    </Box>
-                </Box>
-            </form>
-            <Box height={60} display='flex' alignItems='center' justifyContent='center'>
-                {
-                    loading ?
-                        <LoadingSpinner /> :
-                        <FormMessage success={success} content={message} />
-                }
+        <Flex direction='column' align='center' p={5}>
+            <Text fontSize='4xl' fontWeight={600}>Add new store</Text>
+            <Box w={400}>
+                <form onSubmit={onFormSubmit}>
+                    <Flex direction='column'>
+                        <FormControl id="name">
+                            <FormLabel>Name</FormLabel>
+                            <Input value={name} onInput={onNameInput} required />
+                        </FormControl>
+                        <FormControl id="address">
+                            <FormLabel>Address</FormLabel>
+                            <Input value={address} onInput={onAddressInput} required />
+                        </FormControl>
+                        <FormControl id="description">
+                            <FormLabel>Description</FormLabel>
+                            <Textarea resize='none' noOfLines={3} value={description} onInput={onDescriptionInput} />
+                        </FormControl>
+                        <FormControl id="image">
+                            <FormLabel>Image</FormLabel>
+                            <input type="file" onChange={onFileChange} />
+                        </FormControl>
+                        <Flex align='center' direction='column'>
+                            <Image objectFit='cover' h={300} my={5} src={file ? URL.createObjectURL(file) : null} alt={file ? file.name : null} />
+                            <Button isLoading={loading} colorScheme='yellow' type="submit">Submit</Button>
+                        </Flex>
+                    </Flex>
+                </form>
             </Box>
-        </Box>
+
+        </Flex>
     )
 }

@@ -1,13 +1,8 @@
-import { Box, makeStyles } from "@material-ui/core";
-
-const useStyles = makeStyles(theme => ({
-
-}))
+import { Flex } from "@chakra-ui/react";
 
 export default function MainDashboard() {
-    const classes = useStyles()
     return (
-        <Box display='flex' justifyContent='center' p={5}>
-        </Box>
+        <Flex direction='column' p={4}>
+        </Flex>
     )
 }

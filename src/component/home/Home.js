@@ -1,14 +1,13 @@
-import { SimpleGrid } from "@chakra-ui/react";
-import { Box } from "@material-ui/core";
+import { Box, SimpleGrid } from "@chakra-ui/react";
 import { Helmet } from "react-helmet-async";
-import useApi from "../../hook/useApi";
+import useApiGet from "../../hook/useApiGet";
 import useAuthStore from "../../store/useAuthStore";
 import LoadingSpinner from "../shared/LoadingSpinner";
 import StoreCard from "./StoreCard";
 
 export default function Home() {
     const user = useAuthStore(state => state.user)
-    const { data: stores, loading, error } = useApi({ endpoint: '/stores', defaultValue: [] })
+    const { data: stores, loading, error } = useApiGet({ endpoint: '/stores', defaultValue: [] })
     if (loading) return <LoadingSpinner />
     return (
         <Box width='80%' mx='auto' mt={2}>

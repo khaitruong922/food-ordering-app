@@ -2,7 +2,7 @@ import { Box, Flex, Grid, GridItem, Image, SimpleGrid, Text } from "@chakra-ui/r
 import { Fragment, useEffect } from "react"
 import { Helmet } from "react-helmet-async"
 import { Link, useParams } from "react-router-dom"
-import useApi from "../../hook/useApi"
+import useApiGet from "../../hook/useApiGet"
 import Cart from "../cart/Cart"
 import LoadingSpinner from "../shared/LoadingSpinner"
 import AppDivider from "../styled-component/AppDivider"
@@ -10,7 +10,7 @@ import ProductMenu from "./ProductMenu"
 
 export default function StorePage() {
     const { id } = useParams()
-    const { data, error, loading, setLoading } = useApi({ endpoint: `/stores/${id}`, defaultValue: null })
+    const { data, error, loading, setLoading } = useApiGet({ endpoint: `/stores/${id}`, defaultValue: null })
     const { name, address, description, image: { url: imageUrl } = {}, subMenus = [] } = data || {}
 
     useEffect(() => {

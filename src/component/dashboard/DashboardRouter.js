@@ -1,7 +1,6 @@
 import { Box, GridItem, SimpleGrid } from "@chakra-ui/react";
 import { Helmet } from "react-helmet-async";
 import { BrowserRouter, Route, Switch, useRouteMatch } from "react-router-dom";
-import AddCategoryPage from '../dashboard/category/AddCategoryPage';
 import CategoryDashboard from "../dashboard/category/CategoryDashboard";
 import MainDashboard from '../dashboard/main/MainDashboard';
 import OrderDashboard from "../dashboard/order/OrderDashboard";
@@ -33,7 +32,6 @@ export default function DashboardRouter() {
                             <Route exact path={`${path}/stores`} component={StoreDashboard} />
                             <Route exact path={`${path}/orders`} component={OrderDashboard} />
                             <Route exact path={`${path}/categories`} component={CategoryDashboard} />
-                            <Route exact path={`${path}/categories/add`} component={AddCategoryPage} />
                             <Route exact path={`${path}/menus/:id/add-product`} component={AddProductPage} />
                             <Route component={Error404Page} />
                         </Switch>

@@ -1,11 +1,9 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import { CssBaseline, ThemeProvider } from "@material-ui/core";
 import { useEffect } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import AppRouter from './AppRouter';
+import chakraTheme from './chakraTheme';
 import useAuthStore from "./store/useAuthStore";
-import { theme } from "./theme";
-
 export default function App() {
   const fetchCurrentUser = useAuthStore(state => state.fetchCurrentUser)
   useEffect(() => {
@@ -13,11 +11,8 @@ export default function App() {
   }, [fetchCurrentUser])
   return (
     <HelmetProvider>
-      <ChakraProvider>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <AppRouter />
-        </ThemeProvider>
+      <ChakraProvider theme={chakraTheme}>
+        <AppRouter />
       </ChakraProvider>
     </HelmetProvider>
   );

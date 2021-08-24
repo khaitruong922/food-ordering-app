@@ -143,7 +143,7 @@ export default function CheckoutPage() {
                 Your order has been placed!
             </Text>
             <Box height={5} />
-            <Icon as={HiCheckCircle} boxSize={50} color='green.500' />
+            <Icon as={HiCheckCircle} boxSize={50} color='teal.400' />
         </Flex>)
     }
 

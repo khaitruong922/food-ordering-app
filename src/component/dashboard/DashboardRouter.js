@@ -33,7 +33,6 @@ export default function DashboardRouter() {
                             <Route exact path={`${path}/orders`} component={OrderDashboard} />
                             <Route exact path={`${path}/categories`} component={CategoryDashboard} />
                             <Route exact path={`${path}/menus/:id/add-product`} component={AddProductPage} />
-                            <Route component={Error404Page} />
                         </Switch>
                     </GridItem>
                 </SimpleGrid>

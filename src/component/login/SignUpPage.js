@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import api from '../../api/api';
 import useInput from '../../hook/useInput';
+import { useErrorToast, useSuccessToast } from '../shared/toast';
 import AppDivider from '../styled-component/AppDivider';
 
 
@@ -16,27 +17,21 @@ export default function SignUpPage() {
     const { value: password, onInput: onPasswordInput } = useInput('')
     const { value: confirmPassword, onInput: onConfirmPasswordInput } = useInput('')
     const [submitting, setSubmitting] = useState(false)
-    const toast = useToast()
-
+    const errorToast = useErrorToast()
+    const successToast = useSuccessToast()
     const onFormSubmit = async (e) => {
         e.preventDefault()
         if (password !== confirmPassword) {
-            toast({
-                position: 'bottom-right',
+            errorToast({
                 title: 'Password do not match!',
-                status: 'error',
-                isClosable: true,
             })
             return
         }
         setSubmitting(true)
         try {
             await api.post('/users', { username, name, email, phoneNumber, address, password })
-            toast({
-                position: 'bottom-right',
+            successToast({
                 title: 'Register account successfully!',
-                status: 'success',
-                isClosable: true,
             })
         }
         catch (e) {
@@ -44,12 +39,9 @@ export default function SignUpPage() {
                 e.response.data.statusCode === 500 ?
                     'Username is already taken!' :
                     e.response.data.message[0]
-            toast({
-                position: 'bottom-right',
+            errorToast({
                 title: 'Sign up failed!',
                 description: message,
-                status: 'error',
-                isClosable: true,
             })
         }
         finally {

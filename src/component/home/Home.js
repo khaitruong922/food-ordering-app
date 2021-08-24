@@ -1,26 +1,48 @@
-import { Box, SimpleGrid } from "@chakra-ui/react";
+import { Box, Button, Flex, SimpleGrid } from "@chakra-ui/react";
+import { Fragment } from "react";
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import useApiGet from "../../hook/useApiGet";
 import useAuthStore from "../../store/useAuthStore";
 import LoadingSpinner from "../shared/LoadingSpinner";
 import StoreCard from "./StoreCard";
 
+function Category({ category, onClick, isSelected }) {
+    const { name } = category
+    return <Button p={7} fontSize='lg' borderRadius={20} ml={2} colorScheme={isSelected ? 'yellow' : 'gray'} onClick={onClick}>{name}</Button>
+}
 export default function Home() {
     const user = useAuthStore(state => state.user)
-    const { data: stores, loading, error } = useApiGet({ endpoint: '/stores', defaultValue: [] })
-    if (loading) return <LoadingSpinner />
+    const { data: stores, loading: storesLoading, error: storesError } = useApiGet({ endpoint: '/stores', defaultValue: [] })
+    const { data: categories, loading: categoriesLoading, error: categoriesError } = useApiGet({ endpoint: '/categories', defaultValue: [] })
+    const [selectedCategory, setSelectedCategory] = useState(-1)
+    const displayedStores = stores.filter(store => selectedCategory == -1 || selectedCategory == store.category?.id)
+    if (storesLoading) return <LoadingSpinner />
     return (
         <Box width='80%' mx='auto' mt={2}>
             <Helmet title='DeliV' />
+            <Flex p={4}>
+                {
+                    categoriesLoading ? <LoadingSpinner /> :
+                        <Fragment>
+                            <Category key={-1} category={{ name: 'All' }} onClick={() => setSelectedCategory(-1)} isSelected={selectedCategory == -1} />
+                            {categories.map(category =>
+                                <Category key={category.id} category={category} onClick={() => setSelectedCategory(category.id)} isSelected={selectedCategory == category.id} />)
+                            }
+                        </Fragment>
+                }
+            </Flex>
             <SimpleGrid
                 columns={[1, 2, 3, 4]}
-                spacing={3}
+                spacing={10}
             >
-                {stores.map((store) => (
-                    <StoreCard key={store.id} store={store} />
-                ))}
+                {
+                    displayedStores.map((store) => (
+                        <StoreCard key={store.id} store={store} />
+                    ))
+                }
             </SimpleGrid>
-        </Box>
+        </Box >
 
     )
 }

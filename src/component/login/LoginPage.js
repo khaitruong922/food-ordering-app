@@ -2,6 +2,7 @@ import { Box, Button, Flex, FormControl, FormLabel, Input, Text, useToast } from
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
+import { useErrorToast } from '../shared/toast';
 import useInput from '../../hook/useInput';
 import useAuthStore from '../../store/useAuthStore';
 import AppDivider from '.././styled-component/AppDivider';
@@ -10,7 +11,7 @@ export default function LoginPage() {
     const { value: username, onInput: onUsernameInput } = useInput('')
     const { value: password, onInput: onPasswordInput } = useInput('')
     const login = useAuthStore(state => state.login)
-    const toast = useToast()
+    const errorToast = useErrorToast()
     const fetchCurrentUser = useAuthStore(state => state.fetchCurrentUser)
 
     const onFormSubmit = async (e) => {
@@ -18,12 +19,9 @@ export default function LoginPage() {
         await login({ username, password })
         const user = await fetchCurrentUser()
         if (!user) {
-            toast({
-                position: 'bottom-right',
+            errorToast({
                 title: 'Login failed!',
                 description: 'Username and password do not match.',
-                status: 'error',
-                isClosable: true,
             })
             return
         }

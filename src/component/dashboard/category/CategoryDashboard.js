@@ -1,6 +1,6 @@
-import { Box, Button, Flex, Input, Table, Tbody, Td, Text, Th, Thead, Tr, useToast } from '@chakra-ui/react';
-import LaunchIcon from '@material-ui/icons/Launch';
+import { Button, Flex, Icon, Input, Table, Tbody, Td, Text, Th, Thead, Tr, useToast } from '@chakra-ui/react';
 import { useState } from 'react';
+import { MdLaunch } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import api from '../../../api/api';
 import useApiGet from "../../../hook/useApiGet";
@@ -56,18 +56,18 @@ export default function CategoryDashboard() {
             {
                 loading ?
                     <LoadingSpinner /> :
-                    <Table variant='striped' colorScheme='orange'>
+                    <Table variant='striped' colorScheme='yellow'>
                         <Thead>
                             <Th>ID</Th>
                             <Th>Name</Th>
-                            <Th>Manage</Th>
+                            <Th textAlign='center'>Manage</Th>
                         </Thead>
                         <Tbody>
                             {categories.map(({ id, name, }) => (
                                 <Tr>
                                     <Td>{id}</Td>
                                     <Td>{name}</Td>
-                                    <Td><Link to={`/dashboard/categories/${id}`}><LaunchIcon /></Link></Td>
+                                    <Td textAlign='center'><Link to={`/dashboard/categories/${id}`}><Icon as={MdLaunch} /></Link></Td>
                                 </Tr>
                             ))}
                         </Tbody>

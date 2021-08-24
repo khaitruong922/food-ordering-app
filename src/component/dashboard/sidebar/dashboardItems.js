@@ -1,33 +1,33 @@
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import PeopleIcon from '@material-ui/icons/People';
-import StoreIcon from '@material-ui/icons/Store';
-import LocalShippingIcon from '@material-ui/icons/LocalShipping';
-import CategoryIcon from '@material-ui/icons/Category';
+import { RiDashboardFill } from "react-icons/ri";
+import { HiUsers } from 'react-icons/hi'
+import { FaStore, FaSitemap } from 'react-icons/fa'
+import { Icon } from "@chakra-ui/react";
+import { IoCartSharp } from 'react-icons/io5'
 
 const dashboardItems = {
     main: [{
         name: 'Dashboard',
-        icon: <DashboardIcon color="secondary" />,
+        icon: <Icon as={RiDashboardFill} color='orange.400' />,
         path: '',
     }],
     manage: [{
         name: 'Users',
-        icon: <PeopleIcon color="secondary" />,
+        icon: <Icon as={HiUsers} color='orange.400' />,
         path: 'users'
     },
     {
         name: 'Stores',
-        icon: <StoreIcon color="secondary" />,
+        icon: <Icon as={FaStore} color='orange.400' />,
         path: 'stores'
     },
     {
         name: 'Orders',
-        icon: <LocalShippingIcon color="secondary" />,
+        icon: <Icon as={IoCartSharp} color='orange.400' />,
         path: 'orders'
     },
     {
         name: 'Categories',
-        icon: <CategoryIcon color="secondary" />,
+        icon: <Icon as={FaSitemap} color='orange.400' />,
         path: 'categories'
     },
     ]

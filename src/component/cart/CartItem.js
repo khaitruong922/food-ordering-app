@@ -1,6 +1,5 @@
+import { AddIcon, MinusIcon } from '@chakra-ui/icons';
 import { Box, Flex, IconButton, Text } from '@chakra-ui/react';
-import AddBoxIcon from '@material-ui/icons/AddBox';
-import IndeterminateCheckBoxIcon from '@material-ui/icons/IndeterminateCheckBox';
 import { Fragment } from "react";
 import useCartsStore from "../../store/useCartsStore";
 import formatCurrency from "../../util/formatCurrency";
@@ -14,13 +13,13 @@ export default function CartItem({ storeId, productId }) {
     const { id, name, price } = product || {}
     return (
         <Fragment>
-            <Flex align='center'>
+            <Flex align='center' p={1}>
                 <IconButton
                     onClick={() => addProductToCart({ storeId, product })}
                     variant='ghost'
                     isRound
                     _focus={{ boxShadow: 'none' }}
-                    icon={<AddBoxIcon color='secondary' />}
+                    icon={<AddIcon color='green.500' />}
                 />
                 <Box flex={1}>
                     <Text align='center'>{quantity}</Text>
@@ -30,7 +29,7 @@ export default function CartItem({ storeId, productId }) {
                     variant='ghost'
                     isRound
                     _focus={{ boxShadow: 'none' }}
-                    icon={<IndeterminateCheckBoxIcon />}
+                    icon={<MinusIcon />}
                 />
                 <Box flex={10}>
                     <Text flex={3}>{name}</Text>

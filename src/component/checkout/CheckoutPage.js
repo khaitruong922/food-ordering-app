@@ -1,5 +1,5 @@
-import { Box, Button, Flex, FormControl, FormLabel, Input, Table, Tbody, Td, Text, Textarea, Tfoot, Th, Thead, Tr, useToast } from '@chakra-ui/react';
-import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import { Box, Button, Flex, FormControl, FormLabel, Icon, Input, Table, Tbody, Td, Text, Textarea, Tfoot, Th, Thead, Tr, useToast } from '@chakra-ui/react';
+import { Step, Steps, useSteps } from 'chakra-ui-steps';
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import useInput from '../../hook/useInput';
@@ -7,9 +7,7 @@ import useAuthStore from '../../store/useAuthStore';
 import useCartsStore from '../../store/useCartsStore';
 import formatCurrency from '../../util/formatCurrency';
 import getArrayEntries from '../../util/getArrayEntries';
-import LoadingSpinner from '../shared/LoadingSpinner';
-import { Step, Steps, useSteps } from 'chakra-ui-steps';
-
+import {HiCheckCircle} from 'react-icons/hi'
 
 
 function Info({ label, value }) {
@@ -145,7 +143,7 @@ export default function CheckoutPage() {
                 Your order has been placed!
             </Text>
             <Box height={5} />
-            <CheckCircleOutlineIcon style={{ color: '#38b2ac', width: 50, height: 50, }} />
+            <Icon as={HiCheckCircle} boxSize={50} color='green.500' />
         </Flex>)
     }
 

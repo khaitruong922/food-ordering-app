@@ -1,10 +1,8 @@
-import { Flex, IconButton, Text } from '@chakra-ui/react';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { Flex, Icon, IconButton, Text } from '@chakra-ui/react';
 import { Fragment } from "react";
+import { RiDashboardFill, RiLogoutCircleRLine } from "react-icons/ri";
 import { Link, useHistory } from "react-router-dom";
 import useAuthStore from "../../store/useAuthStore";
-
 
 function AppBarItems() {
   const user = useAuthStore(state => state.user)
@@ -17,7 +15,7 @@ function AppBarItems() {
         isAdmin &&
         <Link to='/dashboard'>
           <IconButton
-            icon={<DashboardIcon color='secondary' />}
+            icon={<Icon boxSize={25} as={RiDashboardFill} color='orange.400' />}
             variant='ghost'
             isRound
             colorScheme='blackAlpha'
@@ -34,13 +32,13 @@ function AppBarItems() {
         variant='ghost'
         colorScheme='blackAlpha'
         _focus={{ boxShadow: 'none' }}
-        icon={<ExitToAppIcon style={{ color: 'white' }} />}
+        icon={<Icon boxSize={25} as={RiLogoutCircleRLine} color='orange.400' />}
       />
     </Fragment >
   )
   return (
     <Fragment>
-      <Link to='/login'><Text color='white' fontSize='lg' fontWeight={600}>Login</Text></Link>
+      <Link to='/login'><Text color='white' fontSize='md' fontWeight={600} textTransform='uppercase'>Login</Text></Link>
     </Fragment>
   )
 }
@@ -48,7 +46,7 @@ function AppBarItems() {
 export default function MainAppBar() {
   return (
     <Flex py={4} px={6} bgColor='black' position='sticky' justify='space-between' align='center'>
-      <Link to="/"><Text color='white' fontSize='2xl' fontWeight={600}>DeliV</Text></Link>
+      <Link to="/"><Text color='white' fontSize='xl' fontWeight={600}>DeliV</Text></Link>
       <Flex justify='center' ml='auto'>
         <AppBarItems />
       </Flex>

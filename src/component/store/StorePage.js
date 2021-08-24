@@ -1,4 +1,4 @@
-import { Box, Flex, Grid, GridItem, Image, SimpleGrid, Text } from "@chakra-ui/react"
+import { Box, Flex, GridItem, Image, SimpleGrid, Text } from "@chakra-ui/react"
 import { Fragment, useEffect } from "react"
 import { Helmet } from "react-helmet-async"
 import { Link, useParams } from "react-router-dom"
@@ -40,7 +40,7 @@ export default function StorePage() {
                         <SimpleGrid columns={12} w='100%'>
                             <GridItem colSpan={[12, null, null, 3]}>
                                 <Box p={2}>
-                                    <Text fontSize='2xl'>Menu</Text>
+                                    <Text fontSize='2xl' fontWeight={600}>Menu</Text>
                                     {subMenus.map(menu =>
                                         <Link key={menu.id}><Text py={2} fontSize='md'>{menu.name} ({menu.products.length})</Text></Link>
                                     )}
@@ -51,7 +51,7 @@ export default function StorePage() {
                             </GridItem>
                             <GridItem colSpan={[12, null, 4, 3]}>
                                 <Box p={2}>
-                                    <Text fontSize='2xl'>Cart</Text>
+                                    <Text fontSize='2xl' fontWeight={600}>Cart</Text>
                                     <Cart storeId={id} />
                                 </Box>
                             </GridItem>

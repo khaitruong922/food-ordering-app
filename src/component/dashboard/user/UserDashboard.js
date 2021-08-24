@@ -1,5 +1,5 @@
-import { Flex, Table, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react';
-import LaunchIcon from '@material-ui/icons/Launch';
+import { Flex, Icon, Table, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react';
+import { MdLaunch } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import useApiGet from "../../../hook/useApiGet";
 import LoadingSpinner from "../../shared/LoadingSpinner";
@@ -14,7 +14,7 @@ export default function UserDashboard() {
             {
                 loading ?
                     <LoadingSpinner /> :
-                    <Table variant='striped' colorScheme='orange'>
+                    <Table variant='striped' colorScheme='yellow'>
                         <Thead>
                             <Th>ID</Th>
                             <Th>Name</Th>
@@ -22,7 +22,7 @@ export default function UserDashboard() {
                             <Th>Address</Th>
                             <Th>Phone number</Th>
                             <Th>Email</Th>
-                            <Th>Manage</Th>
+                            <Th textAlign='center'>Manage</Th>
                         </Thead>
                         <Tbody>
                             {users.map(({ id, name, username, address, phoneNumber, email, }) => (
@@ -33,7 +33,7 @@ export default function UserDashboard() {
                                     <Td>{address}</Td>
                                     <Td>{phoneNumber}</Td>
                                     <Td>{email}</Td>
-                                    <Td><Link to={`/dashboard/users/${id}`}><LaunchIcon /></Link></Td>
+                                    <Td textAlign='center'><Link to={`/dashboard/users/${id}`}><Icon as={MdLaunch} /></Link></Td>
                                 </Tr>
                             ))}
                         </Tbody>

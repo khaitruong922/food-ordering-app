@@ -1,13 +1,10 @@
-import { Box, Button, Flex, Text } from '@chakra-ui/react'
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
-import { Fragment } from "react"
-import { useEffect } from "react"
+import { Box, Button, Flex, Icon, Text } from '@chakra-ui/react'
+import { Fragment, useEffect } from "react"
+import { IoCartOutline } from 'react-icons/io5'
 import { Link } from "react-router-dom"
-import useAuthStore from "../../store/useAuthStore"
 import useCartsStore from "../../store/useCartsStore"
 import formatCurrency from "../../util/formatCurrency"
 import CartItem from "./CartItem"
-
 export default function Cart({ storeId }) {
     const productIds = useCartsStore(state => Object.keys(state.carts[storeId]?.products ?? {}))
     const total = useCartsStore(state => (state.carts[storeId]?.total))
@@ -32,7 +29,7 @@ export default function Cart({ storeId }) {
                         <Box display='flex' justifyContent='center'>
                             <Link to={`/stores/${storeId}/checkout`} >
                                 <Button
-                                    leftIcon={<ShoppingCartIcon color='secondary' />}
+                                    leftIcon={<Icon as={IoCartOutline} color='orange.500' boxSize={25} />}
                                     variant='ghost'
                                 >Checkout
                                 </Button>

@@ -7,8 +7,7 @@ export default function ProductMenu({ menu, storeId }) {
     if (products?.length === 0) return <Fragment />
     return (
         <Box p={2}>
-            <Text fontSize='2xl'>{name}</Text>
-            <Box height={10} />
+            <Text fontSize='2xl' fontWeight={600}>{name}</Text>
             <SimpleGrid container column={1}>
                 {products.map(product => (
                     <Product key={product.id} storeId={storeId} product={product} />

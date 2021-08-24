@@ -2,8 +2,8 @@ import { Box, Button, Flex, FormControl, FormLabel, Image, Input, InputGroup, In
 import { useState } from 'react';
 import { useParams } from "react-router-dom";
 import api from "../../../api/api";
+import {useErrorToast, useSuccessToast} from '../../shared/toast';
 import useInput from "../../../hook/useInput";
-import useMessage from "../../../hook/useMessage";
 import isValidImageFile from "../../../util/isValidImageFile";
 
 export default function AddProductPage() {
@@ -11,20 +11,20 @@ export default function AddProductPage() {
     const { value: name, onInput: onNameInput } = useInput('')
     const { value: price, onInput: onPriceInput } = useInput('')
     const { value: description, onInput: onDescriptionInput } = useInput('')
-    const { message, success, setErrorMessage, setSuccessMessage } = useMessage()
     const [file, setFile] = useState(null)
     const toast = useToast()
     const [loading, setLoading] = useState(false)
-
+    const errorToast = useErrorToast()
+    const successToast = useSuccessToast()
     async function onFormSubmit(e) {
         e.preventDefault()
         const _price = Number(price)
         if (_price === NaN) {
-            setErrorMessage('Please enter a number for price')
+            errorToast({ title: 'Invalid price', description: 'Price must be a positive number!' })
             return
         }
         if (_price < 0) {
-            setErrorMessage(`Price can't be negative!`)
+            errorToast({ title: 'Invalid price', description: `Price can't be negative!` })
             return
         }
         try {
@@ -40,13 +40,7 @@ export default function AddProductPage() {
                     }
                 })
             }
-            toast({
-                position: 'bottom-right',
-                title: 'Add product sucessfully!',
-                description: '',
-                status: 'success',
-                isClosable: true,
-            })
+            successToast({ title: 'Add product sucessfully!', description: '', })
         } catch (e) {
             const message = e.response.data.message[0]
             toast({
@@ -65,15 +59,11 @@ export default function AddProductPage() {
         const file = e.target.files[0]
         const { valid, message } = isValidImageFile(file)
         if (!valid) {
-            setErrorMessage(message)
             setFile(null)
             e.target.value = null
-            toast({
-                position: 'bottom-right',
+            errorToast({
                 title: 'Image upload failed!',
                 description: message,
-                status: 'error',
-                isClosable: true,
             })
             return
         }

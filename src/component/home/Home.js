@@ -9,14 +9,14 @@ import StoreCard from "./StoreCard";
 
 function Category({ category, onClick, isSelected }) {
     const { name } = category
-    return <Button p={7} fontSize='lg' borderRadius={20} ml={2} colorScheme={isSelected ? 'yellow' : 'gray'} onClick={onClick}>{name}</Button>
+    return <Button _focus={{ boxShadow: 'none' }} p={7} fontSize='lg' borderRadius={20} ml={2} colorScheme={isSelected ? 'yellow' : 'gray'} onClick={onClick}>{name}</Button>
 }
 export default function Home() {
     const user = useAuthStore(state => state.user)
-    const { data: stores, loading: storesLoading, error: storesError } = useApiGet({ endpoint: '/stores', defaultValue: [] })
-    const { data: categories, loading: categoriesLoading, error: categoriesError } = useApiGet({ endpoint: '/categories', defaultValue: [] })
+    const { data: stores, loading: storesLoading } = useApiGet({ endpoint: '/stores', defaultValue: [] })
+    const { data: categories, loading: categoriesLoading } = useApiGet({ endpoint: '/categories', defaultValue: [] })
     const [selectedCategory, setSelectedCategory] = useState(-1)
-    const displayedStores = stores.filter(store => selectedCategory == -1 || selectedCategory == store.category?.id)
+    const displayedStores = stores.filter(store => selectedCategory == -1 || store.categories?.some(category => category.id === selectedCategory))
     if (storesLoading) return <LoadingSpinner />
     return (
         <Box width='80%' mx='auto' mt={2}>

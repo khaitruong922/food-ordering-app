@@ -4,7 +4,6 @@ import { HelmetProvider } from "react-helmet-async";
 import AppRouter from './AppRouter';
 import chakraTheme from './chakraTheme';
 import useAuthStore from "./store/useAuthStore";
-import "@fontsource/open-sans"
 
 export default function App() {
   const fetchCurrentUser = useAuthStore(state => state.fetchCurrentUser)

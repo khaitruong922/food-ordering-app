@@ -38,14 +38,14 @@ function AppBarItems() {
   )
   return (
     <Fragment>
-      <Link to='/login'><Text color='white' fontSize='md' fontWeight={600} textTransform='uppercase'>Login</Text></Link>
+      <Link to='/login'><Text color='white' fontWeight={500} fontSize='md'>Login</Text></Link>
     </Fragment>
   )
 }
 
 export default function MainAppBar() {
   return (
-    <Flex py={4} px={6} bgColor='black' position='sticky' justify='space-between' align='center'>
+    <Flex py={4} px={6} bgColor='gray.800' position='sticky' justify='space-between' align='center'>
       <Link to="/"><Text color='white' fontSize='xl' fontWeight={600}>DeliV</Text></Link>
       <Flex justify='center' ml='auto'>
         <AppBarItems />

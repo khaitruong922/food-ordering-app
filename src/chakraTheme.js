@@ -6,8 +6,6 @@ const chakraTheme = extendTheme({
         Steps,
     },
     fonts: {
-        heading: 'Open Sans',
-        body: 'Open Sans'
     }
 })
 export default chakraTheme

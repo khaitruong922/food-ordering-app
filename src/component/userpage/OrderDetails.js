@@ -1,44 +1,41 @@
-import { Text, Box } from '@chakra-ui/react'
+import { Text, Box, Flex, Button } from '@chakra-ui/react'
 import React from 'react'
 
 
-export default function OrderDetails() {
-    // const { name, address, phoneNumber, note, status, totalPrice } = order
-    return <Box display="flex" direction="column" borderRadius="20px" border="1px" borderColor="black" alignItems="center" height="150px" width="500px">
-
-            <Box height="20px" />
-
-            <Text>
-                Name : 
+export default function OrderDetails({received_order}) {
+    const {id, name, address, phoneNumber, note, status, totalPrice } = received_order
+    return <Flex align="center" direction="column" backgroundColor="blue.100"  boxShadow='lg' mt={5} py={5} px={10}>
+            
+            <Box height="10px" />
+            <Text mx="15px">
+                Order ID: {id}
             </Text>
-
-            <Box height="20px" />
-
-            <Text>
-                Address : 
+            <Box height="5px" />
+            <Text mx="15px">
+                Name : {name}
             </Text>
-
-            <Box height="20px" />
-
-            <Text>
-                Phone Number : 
+            <Box height="5px" />
+            <Text mx="15px">
+                Address : {address}
             </Text>
-
-            <Box height="20px" />
-            <Text>
-               Note : 
+            <Box height="5px" />
+            <Text mx="15px">
+                Phone Number : {phoneNumber}
             </Text>
-
-            <Box height="20px" />
-
-            <Text>
-                Price : 
+            <Box height="5px" />
+            <Text mx="15px">
+               Note : {note}
             </Text>
-
-            <Box height="20px" />
-
-            <Text>
-                Status : 
+            <Box height="5px" />
+            <Text mx="15px">
+                Price : {totalPrice} $
             </Text>
-        </Box>
+            <Box height="5px" />
+            <Text mx="15px">
+                Status : {status}
+            </Text>
+            <Button colorScheme="teal">
+                Order Details
+            </Button>
+        </Flex>
 }

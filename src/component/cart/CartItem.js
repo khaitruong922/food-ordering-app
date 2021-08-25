@@ -3,7 +3,7 @@ import { Box, Flex, IconButton, Text } from '@chakra-ui/react';
 import { Fragment } from "react";
 import useCartsStore from "../../store/useCartsStore";
 import formatCurrency from "../../util/formatCurrency";
-import AppDivider from "../styled-component/AppDivider";
+import AppDivider from "../shared/AppDivider";
 
 export default function CartItem({ storeId, productId }) {
     const quantity = useCartsStore(state => state.carts[storeId].products[productId].quantity)

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useErrorToast } from '../shared/toast';
 import useInput from '../../hook/useInput';
 import useAuthStore from '../../store/useAuthStore';
-import AppDivider from '.././styled-component/AppDivider';
+import AppDivider from '../shared/AppDivider';
 
 export default function LoginPage() {
     const { value: username, onInput: onUsernameInput } = useInput('')
@@ -30,7 +30,7 @@ export default function LoginPage() {
     return (
         <Flex direction='column' align='center' justify='center' width={400} mx='auto' boxShadow='xl' mt={5} p={5}>
             <Helmet title='Login' />
-            <Text fontSize='3xl' fontWeight={700}>Sign In</Text>
+            <Text fontSize='3xl' fontWeight={600}>Sign In</Text>
             <Box width='100%' p={2}>
                 <form onSubmit={onFormSubmit}>
                     <FormControl id="username">

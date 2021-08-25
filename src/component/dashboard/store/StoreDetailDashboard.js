@@ -10,8 +10,8 @@ import useInput from '../../../hook/useInput'
 import formatCurrency from '../../../util/formatCurrency'
 import LoadingSpinner from '../../shared/LoadingSpinner'
 import { useErrorToast } from '../../shared/toast'
-import AppDivider from '../../styled-component/AppDivider'
-import DeleteAlertDialog from '../../styled-component/DeleteAlertDialog'
+import AppDivider from '../../shared/AppDivider'
+import DeleteAlertDialog from '../../shared/DeleteAlertDialog'
 
 
 const Product = ({ product }) => {
@@ -19,7 +19,7 @@ const Product = ({ product }) => {
     const { url: imageUrl } = image
     return (
         <Flex direction='row' p={2} height='100%'>
-            <Box  display='flex' alignItems='center'>
+            <Box display='flex' alignItems='center'>
                 <Image borderRadius={10} objectFit='cover' boxSize={75} src={imageUrl}></Image>
             </Box>
             <Box ml={4}>

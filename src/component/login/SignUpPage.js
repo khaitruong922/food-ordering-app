@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import api from '../../api/api';
 import useInput from '../../hook/useInput';
 import { useErrorToast, useSuccessToast } from '../shared/toast';
-import AppDivider from '../styled-component/AppDivider';
+import AppDivider from '../shared/AppDivider';
 
 
 export default function SignUpPage() {
@@ -52,7 +52,7 @@ export default function SignUpPage() {
     return (
         <Flex direction='column' align='center' justify='center' width={400} mx='auto' boxShadow='xl' mt={5} p={5}>
             <Helmet title='Sign Up' />
-            <Text fontSize='3xl' fontWeight={700}>Sign Up</Text>
+            <Text fontSize='3xl' fontWeight={600}>Sign Up</Text>
             <Box width='100%' p={2}>
                 <form onSubmit={onFormSubmit}>
                     <FormControl id="username">

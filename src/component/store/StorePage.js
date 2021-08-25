@@ -5,7 +5,7 @@ import { Link, useParams } from "react-router-dom"
 import useApiGet from "../../hook/useApiGet"
 import Cart from "../cart/Cart"
 import LoadingSpinner from "../shared/LoadingSpinner"
-import AppDivider from "../styled-component/AppDivider"
+import AppDivider from "../shared/AppDivider"
 import ProductMenu from "./ProductMenu"
 
 export default function StorePage() {

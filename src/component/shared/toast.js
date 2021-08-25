@@ -6,9 +6,9 @@ const createToast = (status) => {
         return ({ title, description }) => toast(
             {
                 position: 'bottom-right',
-                status: 'error',
                 isClosable: true,
                 duration: 4000,
+                status,
                 title,
                 description,
             }

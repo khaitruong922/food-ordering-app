@@ -109,9 +109,11 @@ export default function CheckoutPage() {
             <Box height={10} />
             <Table variant='simple'>
                 <Thead>
-                    <Th>Item</Th>
-                    <Th isNumeric>Quantity</Th>
-                    <Th isNumeric>Subtotal</Th>
+                    <Tr>
+                        <Th>Item</Th>
+                        <Th isNumeric>Quantity</Th>
+                        <Th isNumeric>Subtotal</Th>
+                    </Tr>
                 </Thead>
                 <Tbody>
                     {products.map(({ data: { id, name, price }, quantity }) => (
@@ -134,7 +136,7 @@ export default function CheckoutPage() {
                 <Button onClick={prevStep}>Back</Button>
                 <Button colorScheme='teal' ml={2} isLoading={submitting} onClick={handleOrderSubmit}>Confirm order</Button>
             </Flex>
-        </Box>
+        </Box >
         )
     }
     function Completed() {

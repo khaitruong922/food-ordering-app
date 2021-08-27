@@ -45,7 +45,7 @@ export default function CategoryDashboard() {
     }
     return (
         <Flex direction='column' p={5}>
-            <Text fontSize='4xl' align='center' mb={2}>Categories</Text>
+            <Text fontWeight={700} fontSize='2xl' textTransform='uppercase'>Categories</Text>
             <form onSubmit={onAddCategorySubmit}>
                 <Flex justify='flex-end' my={5}>
                     <Input value={category} onInput={onCategoryInput} w={300} placeholder='Category name' mr={2} required />

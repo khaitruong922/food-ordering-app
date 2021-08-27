@@ -1,6 +1,6 @@
 import { CheckIcon, EmailIcon, PhoneIcon } from '@chakra-ui/icons'
 import { Avatar, Box, Button, Flex, GridItem, Icon, Modal, ModalOverlay, SimpleGrid, Tab, TabList, Tabs, Text, useDisclosure, ModalContent, ModalHeader, ModalBody, ModalCloseButton, ModalFooter, Table, Thead, Tbody, Th, Tr, Td, Tfoot, FormControl, FormLabel, Input, useBoolean } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Fragment } from 'react'
 import { BiTimeFive } from 'react-icons/bi'
 import { IoLocationOutline } from 'react-icons/io5'
@@ -129,13 +129,22 @@ function Info({ label, value }) {
 function Order({ order }) {
     const { id, name, address, phoneNumber, note, createdAt, status, orderDetails, totalPrice } = order
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const isCompleted = status === 'COMPLETED'
     return (
-        <Box onClick={onOpen} cursor='pointer' boxShadow='sm' borderRadius='md' p={4}>
-            <Text fontSize='lg' fontWeight={600}>#{id}</Text>
+        <Box border='1px' borderColor={isCompleted ? 'green.400' : 'yellow.400'} onClick={onOpen} cursor='pointer' boxShadow='sm' borderRadius='md' p={4}>
+            <Text fontSize='lg' fontWeight={600}>Order #{id}</Text>
             <Text color='gray.600' fontSize='sm'>{new Date(createdAt).toISOString().substring(0, 10)}</Text>
             <Flex my={1} align='center'>
-                <Icon as={BiTimeFive} mr={2} />
-                <Text textTransform='capitalize' fontSize='sm'>{status.toLowerCase()}</Text>
+                {isCompleted ?
+                    <Icon color='green.400' as={CheckIcon} mr={2} /> :
+                    <Icon color='yellow.600' as={BiTimeFive} mr={2} />
+                }
+                <Text
+                    color={isCompleted ? 'green.400' : 'yellow.600'}
+                    textTransform='capitalize' fontSize='sm'
+                >
+                    {status.toLowerCase()}
+                </Text>
             </Flex>
             <Text fontWeight={600} align='right'>{formatCurrency(totalPrice)}</Text>
             <Modal size='3xl' preserveScrollBarGap closeOnOverlayClick isOpen={isOpen} onClose={onClose}>
@@ -145,8 +154,16 @@ function Order({ order }) {
                         <Text fontSize='xl' fontWeight={600}>Order #{id}</Text>
                         <Text color='gray.600' fontSize='md'>{new Date(createdAt).toISOString().substring(0, 10)}</Text>
                         <Flex my={1} align='center'>
-                            <Icon as={BiTimeFive} mr={2} />
-                            <Text textTransform='capitalize' fontSize='md'>{status.toLowerCase()}</Text>
+                            {isCompleted ?
+                                <Icon color='green.400' as={CheckIcon} mr={2} /> :
+                                <Icon color='yellow.600' as={BiTimeFive} mr={2} />
+                            }
+                            <Text
+                                color={isCompleted ? 'green.400' : 'yellow.600'}
+                                textTransform='capitalize' fontSize='md'
+                            >
+                                {status.toLowerCase()}
+                            </Text>
                         </Flex>
                     </ModalHeader>
                     <ModalCloseButton />
@@ -159,14 +176,16 @@ function Order({ order }) {
                         <Box height={10} />
                         <Table variant='simple'>
                             <Thead>
-                                <Th>Item</Th>
-                                <Th isNumeric>Quantity</Th>
-                                <Th isNumeric>Subtotal</Th>
+                                <Tr>
+                                    <Th>Item</Th>
+                                    <Th isNumeric>Quantity</Th>
+                                    <Th isNumeric>Subtotal</Th>
+                                </Tr>
                             </Thead>
                             <Tbody>
-                                {orderDetails.map(({ product: { id, name, price }, quantity }) => (
+                                {orderDetails.map(({ product, id, quantity, price }) => (
                                     <Tr key={id}>
-                                        <Td>{name}</Td>
+                                        <Td>{product?.name}</Td>
                                         <Td isNumeric>{quantity}</Td>
                                         <Td isNumeric>{formatCurrency(quantity * price)}</Td>
                                     </Tr>
@@ -213,14 +232,15 @@ function OrderList() {
                     </Tab>
                 </TabList>
             </Tabs>
-            <SimpleGrid columns={12} spacing={3}>
-                {loading ? <LoadingSpinner /> :
-                    displayedOrders.map(order =>
+            {loading ? <LoadingSpinner /> :
+                <SimpleGrid columns={12} spacing={3}>
+                    {displayedOrders.map(order =>
                         <GridItem key={order.id} colSpan={[12, 6, 4, 3]}>
                             <Order order={order} />
                         </GridItem>
                     )}
-            </SimpleGrid>
+                </SimpleGrid>
+            }
         </Box >
 
     )

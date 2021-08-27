@@ -9,7 +9,7 @@ export default function StoreDashboard() {
     const { data: stores, loading, error } = useApiGet({ endpoint: '/stores', defaultValue: [] })
     return (
         <Flex direction='column' p={5}>
-            <Text fontSize='4xl' align='center' mb={2}>Stores</Text>
+            <Text fontWeight={700} fontSize='2xl' textTransform='uppercase'>Stores</Text>
             <Box ml='auto' mb={5}>
                 <Link to='/dashboard/stores/add'><Button colorScheme='yellow'>Add store</Button></Link>
             </Box>

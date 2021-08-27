@@ -10,7 +10,7 @@ export default function UserDashboard() {
 
     return (
         <Flex direction='column' p={5}>
-            <Text fontSize='4xl' align='center' mb={2}>Users</Text>
+            <Text fontWeight={700} fontSize='2xl' textTransform='uppercase' mb={2}>Users</Text>
             {
                 loading ?
                     <LoadingSpinner /> :

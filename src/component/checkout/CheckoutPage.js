@@ -7,7 +7,7 @@ import useAuthStore from '../../store/useAuthStore';
 import useCartsStore from '../../store/useCartsStore';
 import formatCurrency from '../../util/formatCurrency';
 import getArrayEntries from '../../util/getArrayEntries';
-import {HiCheckCircle} from 'react-icons/hi'
+import { HiCheckCircle } from 'react-icons/hi'
 
 
 function Info({ label, value }) {
@@ -110,22 +110,22 @@ export default function CheckoutPage() {
             <Table variant='simple'>
                 <Thead>
                     <Th>Item</Th>
-                    <Th>Quantity</Th>
-                    <Th>Subtotal</Th>
+                    <Th isNumeric>Quantity</Th>
+                    <Th isNumeric>Subtotal</Th>
                 </Thead>
                 <Tbody>
                     {products.map(({ data: { id, name, price }, quantity }) => (
                         <Tr key={id}>
                             <Td>{name}</Td>
-                            <Td>{quantity}</Td>
-                            <Td>{formatCurrency(quantity * price)}</Td>
+                            <Td isNumeric>{quantity}</Td>
+                            <Td isNumeric>{formatCurrency(quantity * price)}</Td>
                         </Tr>
                     ))}
                 </Tbody>
                 <Tfoot>
                     <Tr>
                         <Th fontSize='md' colSpan={2}>Total</Th>
-                        <Th fontSize='md' align='right'>{formatCurrency(total)}</Th>
+                        <Th fontSize='md' isNumeric>{formatCurrency(total)}</Th>
                     </Tr>
                 </Tfoot>
             </Table>

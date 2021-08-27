@@ -1,6 +1,7 @@
 import { Flex, Icon, IconButton, Text } from '@chakra-ui/react';
 import { Fragment } from "react";
 import { RiDashboardFill, RiLogoutCircleRLine } from "react-icons/ri";
+import { HiUserCircle } from 'react-icons/hi'
 import { Link, useHistory } from "react-router-dom";
 import useAuthStore from "../../store/useAuthStore";
 
@@ -23,6 +24,15 @@ function AppBarItems() {
           />
         </Link>
       }
+      <Link to='/profile'>
+        <IconButton
+          icon={<Icon boxSize={25} as={HiUserCircle} color='orange.400' />}
+          variant='ghost'
+          isRound
+          colorScheme='blackAlpha'
+          _focus={{ boxShadow: 'none' }}
+        />
+      </Link>
       <IconButton
         onClick={() => {
           logout()
@@ -32,7 +42,7 @@ function AppBarItems() {
         variant='ghost'
         colorScheme='blackAlpha'
         _focus={{ boxShadow: 'none' }}
-        icon={<Icon boxSize={25} as={RiLogoutCircleRLine} color='orange.400' />}
+        icon={<Icon boxSize={25} as={RiLogoutCircleRLine} color='white' />}
       />
     </Fragment >
   )

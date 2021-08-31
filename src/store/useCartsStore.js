@@ -67,10 +67,10 @@ const useCartsStore = create(persist(
       })
       return total
     },
-    submitOrder: async ({ storeId, address, note, name, phoneNumber, deliveredAt = '2021-08-08' }) => {
+    submitOrder: async ({ storeId, address, note, name, phoneNumber, deliveredAt = '2021-08-08', }) => {
       const products = getArrayEntries(get().carts[storeId].products)
       const orderDetails = products.map(product => { return { product: product.id, quantity: product.quantity } })
-      const body = { name, phoneNumber, address, note, deliveredAt, orderDetails }
+      const body = { store: storeId, name, phoneNumber, address, note, deliveredAt, orderDetails }
       console.log(body)
       try {
         const res = await api.post('/orders', body)

@@ -28,7 +28,8 @@ function Info({ label, value }) {
 }
 
 function Order({ order, onStatusChange }) {
-    const { id, name, address, phoneNumber, note, createdAt, status, orderDetails, totalPrice, user } = order
+    const { id, name, address, phoneNumber, note, createdAt, status, orderDetails, totalPrice, user, store } = order
+    const { id: storeId, name: storeName } = store || {}
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [changingStatus, setChangingStatus] = useState('')
     const isCompleted = status === 'COMPLETED'
@@ -88,6 +89,9 @@ function Order({ order, onStatusChange }) {
                         <Info label='User ID' value={user?.id} />
                         <Info label='Username' value={user?.username} />
                         <Box h={5} />
+                        <Info label='Store ID' value={storeId} />
+                        <Info label='Store name' value={storeName} />
+                        <Box h={5} />
                         <Info label='Name' value={name} />
                         <Info label='Address' value={address} />
                         <Info label='Phone number' value={phoneNumber} />
@@ -107,7 +111,7 @@ function Order({ order, onStatusChange }) {
                                     <Tr key={id}>
                                         <Td>{product?.name}</Td>
                                         <Td isNumeric>{quantity}</Td>
-                                        <Td isNumeric>{formatCurrency(quantity * price)}</Td>
+                                        <Td isNumeric>{formatCurrency(price)}</Td>
                                     </Tr>
                                 ))}
                             </Tbody>

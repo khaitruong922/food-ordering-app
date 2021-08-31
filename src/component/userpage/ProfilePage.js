@@ -127,7 +127,8 @@ function Info({ label, value }) {
 
 
 function Order({ order }) {
-    const { id, name, address, phoneNumber, note, createdAt, status, orderDetails, totalPrice } = order
+    const { id, name, address, phoneNumber, note, createdAt, status, orderDetails, totalPrice, store } = order
+    const { name: storeName } = store || {}
     const { isOpen, onOpen, onClose } = useDisclosure()
     const isCompleted = status === 'COMPLETED'
     return (
@@ -168,6 +169,8 @@ function Order({ order }) {
                     </ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
+                        <Info label='Store' value={storeName} />
+                        <Box height={5} />
                         <Info label='Name' value={name} />
                         <Info label='Address' value={address} />
                         <Info label='Phone number' value={phoneNumber} />
@@ -187,7 +190,7 @@ function Order({ order }) {
                                     <Tr key={id}>
                                         <Td>{product?.name}</Td>
                                         <Td isNumeric>{quantity}</Td>
-                                        <Td isNumeric>{formatCurrency(quantity * price)}</Td>
+                                        <Td isNumeric>{formatCurrency(price)}</Td>
                                     </Tr>
                                 ))}
                             </Tbody>

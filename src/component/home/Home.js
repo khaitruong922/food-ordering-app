@@ -9,8 +9,9 @@ import StoreCard from "./StoreCard";
 
 function Category({ category, onClick, isSelected }) {
     const { name } = category
-    return <Button _focus={{ boxShadow: 'none' }} p={7} fontSize='lg' borderRadius={20} ml={2} colorScheme={isSelected ? 'yellow' : 'gray'} onClick={onClick}>{name}</Button>
+    return <Button _focus={{ boxShadow: 'none' }} p={4} fontSize='lg' borderRadius='xl' ml={2} colorScheme={isSelected ? 'whatsapp' : 'gray'} onClick={onClick}>{name}</Button>
 }
+
 export default function Home() {
     const user = useAuthStore(state => state.user)
     const { data: stores, loading: storesLoading } = useApiGet({ endpoint: '/stores', defaultValue: [] })
@@ -24,17 +25,17 @@ export default function Home() {
             <Flex p={4}>
                 {
                     categoriesLoading ? <LoadingSpinner /> :
-                        <Fragment>
-                            <Category key={-1} category={{ name: 'All' }} onClick={() => setSelectedCategory(-1)} isSelected={selectedCategory == -1} />
+                        <>
+                            <Category key={-1} category={{ name: 'ALL' }} onClick={() => setSelectedCategory(-1)} isSelected={selectedCategory == -1} />
                             {categories.map(category =>
                                 <Category key={category.id} category={category} onClick={() => setSelectedCategory(category.id)} isSelected={selectedCategory == category.id} />)
                             }
-                        </Fragment>
+                        </>
                 }
             </Flex>
             <SimpleGrid
                 columns={[1, 2, 3, 4]}
-                spacing={10}
+                spacing={3}
             >
                 {
                     displayedStores.map((store) => (

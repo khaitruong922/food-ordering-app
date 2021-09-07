@@ -1,5 +1,5 @@
-import logo from '../asset/image/logo.png'
+import placeholder from '../asset/image/placeholder.png'
 const mockProductImage = {
-    url: logo
+    url: placeholder
 }
 export default mockProductImage

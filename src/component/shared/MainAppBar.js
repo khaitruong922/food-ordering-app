@@ -55,8 +55,8 @@ function AppBarItems() {
 
 export default function MainAppBar() {
   return (
-    <Flex py={4} px={6} bgColor='gray.800' position='sticky' justify='space-between' align='center'>
-      <Link to="/"><Text color='white' fontSize='xl' fontWeight={600}>DeliV</Text></Link>
+    <Flex py={4} px={6} bgColor='gray.900' position='sticky' justify='space-between' align='center'>
+      <Link to="/"><Text ml={2} color='white' fontSize='xl' fontWeight={600}>DeliV</Text></Link>
       <Flex justify='center' ml='auto'>
         <AppBarItems />
       </Flex>

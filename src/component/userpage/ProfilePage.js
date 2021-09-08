@@ -2,6 +2,7 @@ import { CheckIcon, EmailIcon, PhoneIcon } from '@chakra-ui/icons'
 import { Avatar, Box, Button, Flex, GridItem, Icon, Modal, ModalOverlay, SimpleGrid, Tab, TabList, Tabs, Text, useDisclosure, ModalContent, ModalHeader, ModalBody, ModalCloseButton, ModalFooter, Table, Thead, Tbody, Th, Tr, Td, Tfoot, FormControl, FormLabel, Input, useBoolean } from '@chakra-ui/react'
 import { useState } from 'react'
 import { Fragment } from 'react'
+import { Helmet } from 'react-helmet-async'
 import { BiTimeFive } from 'react-icons/bi'
 import { IoLocationOutline } from 'react-icons/io5'
 import api from '../../api/api'
@@ -252,6 +253,7 @@ function OrderList() {
 export default function ProfilePage() {
     return (
         <Flex h='100%' direction='column' p={4}>
+            <Helmet title='Profile' />
             <SimpleGrid columns={12} spacing={3}>
                 <GridItem colSpan={[12, null, 1, 2]}>
                 </GridItem>

@@ -1,6 +1,6 @@
 import { CheckIcon, EmailIcon, PhoneIcon } from '@chakra-ui/icons'
 import { IoLocationOutline } from 'react-icons/io5'
-import { Box, Button, Flex, SimpleGrid, Text, Icon ,Divider} from "@chakra-ui/react";
+import { Box, Button, Flex, SimpleGrid, Text, Icon, Divider } from "@chakra-ui/react";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import images from "../../asset/image/images";
@@ -20,7 +20,6 @@ export default function Home() {
     const { data: categories, loading: categoriesLoading } = useApiGet({ endpoint: '/categories', defaultValue: [] })
     const [selectedCategory, setSelectedCategory] = useState(-1)
     const displayedStores = stores.filter(store => selectedCategory == -1 || store.categories?.some(category => category.id === selectedCategory))
-    if (storesLoading) return <LoadingSpinner />
     return (
         <Box h='100%'>
             <Helmet title='DeliV' />
@@ -42,23 +41,27 @@ export default function Home() {
                             </>
                     }
                 </Flex>
-                <SimpleGrid
-                    columns={[1, 2, 3, 4]}
-                    spacing={5}
-                >
-                    {
-                        displayedStores.map((store) => (
-                            <StoreCard key={store.id} store={store} />
-                        ))
-                    }
-                </SimpleGrid>
+                {storesLoading ? <LoadingSpinner /> :
+                    <SimpleGrid
+                        columns={[1, 2, 3, 4]}
+                        spacing={5}
+                    >
+                        {
+
+                            displayedStores.map((store) => (
+                                <StoreCard key={store.id} store={store} />
+                            ))
+                        }
+                    </SimpleGrid>
+                }
+
             </Box>
             <Flex p={6} direction='column' align='center' bgColor='gray.900' color='white'>
                 <Text mb={2} fontWeight={600} fontSize='xl'>Contact us</Text>
                 <Flex align='center' height={25}>
                     <Icon as={PhoneIcon} />
                     <Text mx={2}>+84 90 123 4567</Text>
-                    <Divider orientation='vertical' size='lg'/>
+                    <Divider orientation='vertical' size='lg' />
                     <Icon ml={2} as={EmailIcon} />
                     <Text mx={2}>support@deliv.com</Text>
                 </Flex>

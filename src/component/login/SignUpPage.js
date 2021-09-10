@@ -79,7 +79,7 @@ export default function SignUpPage() {
                         <FormLabel>Password</FormLabel>
                         <Input type='password' value={password} onInput={onPasswordInput} required />
                     </FormControl>
-                    <FormControl id="address">
+                    <FormControl id="confirmPassword">
                         <FormLabel>Confirm Password</FormLabel>
                         <Input type='password' value={confirmPassword} onInput={onConfirmPasswordInput} required />
                     </FormControl>

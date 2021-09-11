@@ -1,22 +1,25 @@
-import { Box, Button, Flex, Icon, Table, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react';
+import { Box, Button, Flex, Icon, Table, Tbody, Td, Text, Th, Thead, Tr, useDisclosure } from '@chakra-ui/react';
 import { MdLaunch } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import useApiGet from "../../../hook/useApiGet";
 import LoadingSpinner from "../../shared/LoadingSpinner";
+import AddStoreModal from './AddStoreModal';
 
 
 export default function StoreDashboard() {
-    const { data: stores, loading, error } = useApiGet({ endpoint: '/stores', defaultValue: [] })
+    const { data: stores, refresh, loading, error } = useApiGet({ endpoint: '/stores', defaultValue: [] })
+    const { isOpen, onClose, onOpen } = useDisclosure()
     return (
         <Flex direction='column' p={5}>
             <Text fontWeight={700} fontSize='2xl' textTransform='uppercase'>Stores</Text>
             <Box ml='auto' mb={5}>
-                <Link to='/dashboard/stores/add'><Button colorScheme='yellow'>Add store</Button></Link>
+                <Button onClick={onOpen} colorScheme='yellow'>Add store</Button>
+                <AddStoreModal isOpen={isOpen} onClose={onClose} refresh={refresh} />
             </Box>
             {
                 loading ?
                     <LoadingSpinner /> :
-                    <Table variant='striped' colorScheme='yellow'>
+                    <Table variant='striped' colorScheme='gray'>
                         <Thead>
                             <Th>ID</Th>
                             <Th>Name</Th>

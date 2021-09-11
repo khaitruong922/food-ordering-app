@@ -19,7 +19,7 @@ export default function Home() {
     const { data: stores, loading: storesLoading } = useApiGet({ endpoint: '/stores', defaultValue: [] })
     const { data: categories, loading: categoriesLoading } = useApiGet({ endpoint: '/categories', defaultValue: [] })
     const [selectedCategory, setSelectedCategory] = useState(-1)
-    const displayedStores = stores.filter(store => selectedCategory == -1 || store.categories?.some(category => category.id === selectedCategory))
+    const displayedStores = stores.filter(store => selectedCategory === -1 || store.categories?.some(category => category.id === selectedCategory))
     return (
         <Box h='100%'>
             <Helmet title='DeliV' />
@@ -34,9 +34,9 @@ export default function Home() {
                     {
                         categoriesLoading ? <LoadingSpinner /> :
                             <>
-                                <Category key={-1} category={{ name: 'ALL' }} onClick={() => setSelectedCategory(-1)} isSelected={selectedCategory == -1} />
+                                <Category key={-1} category={{ name: 'ALL' }} onClick={() => setSelectedCategory(-1)} isSelected={selectedCategory === -1} />
                                 {categories.map(category =>
-                                    <Category key={category.id} category={category} onClick={() => setSelectedCategory(category.id)} isSelected={selectedCategory == category.id} />)
+                                    <Category key={category.id} category={category} onClick={() => setSelectedCategory(category.id)} isSelected={selectedCategory === category.id} />)
                                 }
                             </>
                     }

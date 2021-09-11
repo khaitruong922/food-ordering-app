@@ -48,15 +48,15 @@ export default function CategoryDashboard() {
             <Text fontWeight={700} fontSize='2xl' textTransform='uppercase'>Categories</Text>
             <form onSubmit={onAddCategorySubmit}>
                 <Flex justify='flex-end' my={5}>
-                    <Input value={category} onInput={onCategoryInput} w={300} placeholder='Category name' mr={2} required />
-                    <Button isLoading={submitting} type='submit' colorScheme='yellow'>Add category</Button>
+                    <Input size='sm' value={category} onInput={onCategoryInput} w={300} placeholder='Category name' mr={2} required />
+                    <Button size='sm' isLoading={submitting} type='submit' colorScheme='yellow'>Add category</Button>
                 </Flex>
             </form>
 
             {
                 loading ?
                     <LoadingSpinner /> :
-                    <Table variant='striped' colorScheme='yellow'>
+                    <Table variant='striped' colorScheme='gray'>
                         <Thead>
                             <Th>ID</Th>
                             <Th>Name</Th>

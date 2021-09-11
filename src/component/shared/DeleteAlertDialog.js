@@ -7,9 +7,12 @@ export default function DeleteAlertDialog({
     header = 'Warning!',
     content = 'This action cannot be undone.',
     onDeleteClick,
+    isLoading,
 }) {
     return (
         <AlertDialog
+            preserveScrollBarGap
+            closeOnOverlayClick
             isOpen={isOpen}
             leastDestructiveRef={leastDestructiveRef}
             onClose={onClose}
@@ -23,7 +26,7 @@ export default function DeleteAlertDialog({
                         <Button ref={leastDestructiveRef} onClick={onClose}>
                             No
                         </Button>
-                        <Button colorScheme="red" ml={3} onClick={onDeleteClick}>
+                        <Button isLoading={isLoading} colorScheme="red" ml={3} onClick={onDeleteClick}>
                             Yes
                         </Button>
                     </AlertDialogFooter>

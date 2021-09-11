@@ -18,7 +18,7 @@ import EditStoreModal from './EditStoreModal'
 
 const Product = ({ product, refresh }) => {
     const { id, image, name, price, description } = product
-    const { url: imageUrl } = image
+    const { url: imageUrl } = image || {}
     const { isOpen: isEditOpen, onOpen: onEditOpen, onClose: onEditClose } = useDisclosure()
     const { isOpen: isDeleteOpen, onOpen: onDeleteOpen, onClose: onDeleteClose } = useDisclosure()
     const [deleting, setDeleting] = useState(false)

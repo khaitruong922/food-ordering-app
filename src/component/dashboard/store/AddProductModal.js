@@ -42,6 +42,7 @@ export default function AddProductModal({ menu, isOpen, onClose, refresh }) {
             }
             successToast({ title: 'Add product sucessfully!', description: '', })
             refresh()
+            onClose()
         } catch (e) {
             console.log(e)
             errorToast({

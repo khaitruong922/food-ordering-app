@@ -17,7 +17,7 @@ export default function EditUserModal({ user, isOpen, onClose, refresh }) {
         e.preventDefault()
         try {
             setSubmitting(true)
-            const { data } = await api.patch(`/users/${id}`, { name: nameInput, address: addressInput, phoneNumber: phoneNumberInput, email, emailInput })
+            const { data } = await api.patch(`/users/${id}`, { name: nameInput, address: addressInput, phoneNumber: phoneNumberInput, email: emailInput })
             successToast({ title: 'Update account sucessfully!', description: '', })
             refresh()
             onClose()

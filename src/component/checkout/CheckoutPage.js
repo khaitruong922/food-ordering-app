@@ -57,48 +57,6 @@ export default function CheckoutPage() {
             setSubmitting(false)
         }
     }
-    const steps = [
-        {
-            label: "Shipping Information",
-            item: <ShippingInformation />
-        },
-        {
-            label: "Review",
-            item: <Review />
-        },
-        {
-            label: "Completed",
-            item: <Completed />
-        }
-    ]
-    function ShippingInformation() {
-        return (
-            <Box>
-                <Box>
-                    <FormControl id="name">
-                        <FormLabel>Name</FormLabel>
-                        <Input value={name} onInput={onNameInput} required />
-                    </FormControl>
-                    <FormControl id="phoneNumber">
-                        <FormLabel>Phone number</FormLabel>
-                        <Input value={phoneNumber} onInput={onPhoneNumberInput} required />
-                    </FormControl>
-                    <FormControl id="address">
-                        <FormLabel>Address</FormLabel>
-                        <Input value={address} onInput={onAddressInput} required />
-                    </FormControl>
-                    <FormControl id="note">
-                        <FormLabel>Note</FormLabel>
-                        <Textarea resize='none' noOfLines={3} value={note} onInput={onNoteInput} />
-                    </FormControl>
-                </Box>
-                <Box height={5} />
-                <Flex justify='flex-end'>
-                    <Link to={`/stores/${storeId}`}><Button>Back to store</Button></Link>
-                    <Button colorScheme='teal' ml={2} onClick={nextStep}>Next</Button>
-                </Flex>
-            </Box>)
-    }
     function Review() {
         return (<Box>
             <Info label='Name' value={name} />
@@ -157,17 +115,49 @@ export default function CheckoutPage() {
                 </Text>
             </Box>
             <Box width='100%'>
-                <Steps colorScheme='teal' activeStep={activeStep}>
-                    {steps.map((step) => (
-                        <Step label={step.label} key={step.label}>
+                <form onSubmit={handleOrderSubmit}>
+                    <Steps colorScheme='teal' activeStep={activeStep}>
+                        <Step label='Shipping Information'>
                             <Flex direction='column' justify='center' boxShadow='md' mt={10} py={5} px={10}>
-                                <form onSubmit={handleOrderSubmit}>
-                                    {step.item}
-                                </form>
+                                <Box>
+                                    <Box>
+                                        <FormControl id="name">
+                                            <FormLabel>Name</FormLabel>
+                                            <Input value={name} onInput={onNameInput} required />
+                                        </FormControl>
+                                        <FormControl id="phoneNumber">
+                                            <FormLabel>Phone number</FormLabel>
+                                            <Input value={phoneNumber} onInput={onPhoneNumberInput} required />
+                                        </FormControl>
+                                        <FormControl id="address">
+                                            <FormLabel>Address</FormLabel>
+                                            <Input value={address} onInput={onAddressInput} required />
+                                        </FormControl>
+                                        <FormControl id="note">
+                                            <FormLabel>Note</FormLabel>
+                                            <Textarea resize='none' noOfLines={3} value={note} onInput={onNoteInput} />
+                                        </FormControl>
+                                    </Box>
+                                    <Box height={5} />
+                                    <Flex justify='flex-end'>
+                                        <Link to={`/stores/${storeId}`}><Button>Back to store</Button></Link>
+                                        <Button colorScheme='teal' ml={2} onClick={nextStep}>Next</Button>
+                                    </Flex>
+                                </Box>
                             </Flex>
                         </Step>
-                    ))}
-                </Steps>
+                        <Step label='Review'>
+                            <Flex direction='column' justify='center' boxShadow='md' mt={10} py={5} px={10}>
+                                <Review />
+                            </Flex>
+                        </Step>
+                        <Step label='Completed'>
+                            <Flex direction='column' justify='center' boxShadow='md' mt={10} py={5} px={10}>
+                                <Completed />
+                            </Flex>
+                        </Step>
+                    </Steps>
+                </form>
             </Box>
         </Box>
     )

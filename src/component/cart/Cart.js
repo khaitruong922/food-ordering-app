@@ -14,7 +14,7 @@ export default function Cart({ storeId }) {
         createStoreCart({ storeId })
     }, [])
     return (
-        <Box p={2}>
+        <Box py={4}>
             {productIds.map(productId => <CartItem key={productId} storeId={storeId} productId={productId} />)}
             <Box height={5} />
             {
@@ -26,11 +26,12 @@ export default function Cart({ storeId }) {
                                 <Text fontSize='md' fontWeight={600} align='right'>{formatCurrency(total)}</Text>
                             </Box>
                         </Flex>
-                        <Box display='flex' justifyContent='center'>
+                        <Box mt={2} display='flex' justifyContent='center'>
                             <Link to={`/stores/${storeId}/checkout`} >
                                 <Button
-                                    leftIcon={<Icon as={IoCartOutline} color='orange.500' boxSize={25} />}
-                                    variant='ghost'
+                                    leftIcon={<Icon as={IoCartOutline}  boxSize={25} />}
+                                    variant='solid'
+                                    colorScheme='yellow'
                                 >Checkout
                                 </Button>
                             </Link>

@@ -13,28 +13,32 @@ export default function CartItem({ storeId, productId }) {
     const { id, name, price } = product || {}
     return (
         <Fragment>
-            <Flex align='center' p={1}>
+            <Flex align='center' py={3}>
                 <IconButton
                     onClick={() => addProductToCart({ storeId, product })}
-                    variant='ghost'
-                    isRound
+                    variant='solid'
+                    colorScheme='green'
+                    borderRadius='md'
+                    size='xs'
                     _focus={{ boxShadow: 'none' }}
-                    icon={<AddIcon color='green.500' />}
+                    icon={<AddIcon />}
                 />
-                <Box flex={1}>
-                    <Text align='center'>{quantity}</Text>
+                <Box>
+                    <Text w='50px' align='center'>{quantity}</Text>
                 </Box>
                 <IconButton
                     onClick={() => decreaseProductQuantity({ storeId, productId })}
-                    variant='ghost'
-                    isRound
+                    variant='solid'
+                    size='xs'
+                    borderRadius='md'
+                    colorScheme='red'
                     _focus={{ boxShadow: 'none' }}
                     icon={<MinusIcon />}
                 />
-                <Box flex={10}>
+                <Box ml={4}>
                     <Text flex={3}>{name}</Text>
                 </Box>
-                <Box flex={3}>
+                <Box ml='auto'>
                     <Text align='right'>{formatCurrency(quantity * price)}</Text>
                 </Box>
             </Flex >

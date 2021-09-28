@@ -1,7 +1,6 @@
 import { CheckIcon, EmailIcon, PhoneIcon } from '@chakra-ui/icons'
-import { Avatar, Box, Button, Flex, GridItem, Icon, Modal, ModalOverlay, SimpleGrid, Tab, TabList, Tabs, Text, useDisclosure, ModalContent, ModalHeader, ModalBody, ModalCloseButton, ModalFooter, Table, Thead, Tbody, Th, Tr, Td, Tfoot, FormControl, FormLabel, Input, useBoolean } from '@chakra-ui/react'
-import { useState } from 'react'
-import { Fragment } from 'react'
+import { Avatar, Box, Button, Flex, FormControl, FormLabel, GridItem, Icon, Image, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, SimpleGrid, Tab, Table, TabList, Tabs, Tbody, Td, Text, Tfoot, Th, Thead, Tr, useBoolean, useDisclosure } from '@chakra-ui/react'
+import { Fragment, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { BiTimeFive } from 'react-icons/bi'
 import { IoLocationOutline } from 'react-icons/io5'
@@ -129,7 +128,7 @@ function Info({ label, value }) {
 
 function Order({ order }) {
     const { id, name, address, phoneNumber, note, createdAt, status, orderDetails, totalPrice, store } = order
-    const { name: storeName } = store || {}
+    const { name: storeName, address: storeAddress } = store || {}
     const { isOpen, onOpen, onClose } = useDisclosure()
     const isCompleted = status === 'COMPLETED'
     return (
@@ -171,6 +170,7 @@ function Order({ order }) {
                     <ModalCloseButton />
                     <ModalBody>
                         <Info label='Store' value={storeName} />
+                        <Info label='Store address' value={storeAddress} />
                         <Box height={5} />
                         <Info label='Name' value={name} />
                         <Info label='Address' value={address} />
@@ -181,24 +181,24 @@ function Order({ order }) {
                         <Table variant='simple'>
                             <Thead>
                                 <Tr>
-                                    <Th>Item</Th>
-                                    <Th isNumeric>Quantity</Th>
-                                    <Th isNumeric>Subtotal</Th>
+                                    <Th px={0}>Item</Th>
+                                    <Th px={0} isNumeric>Quantity</Th>
+                                    <Th px={0} isNumeric>Subtotal</Th>
                                 </Tr>
                             </Thead>
                             <Tbody>
                                 {orderDetails.map(({ product, id, quantity, price }) => (
                                     <Tr key={id}>
-                                        <Td>{product?.name}</Td>
-                                        <Td isNumeric>{quantity}</Td>
-                                        <Td isNumeric>{formatCurrency(price)}</Td>
+                                        <Td px={0}>{product?.name}</Td>
+                                        <Td px={0} isNumeric>{quantity}</Td>
+                                        <Td px={0} isNumeric>{formatCurrency(price)}</Td>
                                     </Tr>
                                 ))}
                             </Tbody>
                             <Tfoot>
                                 <Tr>
-                                    <Th fontSize='md' colSpan={2}>Total</Th>
-                                    <Th fontSize='md' isNumeric>{formatCurrency(totalPrice)}</Th>
+                                    <Th px={0} fontSize='md' colSpan={2}>Total</Th>
+                                    <Th px={0} fontSize='md' isNumeric>{formatCurrency(totalPrice)}</Th>
                                 </Tr>
                             </Tfoot>
                         </Table>

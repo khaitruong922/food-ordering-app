@@ -23,7 +23,7 @@ export default function SignUpPage() {
         e.preventDefault()
         if (password !== confirmPassword) {
             errorToast({
-                title: 'Password do not match!',
+                title: 'Password do not match',
             })
             return
         }
@@ -31,16 +31,16 @@ export default function SignUpPage() {
         try {
             await api.post('/users', { username, name, email, phoneNumber, address, password })
             successToast({
-                title: 'Register account successfully!',
+                title: 'Register account successfully',
             })
         }
         catch (e) {
             const message =
                 e.response.data.statusCode === 500 ?
-                    'Username is already taken!' :
+                    'Username is already taken' :
                     e.response.data.message[0]
             errorToast({
-                title: 'Sign up failed!',
+                title: 'Register failed',
                 description: message,
             })
         }
@@ -52,44 +52,44 @@ export default function SignUpPage() {
     return (
         <Flex direction='column' align='center' justify='center' width={400} mx='auto' boxShadow='xl' mt={5} p={5}>
             <Helmet title='Sign Up' />
-            <Text fontSize='3xl' fontWeight={600}>Sign Up</Text>
+            <Text fontSize='3xl' fontWeight={600}>Sign up</Text>
             <Box width='100%' p={2}>
                 <form onSubmit={onFormSubmit}>
-                    <FormControl id="username">
+                    <FormControl mt={2} id="username">
                         <FormLabel>Username</FormLabel>
                         <Input value={username} onInput={onUsernameInput} required />
                     </FormControl>
-                    <FormControl id="name">
+                    <FormControl mt={2} id="name">
                         <FormLabel>Name</FormLabel>
                         <Input value={name} onInput={onNameInput} required />
                     </FormControl>
-                    <FormControl id="email">
+                    <FormControl mt={2} id="email">
                         <FormLabel>Email</FormLabel>
                         <Input type='email' value={email} onInput={onEmailInput} required />
                     </FormControl>
-                    <FormControl id="phoneNumber">
+                    <FormControl mt={2} id="phoneNumber">
                         <FormLabel>Phone Number</FormLabel>
                         <Input type='tel' value={phoneNumber} onInput={onPhoneNumberInput} required />
                     </FormControl>
-                    <FormControl id="address">
+                    <FormControl mt={2} id="address">
                         <FormLabel>Address</FormLabel>
                         <Input value={address} onInput={onAddressInput} required />
                     </FormControl>
-                    <FormControl id="password">
+                    <FormControl mt={2} id="password">
                         <FormLabel>Password</FormLabel>
                         <Input type='password' value={password} onInput={onPasswordInput} required />
                     </FormControl>
-                    <FormControl id="confirmPassword">
+                    <FormControl mt={2} id="confirmPassword">
                         <FormLabel>Confirm Password</FormLabel>
                         <Input type='password' value={confirmPassword} onInput={onConfirmPasswordInput} required />
                     </FormControl>
                     <Box height={5}></Box>
-                    <Button type="submit" width='100%' colorScheme='yellow'>Sign Up</Button>
+                    <Button isLoading={submitting} type="submit" width='100%' colorScheme='yellow'>Sign up</Button>
                 </form>
             </Box>
-            <Box height={5}></Box>
+            <Box height={3}></Box>
             <AppDivider />
-            <Box height={5}></Box>
+            <Box height={3}></Box>
             <Text align='center'>Already have an account? Log in <Link to='/login'><Text display='inline' color='yellow.500'>here</Text></Link></Text>
         </Flex>
     )

@@ -1,5 +1,7 @@
-import { AddIcon } from "@chakra-ui/icons";
-import { Box, Flex, IconButton, Image, Text } from "@chakra-ui/react";
+import { AddIcon, PlusSquareIcon, SmallAddIcon } from "@chakra-ui/icons";
+import { Box, Flex, IconButton, Image, Text, Button, Icon } from "@chakra-ui/react";
+import { IoCartOutline } from 'react-icons/io5'
+
 import mockProductImage from "../../mock/mockProductImage";
 import useCartsStore from "../../store/useCartsStore";
 import formatCurrency from "../../util/formatCurrency";
@@ -10,22 +12,25 @@ export default function Product({ product, storeId }) {
     const addProductToCart = useCartsStore(state => state.addProductToCart)
     return (
         <Flex direction='row' p={2} height='100%'>
-            <Box flex={1} display='flex' alignItems='center'>
+            <Box w={75} display='flex' alignItems='center'>
                 <Image borderRadius={10} objectFit='cover' boxSize={75} src={imageUrl}></Image>
             </Box>
-            <Box flex={5} ml={2}>
+            <Box ml={4}>
                 <Text fontSize='lg' fontWeight={600}>{name}</Text>
                 <Text fontSize='md'>{formatCurrency(price)}</Text>
                 <Text fontSize='sm'>{description}</Text>
             </Box>
-            <Box flex={1} ml={2} alignSelf='center'>
-                <IconButton
-                    isRound
-                    variant='ghost'
+            <Box ml='auto' mr={4} alignSelf='center'>
+                <Button
+                    borderRadius='md'
+                    colorScheme='yellow'
+                    variant='outline'
+                    size='md'
                     _focus={{ boxShadow: 'none' }}
-                    icon={<AddIcon color='green.500' />}
+                    rightIcon={<IoCartOutline />}
                     onClick={() => addProductToCart({ product, storeId })}>
-                </IconButton>
+                    <Text>ADD</Text>
+                </Button>
             </Box>
         </Flex >
     )

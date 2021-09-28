@@ -8,7 +8,7 @@ import SignUpPage from "./component/login/SignUpPage";
 import Error404Page from "./component/shared/Error404Page";
 import MainAppBar from "./component/shared/MainAppBar";
 import StorePage from "./component/store/StorePage";
-import ProfilePage from "./component/userpage/ProfilePage";
+import ProfilePage from "./component/profile/ProfilePage";
 import useAuthStore from "./store/useAuthStore";
 
 export default function AppRouter() {
@@ -29,7 +29,7 @@ export default function AppRouter() {
                         <Route exact path='/login'>
                             {user ? <Redirect to='/' /> : <LoginPage />}
                         </Route>
-                        <Route exact path='/signup'>
+                        <Route exact path='/register'>
                             {user ? <Redirect to='/' /> : <SignUpPage />}
                         </Route>
                         <Route path='/dashboard'>

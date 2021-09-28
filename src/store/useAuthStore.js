@@ -8,8 +8,8 @@ const useAuthStore = create(persist(
     login: async ({ username, password }) => {
       try {
         const loginRes = await api.post('/auth/login', { username, password })
-        const accessToken = loginRes.data.accessToken
-        if (!accessToken) return
+        const accessToken = loginRes.data?.accessToken
+        return accessToken
       }
       catch (e) {
         console.log(e.response)

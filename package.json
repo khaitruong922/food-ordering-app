@@ -20,6 +20,7 @@
     "react-helmet-async": "^1.0.9",
     "react-icons": "^4.2.0",
     "react-router-dom": "^5.2.0",
+    "react-router-hash-link": "^2.4.3",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.2",
     "zustand": "^3.5.7"

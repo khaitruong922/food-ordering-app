@@ -16,9 +16,10 @@ function AppBarItems() {
         isAdmin &&
         <Link to='/dashboard'>
           <IconButton
-            icon={<Icon boxSize={25} as={RiDashboardFill} color='orange.400' />}
+            icon={<Icon boxSize='20px' as={RiDashboardFill} color='yellow.400' />}
             variant='ghost'
             isRound
+            size='sm'
             colorScheme='blackAlpha'
             _focus={{ boxShadow: 'none' }}
           />
@@ -26,9 +27,11 @@ function AppBarItems() {
       }
       <Link to='/profile'>
         <IconButton
-          icon={<Icon boxSize={25} as={HiUserCircle} color='orange.400' />}
+          icon={<Icon boxSize='20px' as={HiUserCircle} color='yellow.400' />}
           variant='ghost'
           isRound
+          size='sm'
+
           colorScheme='blackAlpha'
           _focus={{ boxShadow: 'none' }}
         />
@@ -42,20 +45,21 @@ function AppBarItems() {
         variant='ghost'
         colorScheme='blackAlpha'
         _focus={{ boxShadow: 'none' }}
-        icon={<Icon boxSize={25} as={RiLogoutCircleRLine} color='white' />}
+        size='sm'
+        icon={<Icon boxSize='20px' as={RiLogoutCircleRLine} color='white' />}
       />
     </Fragment >
   )
   return (
     <Fragment>
-      <Link to='/login'><Text color='white' fontWeight={500} fontSize='md'>Login</Text></Link>
+      <Link to='/login'><Text color='white' fontWeight={500} fontSize='lg'>Login</Text></Link>
     </Fragment>
   )
 }
 
 export default function MainAppBar() {
   return (
-    <Flex py={4} px={6} bgColor='gray.900' position='sticky' justify='space-between' align='center'>
+    <Flex py={4} px={8} bgColor='gray.900' position='sticky' align='center'>
       <Link to="/"><Text ml={2} color='white' fontSize='xl' fontWeight={600}>DeliV</Text></Link>
       <Flex justify='center' ml='auto'>
         <AppBarItems />
